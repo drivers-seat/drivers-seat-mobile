@@ -1,0 +1,40 @@
+
+
+[container] {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  row-gap: 3px;
+}
+
+[spacer] {
+  height: 10px;
+}
+
+input, textarea {
+
+  background-color: white;
+  border: solid 1px silver;
+  border-radius: 8px;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+textarea {
+  flex-grow: 1;
+}
+
+[buttons]{
+
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  column-gap: 5px;
+}
+
+ion-icon {
+  color: black;
+  height:25px !important;
+  width:25px  !important;
+}

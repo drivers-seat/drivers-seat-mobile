@@ -1,0 +1,160 @@
+* {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+
+button{
+
+  margin-bottom: 5px;
+
+  background-color:  rgb(17, 20, 71);
+  color:white;
+  font-weight: normal;
+  font-size: 16px;
+  border: solid 2px  rgb(17, 20, 71);
+  *{
+    color:white;
+  }
+
+  &.accept, &.success{
+    background-color: green;
+    border: solid 2px green;
+    color:white;
+    font-weight: normal;
+    font-size: 16px;
+    *{
+      color:white;
+    }
+  }
+
+  &.dismiss{
+    background-color: silver;
+    border: solid 2px black;
+    color:black;
+    font-weight: normal;
+    font-size: 16px;
+    *{
+      color:black;
+    }
+  }
+
+  &.postpone{
+    background-color: transparent;
+    border: solid 2px black;
+    color:black;
+    font-weight: normal;
+    font-size: 16px;
+    *{
+      color:black;
+    }
+  }
+
+  &.warning{
+    background-color: darkorange;
+    border: solid 2px darkorange;
+    color:white;
+    font-weight: normal;
+    font-size: 16px;
+    *{
+      color:white;
+    }
+  }
+
+  &.alert{
+    background-color: darkred;
+    border: solid 2px darkred;
+    color:white;
+    font-weight: normal;
+    font-size: 16px;
+    *{
+      color:white;
+    }
+  }
+}
+
+a {
+  color: blue;
+}
+
+[center]{
+  text-align: center;
+}
+
+[right]{
+  text-align: right;
+}
+
+[left]{
+  text-align: left;
+}
+
+[subtext] {
+  font-size:12px;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  user-select: none;
+
+  td{
+    vertical-align: top;
+  }
+}
+
+[section] {
+  padding-bottom: 10px;
+}
+
+[top-spacer]{
+  padding-top:5px;
+}
+
+[container] {
+  padding: 10px;
+  user-select: none;
+}
+
+[title] {
+  font-weight: bold;
+  
+  * {
+    font-weight: bold;
+  }
+}
+
+[emphasis]{
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+ion-footer{
+  background-color: white;
+}
+
+table[links] {
+  width: auto;
+  table-layout: auto;
+  user-select: none;
+  display: inline-block;
+
+  td {
+    padding-left: 10px;
+    padding-right: 10px;
+    border-left: solid 1px gray;
+  }
+
+  td:first-child {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  td:last-child {
+    padding-right: 0;
+  }
+}
+
+[spacer]{
+  flex-grow: 1;
+}

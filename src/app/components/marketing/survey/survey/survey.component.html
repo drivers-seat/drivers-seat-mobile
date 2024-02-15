@@ -1,0 +1,116 @@
+<ion-header *ngIf="showHeader">
+  <ion-toolbar>
+    <div header>
+      <div tool *ngIf="hasHeaderActions">
+        <ion-icon *ngIf="helpAction" (click)="handleButton(helpAction)" name="help-circle-outline"></ion-icon>
+        <div spacer></div>
+      </div>
+      <div header-title>
+        <div title center *ngFor="let title of current_section?.title">{{title}}</div>
+      </div>
+      <div tool *ngIf="hasHeaderActions">
+        <div spacer></div>
+        <ion-icon *ngIf="closeAction" (click)="handleButton(closeAction)" name="close-circle-outline"></ion-icon>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <div external-html *ngIf="hasExternalHtml">
+    <div spacer></div>
+    <div wait *ngIf="!content_html">
+      <ion-spinner></ion-spinner>
+    </div>
+    <div content *ngIf="content_html" [innerHTML]="content_html"></div>
+    <div spacer></div>
+  </div>
+
+  <iframe *ngIf="content_url" [src]="content_url" _target="self" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+  </iframe>
+
+  <video-player *ngIf="video_url && !video_complete" [url]="video_url" 
+    (videoStart)="onVideoStart()" 
+    (videoReplay)="onVideoReplay()"
+    (videoEnd)="onVideoEnd($event)">
+  </video-player>
+
+  <div container *ngIf="(!content_url && !video_url) || video_complete">
+    
+    <div section *ngIf="current_section?.description?.length > 0">
+      <div *ngFor="let description of current_section?.description">{{description}}</div>
+    </div>
+    
+    <div section></div>
+    
+    <div *ngFor="let item of current_section?.items">
+        
+      <div *ngIf="item.isEnabled==true" survey-item [attr.level_left]="item.level_left" [attr.level_right]="item.level_right">
+        <survey-field *ngIf="item.type=='boolean' || item.type=='option'"
+          [definition]="item"
+          (onTouched)="onItemHasFocused(item)"
+          [value] = "state.data[item.field][item.value || true]"
+          (valueChange)="onValueChanged(item, $event)"
+          ></survey-field>
+        
+        <survey-field *ngIf="item.type !='boolean' && item.type !='option' && item.type != 'action'"
+          [definition]="item"
+          (onTouched)="onItemHasFocused(item)"
+          [value] = "state.data[item.field]"
+          (valueChange)="onValueChanged(item, $event)"
+        ></survey-field>
+
+        <survey-action *ngIf="item.type=='action'"
+          [definition]="item"
+          (click)="handleButton($event)"
+        ></survey-action>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+
+    <div section *ngIf="custom_actions?.length > 0">
+      <button *ngFor="let action of custom_actions" 
+        class="full-button" 
+        [class.accept]="action.type == 'accept'"
+        [class.postpone]="action.type == 'postpone'" 
+        [class.dismiss]="action.type == 'dismiss'" 
+        [class.next]="action.type == 'next'"
+        [class.prev]="action.type == 'prev'"
+        (click)="handleButton(action)">
+        <div *ngFor="let title of action.text">{{title}}</div>
+      </button>
+    </div>
+    
+    <table nav *ngIf="showPagination" >
+      <colgroup span="1" style="width: 50px;"></colgroup>
+      <colgroup span="1"></colgroup>
+      <colgroup span="1" style="width: 50px;"></colgroup>
+      <tr>
+        <td left>
+          <ion-icon *ngIf="!isFirstPage() && showPageNavigation" name="chevron-back-outline" [attr.isEnabled]="canMovePrev()"  (click)="onMovePrev()"></ion-icon>
+        </td>
+        <td pager *ngIf="showPageMarkers">
+          <ion-icon page *ngFor="let section of enabled_sections" (click)="setSection(section)" [attr.isEnabled]="canMoveToSection(section)" [attr.name]="section==current_section ? 'ellipse' : 'ellipse-outline'"></ion-icon>
+        </td>
+        <td *ngIf="!showPageMarkers"></td>
+        <td right>
+          <ion-icon *ngIf="!isLastPage() && showPageNavigation" name="chevron-forward-outline" [attr.isEnabled]="canMoveNext()" (click)="onMoveNext()"></ion-icon>
+        </td>
+      </tr>
+    </table>
+
+    <div center *ngIf="showFooterLinks">
+      <table links>
+        <tr>
+          <td *ngFor="let action of default_actions">
+            <a (click)="handleButton(action)">{{action.text[0]}}</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </ion-toolbar>
+</ion-footer>

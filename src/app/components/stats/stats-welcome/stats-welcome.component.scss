@@ -1,0 +1,39 @@
+[container] {
+  padding: 15px;
+  padding-top: 20px;
+  padding-bottom: 0;
+  background-color: #111447 !important;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: scroll;
+}
+
+
+* {
+  color: white;
+}
+
+a {
+  color: white;
+  text-decoration: underline;
+  font-weight: bolder;
+}
+
+[section] {
+  padding-bottom: 15px;
+}
+
+ul {
+  margin: 0;
+}
+
+li {
+  padding-bottom: 10px;
+}
+
+button[good]{
+  width:65%;
+}

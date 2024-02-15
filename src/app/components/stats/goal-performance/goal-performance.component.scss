@@ -1,0 +1,46 @@
+* {
+  
+  font-size: 16px;
+  font-weight: normal;
+  color: black;
+}
+
+div[graph] {
+  height: 90px;
+  width: 90px;
+  display: inline-block;
+}
+
+[container] {
+  padding: 10px;
+  padding-left: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background-color: #FFF1CC;
+  border-bottom: solid 2px rgba(255, 184, 0, 1);
+}
+
+[header] {
+  font-size: 17px;
+  font-weight: bold;
+  color: #808080
+}
+
+table[performance-stats] {
+  td {
+    background-color: white;
+    border: solid 1px gray;
+    padding: 3px;
+  }
+}
+
+ion-icon {
+  width: 20px;
+  height: 20px;
+}
+
+[newGoal] {
+  * {
+    font-size: 14px;
+  }
+}

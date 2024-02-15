@@ -1,0 +1,50 @@
+<div card [ngClass]="display_class">
+  <div header-container>
+    <div standard-header *ngIf="showHeader">
+      <div tool left *ngIf="hasHeaderActions" (click)="onActionClick(helpAction)">
+        <ion-icon *ngIf="helpAction" name="help-circle-outline"></ion-icon>
+        <div spacer></div>
+      </div>
+      <div header-title *ngIf="title?.length > 0">
+        <div title-container *ngFor="let titleTxt of title">
+          <div spacer></div>
+          <div title center>{{titleTxt}}</div>
+          <div spacer></div>
+        </div>
+      </div>
+      <div tool right *ngIf="hasHeaderActions" (click)="onActionClick(closeAction)">
+        <div spacer></div>
+        <ion-icon *ngIf="closeAction" name="close-circle-outline"></ion-icon>
+      </div>
+    </div>
+    <ng-content select="[header]"></ng-content>
+  </div>
+  <div card-placeholders>
+    <ng-content select="[left-content]"></ng-content>
+    <ng-content select="[center-content]"></ng-content>
+    <ng-content selector="[right-content]"></ng-content>
+  </div>
+  <div footer-container>
+    <ng-content select="[footer]"></ng-content>
+    <div standard-footer *ngIf="showFooter">
+      <div footer-buttons *ngIf="bodyActions?.length > 0">
+        <div button [ngClass]="getActionClass(action)" *ngFor="let action of bodyActions" [attr.type]="action.type"
+          (click)="onActionClick(action)">
+          <div spacer></div>
+          <div button-text *ngFor="let text of action.text">
+            <div spacer></div>
+            <div label>{{text}}</div>
+            <div spacer></div>
+          </div>
+          <div spacer></div>
+        </div>
+      </div>
+      <div footer-links *ngIf="footerActions?.length > 0">
+        <div spacer></div>
+        <a *ngFor="let action of footerActions; let idx=index" [attr.idx]="idx"
+          (click)="onActionClick(action)">{{action?.text[0]}}</a>
+        <div spacer></div>
+      </div>
+    </div>
+  </div>
+</div>

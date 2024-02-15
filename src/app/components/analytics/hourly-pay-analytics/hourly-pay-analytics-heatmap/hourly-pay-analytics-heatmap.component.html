@@ -1,0 +1,32 @@
+<ion-header>
+  <table heatmap *ngIf="days && hours && statsMatrix">
+    <thead>
+      <tr>
+        <td day></td>
+        <td day *ngFor="let day of days" [attr.day]="day">
+          {{getDayText(day)}}
+        </td>
+      </tr>
+    </thead>
+  </table>
+</ion-header>
+<ion-content>
+  <table heatmap *ngIf="days && hours && statsMatrix" (touchstart)="touchStart($event)" (touchend)="touchEnd($event)"
+    (touchmove)="touchMove($event)">
+    <tbody>
+      <tr *ngFor="let hour of hours">
+        <td hour>
+          {{getHourText(hour)}}
+        </td>
+        <td val *ngFor="let day of days" [attr.day]="day" [attr.hour]="hour" [attr.perfBin]="getStatPerfBin(day,hour)"
+          [attr.isScheduled]="getIsScheduled(day,hour)">
+          <div>
+            <div valProp *ngIf="valuePropFx" [attr.day]="day" [attr.hour]="hour" >{{getStatValue(day,hour)}}</div>
+            <div textProp *ngIf="textPropFx" [attr.day]="day" [attr.hour]="hour">{{getStatText(day,hour)}}</div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="height:30px;"></div>
+</ion-content>

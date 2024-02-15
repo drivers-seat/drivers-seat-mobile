@@ -1,0 +1,42 @@
+<table class="nav">
+
+  <colgroup span="1" style="width:30px"></colgroup>
+  <colgroup span="1" style="width:30px"></colgroup>
+  <colgroup span="1"></colgroup>
+  <colgroup span="1" style="width:30px"></colgroup>
+  <colgroup span="1" style="width:30px"></colgroup>
+  <tbody>
+    <tr>
+      <td left (click)="requestDownload()">
+        <ion-icon *ngIf="canExport" name="cloud-download-outline"></ion-icon>
+      </td>
+      <td right (click)="windowMovePrev()">
+        <ion-icon nav [attr.disabled]="!canMovePrev" name="caret-back-outline"></ion-icon>
+      </td>
+      <td center>
+        <ion-label title>
+          {{windowTitle}}
+        </ion-label>
+        <a center *ngIf="canMoveNow" (click)="windowMoveNow()">{{moveNowLabel}}</a>
+      </td>
+      <td left (click)="windowMoveNext()">
+        <ion-icon nav [attr.disabled]="!canMoveNext" name="caret-forward-outline"></ion-icon>
+      </td>
+      <td right>
+        <ion-icon name="help-circle-outline" (click)="showHelp()"></ion-icon>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table segment>
+  <colgroup [attr.span]="summaryLevels.length"></colgroup>
+  <tbody>
+    <tr>
+      <td  *ngFor="let level of summaryLevels" (click)="selectSummaryLevel(level)">
+        <div segment-button [attr.selected]="summaryLevel == level">
+          {{level}}
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,318 @@
+<ion-header>
+  <ion-toolbar>
+    <table>
+      <colgroup span="1" style="width:25px;"></colgroup>
+      <colgroup span="1"></colgroup>
+      <colgroup span="1" style="width:25px;"></colgroup>
+      <tbody>
+        <tr>
+          <td>
+          </td>
+          <td center emphasis>
+          </td>
+          <td (click)="cancelClick()">
+            <ion-icon name="close"></ion-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div container>
+
+    <div pageTitle emphasis *ngIf="!isConfigured">Set Up Location Tracking</div>
+    <div pageTitle emphasis *ngIf="isConfigured">Tracking Your Mileage</div>
+
+    <ion-slides *ngIf="!isConfigured" pager="true" [options]="slideOpts">
+      <ion-slide id="ios_1_perms"  *ngIf="isIos || isWeb">
+        <table>
+          <tr>
+            <td>
+              <img ios src="assets/imgs/shift-tracking/help/ios_01.png">
+            </td>
+          </tr>
+          <tr>
+            <td instructions>
+              Select "Allow While Using App" and turn on Precise location tracking.
+            </td>
+          </tr>
+        </table>
+      </ion-slide>
+
+      <ion-slide id="ios_2_perms"  *ngIf="isIos || isWeb">
+        <table>
+          <tr>
+            <td>
+              <img ios src="assets/imgs/shift-tracking/help/ios_02.png">
+            </td>
+          </tr>
+          <tr>
+            <td instructions>
+              Allow {{ appDisplayName }} to track your mileage in the background while you are using other apps.
+            </td>
+          </tr>
+        </table>
+      </ion-slide>
+
+      <ion-slide id="ios_3_alt"  *ngIf="isIos || isWeb">
+        <table>
+          <tr>
+            <td>
+              <img ios src="assets/imgs/shift-tracking/help/ios_03.png">
+            </td>
+          </tr>
+          <tr>
+            <td instructions>
+              You may be notified that Location Services are off.  Press "Settings" to fix this.
+            </td>
+          </tr>
+        </table>
+      </ion-slide>
+
+      <ion-slide id="ios_04_perms"  *ngIf="isIos || isWeb">
+        <table>
+          <tr>
+            <td>
+              <img ios src="assets/imgs/shift-tracking/help/ios_04.png">
+            </td>
+          </tr>
+          <tr>
+            <td instructions>
+              Open location settings for {{ appDisplayName }}.
+            </td>
+          </tr>
+        </table>
+      </ion-slide>
+
+      <ion-slide id="ios_05_always" *ngIf="isIos || isWeb">
+        <table>
+          <tr>
+            <td>
+              <img ios src="assets/imgs/shift-tracking/help/ios_05.png">
+            </td>
+          </tr>
+          <tr>
+            <td instructions>
+              Set Allow Location Access to "Always" and turn-on Precise Location Tracking. Then, go back to settings.
+            </td>
+          </tr>
+        </table>
+      </ion-slide>
+
+      <ion-slide id="ios_06_final" *ngIf="isIos || isWeb">
+        <table>
+          <tr>
+            <td>
+              <img ios src="assets/imgs/shift-tracking/help/ios_06.png">
+            </td>
+          </tr>
+          <tr>
+            <td instructions>
+              When complete, it should look like this.
+            </td>
+          </tr>
+        </table>
+      </ion-slide>
+
+      <ion-slide id="android_1_perms" *ngIf="isAndroid || isWeb">
+        <table>
+          <tr>
+            <td>
+              <img android src="assets/imgs/shift-tracking/help/android_01.png">
+            </td>
+          </tr>
+          <tr>
+            <td instructions>
+              First allow "Precise" tracking and select "While using the app".
+            </td>
+          </tr>
+        </table>
+      </ion-slide>
+
+      <ion-slide id="android_2_loc" *ngIf="isAndroid || isWeb">
+        <table>
+          <tr>
+            <td>
+              <img android src="assets/imgs/shift-tracking/help/android_02.png">
+            </td>
+          </tr>
+          <tr>
+            <td instructions>
+              Next, "Allow" {{ appDisplayName }} to access your physical activity.
+            </td>
+          </tr>
+        </table>
+      </ion-slide>
+
+      <ion-slide id="android_3_loc_always_1" *ngIf="isAndroid || isWeb">
+        <table>
+          <tr>
+            <td>
+              <img android src="assets/imgs/shift-tracking/help/android_03.png">
+            </td>
+          </tr>
+          <tr>
+            <td instructions>
+              Now, allow {{ appDisplayName }} to track your mileage in the background while you are using other apps.
+            </td>
+          </tr>
+        </table>
+      </ion-slide>
+      
+      <ion-slide id="android_3_loc_always_2" *ngIf="isAndroid || isWeb">
+        <table>
+          <tr>
+            <td>
+              <img android src="assets/imgs/shift-tracking/help/android_04.png">
+            </td>
+          </tr>
+          <tr>
+            <td instructions>
+              Confirm that location access is set to "Allow all the time".  Hit back to finish.
+            </td>
+          </tr>
+        </table>
+      </ion-slide>
+    </ion-slides>
+
+    <ion-slides *ngIf="isConfigured" pager="true" [options]="slideOpts">
+
+      <ion-slide id="usage_1_turn_on">
+        <table>
+          <tr>
+            <td>
+              <div section>
+                <img src="assets/imgs/shift-tracking/help/toggle_not_running_arrow.png" style="width: 100%">
+              </div>
+              <div section></div>
+            </td>
+          </tr>
+          <tr>
+            <td instructions>
+              When you start work, press this button to start tracking.
+            </td>
+          </tr>
+        </table>
+      </ion-slide>
+
+      <ion-slide id="usage_2_spins">
+        <table>
+          <tr>
+            <td>
+              <div section>
+                <div tracker class="on">
+                  <ion-icon example name="navigate"></ion-icon>
+                </div>
+              </div>
+              <div section></div>
+            </td>
+          </tr>
+          <tr>
+            <td instructions>
+              When tracking is turned on, the button will have a spinning outline.
+            </td>
+          </tr>
+        </table>
+      </ion-slide>
+
+      <ion-slide id="usage_3_stats">
+        <table>
+          <tr>
+            <td>
+              <div section>
+                <img src="assets/imgs/shift-tracking/help/toggle_running.png" style="width: 100%">
+              </div>
+              <div section></div>
+            </td>
+          </tr>
+          <tr>
+            <td instructions>
+              And it will tell you how much work time and miles have been recorded.
+            </td>
+          </tr>
+        </table>
+      </ion-slide>
+
+      <ion-slide id="usage_4_turn_off">
+        <table>
+          <tr>
+            <td>
+              <div section>
+                <img src="assets/imgs/shift-tracking/help/toggle_running_arrow.png" style="width: 100%">
+              </div>
+              <div section></div>
+            </td>
+          </tr>
+          <tr>
+            <td instructions>
+              When you're done, press the button again to turn off mileage tracking.
+            </td>
+          </tr>
+        </table>
+      </ion-slide>
+
+      <ion-slide id="usage_5_summary">
+        <table>
+          <tr>
+            <td>
+              <div section>
+                <img src="assets/imgs/shift-tracking/help/shift_summary.png" style="height: 400px">
+              </div>
+              <div section></div>
+            </td>
+          </tr>
+          <tr>
+            <td instructions>
+              A summary of your mileage will appear.
+            </td>
+          </tr>
+        </table>
+      </ion-slide>
+      
+      <ion-slide id="usage_6_reminders">
+        <table>
+          <tr>
+            <td emphasis>
+              Want to make it even better?
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div section>
+                <img src="assets/imgs/shift-tracking/help/start_reminder.png">
+              </div>
+              <div section></div>
+            </td>
+          </tr>
+          <tr>
+            <td instructions>
+              Want to make sure you're maximizing your tax deduction?  You can get helpful reminders to track your mileage when you work.
+            </td>
+          </tr>
+          <tr>
+            <button good title class="full-button" (click)="onSetUpReminders()">
+              Let's set up tracking reminders.
+            </button>
+          </tr>
+        </table>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <table>
+      <tr>
+        <td center>
+          <div>
+            <button *ngIf="!isConfigured" good title class="full-button" (click)="openSettingsClick()">Go to
+              Settings
+            </button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </ion-toolbar>
+</ion-footer>

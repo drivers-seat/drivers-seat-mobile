@@ -1,0 +1,29 @@
+
+ion-header{
+  background-color: rgba(255, 184, 0, .2);
+  border-bottom: solid 2px #F4BB40;
+}
+
+
+[hdr]{
+  padding-left:5px;
+  padding-bottom:5px;
+}
+
+[container]{
+  padding:20px;
+  padding-bottom: 0;
+}
+
+[title] {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+[subtitle] {
+  font-size: 16px;
+}
+
+[subtext] {
+  font-size: 14px;
+}

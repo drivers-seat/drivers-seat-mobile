@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <div title>Data Export</div>
+      <div>Time period: {{window?.title}}</div>
+    </ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="onCancelClick()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        Cancel
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <div container>
+    <div section>
+      Download your earnings and mileage information.
+    </div>
+    <div section title>
+      Options
+    </div>
+    <table>
+      <colgroup span="1" style="width:35px;"></colgroup>
+      <colgroup span="1" style="width:35px;"></colgroup>
+      <colgroup span="1"></colgroup>
+      <tbody>
+        <tr (click)="toggle_include_unpaid_mileage()">
+          <td>
+            <ion-icon chk *ngIf="include_unpaid_mileage==true" name="checkmark-circle-outline"></ion-icon>
+            <ion-icon chk *ngIf="!(include_unpaid_mileage==true)" name="ellipse-outline"></ion-icon>
+          </td>
+          <td colspan="2">
+            <div section>
+              <div title>Include unpaid driving time</div>
+              <div>If you've tracked your mileage, we can include any mileage tracked between different jobs.</div>
+            </div>
+          </td>
+        </tr>
+        <tr (click)="toggle_group_by_employer()">
+          <td>
+            <ion-icon chk *ngIf="group_by_employer==true" name="checkmark-circle-outline"></ion-icon>
+            <ion-icon chk *ngIf="!(group_by_employer==true)" name="ellipse-outline"></ion-icon>
+          </td>
+          <td colspan="2">
+            <div section>
+              <div title>Summarize by Gig Platform</div>
+            </div>
+          </td>
+        </tr>
+        <tr (click)="toggle_enable_time_grouping()">
+          <td>
+            <ion-icon chk *ngIf="group_by_time" name="checkmark-circle-outline"></ion-icon>
+            <ion-icon chk *ngIf="!group_by_time" name="ellipse-outline"></ion-icon>
+          </td>
+          <td colspan="2">
+            <div section>
+              <div title>Summarize by Time Period</div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="group_by_time">
+        <tr *ngIf="canSummarizeByQuarter" (click)="setTimeGrouping('quarter')">
+          <td></td>
+          <td>
+            <ion-icon chk *ngIf="time_grouping=='quarter'" name="checkmark-circle-outline"></ion-icon>
+            <ion-icon chk *ngIf="!(time_grouping=='quarter')" name="ellipse-outline"></ion-icon>
+          </td>
+          <td>Quarter</td>
+        </tr>
+
+        <tr *ngIf="canSummarizeByMonth" (click)="setTimeGrouping('month')">
+          <td></td>
+          <td>
+            <ion-icon chk *ngIf="time_grouping=='month'" name="checkmark-circle-outline"></ion-icon>
+            <ion-icon chk *ngIf="!(time_grouping=='month')" name="ellipse-outline"></ion-icon>
+          </td>
+          <td>Month</td>
+        </tr>
+        <tr *ngIf="canSummarizeByWeek" (click)="setTimeGrouping('week')">
+          <td></td>
+          <td>
+            <ion-icon chk *ngIf="time_grouping=='week'" name="checkmark-circle-outline"></ion-icon>
+            <ion-icon chk *ngIf="!(time_grouping=='week')" name="ellipse-outline"></ion-icon>
+          </td>
+          <td>Week</td>
+        </tr>
+
+        <tr *ngIf="canSummarizeByDay" (click)="setTimeGrouping('day')">
+          <td></td>
+          <td>
+            <ion-icon chk *ngIf="time_grouping=='day'" name="checkmark-circle-outline"></ion-icon>
+            <ion-icon chk *ngIf="!(time_grouping=='day')" name="ellipse-outline"></ion-icon>
+          </td>
+          <td>Day</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button good class="full-button" (click)="onExportClick()">Export Data</button>
+  </ion-toolbar>
+</ion-footer>

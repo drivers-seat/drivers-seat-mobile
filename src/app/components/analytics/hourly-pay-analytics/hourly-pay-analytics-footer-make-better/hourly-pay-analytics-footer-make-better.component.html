@@ -1,0 +1,25 @@
+<ion-footer>
+  <ion-toolbar>
+    <div content>
+      <div title (click)="toggleExpand()">
+        You can help make this even better!
+      </div>
+      <div detail *ngIf="isExpanded">
+        <div section>
+          As more people in your area use {{ appDisplayName }}, this tool gets better! You can help by spreading the word.
+        </div>
+        <div section>
+          <div title>Inviting someone is easy!</div>
+          Just <a (click)="clickRefer()">click here to invite a friend</a> and we'll create a text message for you to
+          forward with all of the info.
+        </div>
+      </div>
+    </div>
+    <ion-buttons slot="primary">
+      <ion-button (click)="toggleExpand()">
+        <ion-icon *ngIf="!isExpanded" name="caret-up-outline"></ion-icon>
+        <ion-icon *ngIf="isExpanded" name="caret-down-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

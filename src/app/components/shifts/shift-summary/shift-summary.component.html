@@ -1,0 +1,111 @@
+<div content>
+  <div section>
+    <div title>Tracking completed</div>
+    <div subtitle>Thanks for tracking your mileage!</div>
+  </div>
+
+  <div section>
+    <div heading>Summary</div>
+    <div stats>
+      <table stats>
+        <colgroup span="1" style="width:50%"></colgroup>
+        <colgroup span="1" style="width:10px"></colgroup>
+        <colgroup span="1" style="width:50%"></colgroup>
+        <tbody>
+          <tr *ngIf="duration_hours > 0 || duration_minutes > 0">
+            <td colspan="3" duration>
+              <div>
+                <span duration *ngIf="duration_hours > 0">
+                  <span val>{{duration_hours}}</span>
+                  <span unit>h</span>
+                </span>
+                <span duration *ngIf="duration_minutes > 0">
+                  <span val>{{duration_minutes}}</span>
+                  <span unit>m</span>
+                </span>
+              </div>
+              <div>working time</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div time>
+                {{startTime_formatted || "-" }}
+              </div>
+              <div date>
+                {{startDate_formatted}}
+              </div>
+            </td>
+            <td></td>
+            <td>
+              <div time>
+                {{endTime_formatted || "-" }}
+              </div>
+              <div date>
+                {{endDate_formatted}}
+              </div>
+
+            </td>
+          </tr>
+          <tr>
+            <td>
+              start
+            </td>
+            <td></td>
+            <td>
+              end
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div stats *ngIf="distance_miles">  
+      <div>
+        <span distance>{{distance_miles.toFixed(1)}}</span>
+        <span>&nbsp;{{ distance_miles > 1 ? 'miles' : 'mile'}} est.</span>
+      </div>
+    </div>
+  </div>
+
+  <div section expenses>
+    <table>
+      <colgroup span="1"></colgroup>
+      <colgroup span="1" style="width:10px;"></colgroup>
+      <colgroup span="1" style="width:115px;"></colgroup>
+      <tbody>
+        <tr>
+          <td>
+            <div heading>Have any expenses?</div>
+            <div>
+              Now is a great time to record any expenses you incurred
+              during your shift.
+            </div>
+          </td>
+          <td></td>
+          <td>
+            <button class="full-button positive" (click)="addExpenses()">
+              Add Expenses
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div section>
+    <div heading>What's next</div>
+    <div>
+      We'll update your earnings with information about your jobs.  
+      It may take a while for your data to appear, depending on how quickly 
+      we receive it from the gig app.
+    </div>
+  </div>
+</div>
+
+<div footer>
+  <button class="full-button positive" (click)="closeModal()">
+    Finish
+  </button>
+  <div subtext>shift {{shift.id}}</div>
+</div>

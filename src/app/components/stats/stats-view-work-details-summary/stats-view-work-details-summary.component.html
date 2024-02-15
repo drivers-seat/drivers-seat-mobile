@@ -1,0 +1,45 @@
+<div *ngIf="childStats">
+  <table stats>
+    <colgroup span="1"></colgroup>
+    <colgroup span="1" style="width:80px;"></colgroup>
+    <colgroup span="1" style="width:80px;"></colgroup>
+    <colgroup span="1" style="width:80px;"></colgroup>
+    <thead>
+      <tr>
+        <td window>
+          {{childSummaryLevel}}
+        </td>
+        <td money>Gross Pay</td>
+        <td time>Hours</td>
+        <td miles>Miles</td>
+      </tr>
+    </thead>
+    <tbody detail>
+      <tr *ngFor="let childStat of childStats">
+        <td (click)="onDrillDown(childStat.window)">
+          <a>{{childStat.window.title}}</a>
+        </td>
+        <td money>
+          {{ childStat.earnings_total | currency:'USD':'symbol':'1.0-0' }}
+        </td>
+        <td time>
+          {{ TimeHelper.getDurationFromSeconds(childStat.duration_seconds, true, false) }}
+        </td>
+        <td miles>
+          {{ childStat.selected_miles | number:'0.0-0' }}
+        </td>
+      </tr>
+    </tbody>
+    <tbody total>
+      <tr>
+        <td>Total</td>
+        <td money>
+          {{ summaryStat.earnings_total | currency:'USD':'symbol':'1.0-0' }}
+        </td>
+        <td time>{{ TimeHelper.getDurationFromSeconds(summaryStat.duration_seconds, true, false) }}</td>
+        <td miles *ngIf="showPrecise"> {{ summaryStat.selected_miles | number:'0.0-1' }}</td>
+        <td miles *ngIf="!showPrecise"> {{ summaryStat.selected_miles | number:'0.0-0' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

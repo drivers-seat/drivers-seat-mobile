@@ -1,0 +1,9 @@
+<button class="full-button" 
+        [class.accept]="definition.action?.type == 'accept'"
+        [class.postpone]="definition.action?.type == 'postpone'" 
+        [class.dismiss]="definition.action?.type == 'dismiss'" 
+        [class.next]="definition.action?.type == 'next'"
+        [class.prev]="definition.action?.type == 'prev'"
+        (click)="onClick()">
+        <div *ngFor="let title of definition.action?.text">{{title}}</div>
+</button>

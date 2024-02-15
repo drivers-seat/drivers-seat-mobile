@@ -1,0 +1,17 @@
+<div [hidden]="!showDetailStats || detailStats_hasNoData">
+  <div class="stats graph detail">
+    <div title>Breakdown</div>
+    <div>Pay and expenses for each {{detailLevel}} of the {{summaryLevel}}</div>
+    <div style="position:relative; height: 250px;">
+      <canvas #detailCanvas></canvas>
+    </div>
+  </div>
+</div>
+
+<div [hidden]="trendStats_hasNoData" class="stats graph trend">
+  <div title>Trend</div>
+  <div>Pay and expenses by {{summaryLevel}}</div>
+  <div style="position:relative; height: 250px;">
+    <canvas #trendCanvas></canvas>
+  </div>
+</div>

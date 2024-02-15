@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <div hdr *ngIf="options_display">
+      <div title center>
+        {{time_slot}}
+      </div>
+      <div subtitle center>
+        {{options_display.metro_area_name}}
+      </div>
+      <div subText center>
+        {{options_display.employer_filter}}
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div container>
+    <div section>
+      <div emphasis>Sorry, there's not enough data</div>
+      To calculate hourly pay, we need data from at least 5 people in your area
+      that work for {{options_display?.employer_filter}} on {{time_slot}}.
+    </div>
+    <div section emphasis>
+      Here's how you can help:
+    </div>
+    <div section>
+      <div title>Spread the word</div>
+      This tool gets better as more people in your area use {{ appDisplayName }}!
+      You can help by <a (click)="onReferClick()">inviting new users to sign up!</a>
+    </div>
+    <div section>
+      <button good class="full-button" (click)="onReferClick()">
+        <div>Invite a friend</div>
+      </button>
+    </div>
+
+
+    <div section>
+      <div title>Check your Gig Accounts</div>
+      When you connect more gig accounts, we can update the tool with more data.
+      Make sure all your gig accounts are connected. You might need to reconnect
+      some of them occasionally. <a (click)="updateGigAccountsClick()">Review your gig accounts.</a>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+      <div center>
+        <a (click)="onCancel()">close</a>
+    </div>
+  </ion-toolbar>
+</ion-footer>

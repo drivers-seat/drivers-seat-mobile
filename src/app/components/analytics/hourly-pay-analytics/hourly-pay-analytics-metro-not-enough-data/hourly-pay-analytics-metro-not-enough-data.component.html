@@ -1,0 +1,30 @@
+<div container>
+  <div container>
+    <div section>
+      <div emphasis>Sorry, there's not enough data</div>
+      Unfortunately, we don't have enough workers in your area to calculate average hourly pay
+      for the settings you've chosen.
+    </div>
+
+    <div section>
+      <div emphasis>Help make this tool better</div>
+    </div>
+
+    <div section>
+      <div title>Spread the word</div>
+      This tool gets better as more people in your area use {{ appDisplayName }}!
+      You can help by <a (click)="onReferClick()">inviting new users to sign up!</a>
+    </div>
+    <div section>
+      <button good class="full-button" (click)="onReferClick()">
+        <div>Invite a friend</div>
+      </button>
+    </div>
+    <div section>
+      <div title>Check your Gig Accounts</div>
+      When you connect more gig accounts, we can update the tool with more data.
+      Make sure all your gig accounts are connected. You might need to reconnect
+      some of them occasionally. <a (click)="updateGigAccountsClick()">Review your gig accounts.</a>
+    </div>
+  </div>
+</div>

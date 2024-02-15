@@ -1,0 +1,56 @@
+<ion-content>
+  <div container>
+    <div center>
+      <img logo src='assets/imgs/logo-small.png' />
+      <div title center>Log In</div>
+      <div subtitle center>Welcome back!</div>
+    </div>
+    <div section first>
+      <div input>
+        <ion-input type="email" placeholder="Enter your email"
+          autocomplete="username"
+          (ngModelChange)="inputChanged()"
+          maxlength="100"
+          [(ngModel)]="email">
+        </ion-input>
+      </div>
+      <div input password>
+        <div input-border>
+          <table>
+            <colgroup span="1"></colgroup>
+            <colgroup span="1" style="width:30px;"></colgroup>
+            <tr>
+              <td>
+                <ion-input [type]="showPassword ? 'text' : 'password'" 
+                  autocomplete="current-password"
+                  [(ngModel)]="password"
+                  (ngModelChange)="inputChanged()" 
+                  maxlength="100"
+                  placeholder="Enter your password">
+                </ion-input>
+              </td>
+              <td (click)="toggleShowPasswordClearText()">
+                <ion-icon slot="end" name="eye-outline" *ngIf="!showPassword"></ion-icon>
+                <ion-icon slot="end" name="eye-off-outline" *ngIf="showPassword"></ion-icon>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div input center>
+        <a (click)="forgotPassword()">Forgot your password?</a>
+      </div>
+    </div>
+    <div section>
+      <button 
+        [disabled]="!canLogin"
+        class="full-button positive login-button" 
+        (click)="login()">Log In</button>
+      
+        <button (click)="navigateToRegister()"
+        class="full-button positive register-button" 
+        (click)="login()">I'm a New User</button>
+    </div>
+    
+  </div>
+</ion-content>

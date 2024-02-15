@@ -1,0 +1,138 @@
+<div card [hidden]="!level">
+  <div header>
+    <div icon>
+      <div spacer></div>
+      <div title>📊</div>
+      <div spacer></div>
+    </div>
+    <div heading>
+      <div spacer></div>
+      <div title>Your Recent Earnings</div>
+      <div subtext *ngIf="!isLoading && !hasNoData && stats?.window?.key != currentWindow?.key">for {{stats?.window?.title}}</div>
+      <div subtext *ngIf="!isLoading && !hasNoData && stats?.window?.key == currentWindow?.key && level != 'day'">for this {{level}}</div>
+      <div subtext *ngIf="!isLoading && !hasNoData && stats?.window?.key == currentWindow?.key && level == 'day'">for today</div>
+      <div subtext *ngIf="isLoading">one moment please...</div>
+      <div spacer></div>
+    </div>
+    <div spacer></div>
+    <div level *ngIf="!hasNoData">
+      <ion-select [value]="level" (ionChange)="onLevelChange($event)">
+        <ion-select-option *ngFor="let lvl of levels" [value]="lvl.level">
+          {{TextHelper.capitalizeFirstLetter(lvl.display)}}
+        </ion-select-option>
+      </ion-select>
+    </div>
+    <div *ngIf="!hasNoData" action (click)="onPerformanceClick()">
+      <div spacer></div>
+      <ion-icon name="chevron-forward"></ion-icon>
+      <div spacer></div>
+    </div>
+  </div>
+
+  <div empty-body *ngIf="isLoading">
+    <div spacer></div>
+    <div center>
+      <ion-spinner></ion-spinner>
+      <div subtitle>one moment please...</div>
+    </div>
+    <div spacer></div>
+  </div>
+
+  <div body [hidden]="isLoading || hasNoData">
+    <div goal [hidden]="!showGoal">
+      <div spacer></div>
+      <div [hidden]="!goal">
+        <canvas #performanceCanvas [hidden]="!goal"></canvas>
+        <div goal-amt>
+          {{goal?.goal_amount | currency:'USD':'symbol':'1.0-0'}}
+        </div>
+        <div center subtext>goal</div>
+      </div>
+      <div no-goal *ngIf="!goal">
+        <div title>No goal set</div>
+        <button (click)="onSetGoalClick()">Set a {{levelAdjective}} goal</button>
+      </div>
+      <div spacer></div>
+    </div>
+    <div perf>
+      <div measure earnings>
+        <div spacer></div>
+        <div pay>
+          {{stats?.totalPayGross | currency:'USD':'symbol':'1.0-0'}}
+        </div>
+        <div subtext>total pay</div>
+        <div spacer></div>
+      </div>
+      <div hours-and-miles>
+        <div measure distance>
+          <div spacer></div>
+          <div miles>
+            {{stats?.miles | number:'1.0-0'}}
+            <div subtext>miles</div>
+          </div>
+          <div spacer></div>
+          <div per-mile>
+            {{stats?.earningsPerMile | currency:'USD':'symbol':'1.2-2' }}/mile
+          </div>
+          <div spacer></div>
+        </div>
+        <div measure duration>
+          <div spacer></div>
+          <div *ngIf="stats?.window?.summaryLevel == 'day'">
+            <div>
+              <span *ngIf="stats?.drivingHours">
+                <span time>{{stats.drivingHours}}</span>h&nbsp;
+              </span>
+              <span *ngIf="stats?.drivingMinutes">
+                <span time>{{stats.drivingMinutes}}</span>m
+              </span>
+            </div>
+            <div subText>time</div>
+          </div>
+          <div *ngIf="stats?.window?.summaryLevel && stats?.window?.summaryLevel != 'day'">
+            <div time>
+              {{stats?.drivingHours}}
+            </div>
+            <div subtext>hours</div>
+          </div>
+
+          <div spacer></div>
+          <div per-hour>
+            {{stats?.hourlyPayGross | currency:'USD':'symbol':'1.2-2' }}/hr.
+          </div>
+          <div spacer></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div empty-body no-data *ngIf="hasNoData">
+    <div example>
+    </div>
+    <div content *ngIf="!hasGigAccounts">
+      <div spacer></div>
+      <div emphasis center>Link Your Gig Accounts</div>
+      <div subTitle center>See all of your earnings in one place and receive personalized insights that help you optimize your work.</div>
+      <div spacer></div>
+      <div spacer></div>
+      <div buttons center>
+        <button (click)="onLinkAccountsClick()">Let's Get Started!</button>
+      </div>
+      <div spacer></div>
+    </div>  
+
+    <div content *ngIf="hasGigAccounts">
+      <div spacer></div>
+      <div emphasis center>Fetching your data...</div>
+      <div subTitle center>We are retrieving data from your {{gigAccountsDesc}}.</div>
+      <!-- <div spacer></div>
+      <div buttons center>
+        <button (click)="onLinkAccountsClick()">Let's Get Started!</button>
+      </div> -->
+      <div spacer></div>
+    </div>  
+
+  </div>
+
+
+</div>

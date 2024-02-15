@@ -1,0 +1,382 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="cancel()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title title>
+      Profile
+    </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="saveChanges()">
+        Save
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content>
+  <form [formGroup]="personalForm" *ngIf="personalForm">
+
+    <div tabPage class="account" *ngIf="activeTab=='account'">
+      
+      <div section>
+        <div>
+          <span title>Email</span><span warn>*</span>
+        </div>
+        <ion-input formControlName="email" #email (keydown.tab)="setFocus($event, firstname)"
+          (keydown.enter)="setFocus($event, firstname)" inputmode="email"
+          [ngClass]="{'gray-bottom': is_iOS, 'red-bottom': !personalForm.value.email}" required type="email">
+        </ion-input>
+      </div>
+
+      <div section>
+        <div>
+          <span title>First Name</span><span warn>*</span>
+        </div>
+        <ion-input formControlName="first_name" #firstname (keydown.tab)="setFocus($event, lastname)"
+          (keydown.enter)="setFocus($event, lastname)"
+          [ngClass]="{'gray-bottom': is_iOS, 'red-bottom': !this.transitionAllowed && !personalForm.value.first_name}"
+          type="text" placeholder="Enter your first name"></ion-input>
+      </div>
+
+      <div section>
+        <div>
+          <span title>Last Name</span><span warn>*</span>
+        </div>
+       <ion-input formControlName="last_name" #lastname (keydown.tab)="setFocus($event, phone)"
+          (keydown.enter)="setFocus($event, phone)"
+          [ngClass]="{'gray-bottom': is_iOS, 'red-bottom': !this.transitionAllowed && !personalForm.value.last_name}"
+          type="text" placeholder="Enter your last name"></ion-input>
+      </div>
+
+      <div section>
+        <div title>Phone Number</div>
+        <ion-input formControlName="phone_number" #phone (keydown.tab)="setFocus($event, null)"
+          (keydown.enter)="setFocus($event, null)" inputmode="tel"
+          [ngClass]="{'gray-bottom': is_iOS || !personalForm.value.phone_number}" type="tel" placeholder="xxx-xxx-xxxx">
+        </ion-input>
+      </div>
+
+      <div section>
+        <table>
+          <colgroup span="1" style="width:40px;"></colgroup>
+          <colgroup span="1"></colgroup>
+          <tbody>
+            <tr>
+              <td>
+                <ion-checkbox formControlName="push_noti_opt_out" [checked]="personalForm.value.push_noti_opt_out">
+                </ion-checkbox>
+              </td>
+              <td title (click)="toggle_pushNotif()">
+                Don't send me push notifications.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div section>
+        <table>
+          <colgroup span="1" style="width:40px;"></colgroup>
+          <colgroup span="1"></colgroup>
+          <tbody>
+            <tr>
+              <td>
+                <ion-checkbox slot="end" formControlName="is_beta" [checked]="personalForm.value.is_beta">
+                </ion-checkbox>
+              </td>
+              <td (click)="toggle_enrollBeta()">
+                <div title>
+                  Enroll in beta testing?
+                </div>
+                <div subtext>
+                  If you enroll in beta testing, we may reach out to you about opportunities to test new versions of the
+                  app before they are released to other users.
+                </div>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+     
+
+    </div>
+
+    <div tabPage class="personal" *ngIf="activeTab=='personal'">
+      <div section>
+        <div title>Country</div>
+        <ion-select
+          [ngClass]="{'gray-bottom': is_iOS, 'red-bottom': !this.transitionAllowed && !personalForm.value.country}"
+          formControlName="country" type="text" placeholder="Select your country">
+          <ion-select-option value="USA">USA</ion-select-option>
+          <ion-select-option value="Other">Enter your country</ion-select-option>
+        </ion-select>
+      
+        <div class="profile-item" margin-top *ngIf="personalForm.value.country == 'Other'">
+          <ion-input formControlName="otherCountry" #otherCountry (keydown.tab)="setFocus($event, zip)"
+            (keydown.enter)="setFocus($event, zip)"
+            [ngClass]="{'gray-bottom': is_iOS, 'red-bottom': !this.transitionAllowed && !personalForm.value.otherCountry}"
+            type="text" placeholder="Other country"></ion-input>
+        </div>
+      </div>
+
+      <div section>
+
+        <div>
+          <span title>Zip Code</span><span warn>*</span>
+        </div>
+        <ion-input formControlName="zipCode" #zip (keydown.tab)="setFocus($event, null)"
+          (keydown.enter)="setFocus($event, null)"
+          [ngClass]="{'gray-bottom': is_iOS, 'red-bottom': !this.transitionAllowed && !this.validateZipCode()}"
+          placeholder="Enter the Zip code"></ion-input>
+      </div>
+
+      <div section>
+        <div title>Time Zone</div>
+        <ion-select placeholder="Select from dropdown" formControlName="timezone"
+          [ngClass]="{'gray-bottom': is_iOS, 'red-bottom': !this.transitionAllowed && !personalForm.value.timezone}">
+          <ion-select-option value="US/Alaska">US/Alaska</ion-select-option>
+          <ion-select-option value="US/Aleutian">US/Aleutian</ion-select-option>
+          <ion-select-option value="US/Arizona">US/Arizona</ion-select-option>
+          <ion-select-option value="US/Central">US/Central</ion-select-option>
+          <ion-select-option value="US/East-Indiana">US/East-Indiana</ion-select-option>
+          <ion-select-option value="US/Eastern">US/Eastern</ion-select-option>
+          <ion-select-option value="US/Hawaii">US/Hawaii</ion-select-option>
+          <ion-select-option value="US/Indiana-Starke">US/Indiana-Starke</ion-select-option>
+          <ion-select-option value="US/Michigan">US/Michigan</ion-select-option>
+          <ion-select-option value="US/Mountain">US/Mountain</ion-select-option>
+          <ion-select-option value="US/Pacific">US/Pacific</ion-select-option>
+        </ion-select>
+      </div>
+
+      <div section>
+        <div title>Gender</div>
+        <ion-select placeholder="Select from dropdown" formControlName="gender_identity"
+          [ngClass]="{'gray-bottom': is_iOS, 'red-bottom': !this.transitionAllowed && !personalForm.value.gender_identity}">
+          <ion-select-option value="male">Male</ion-select-option>
+          <ion-select-option value="female">Female</ion-select-option>
+          <ion-select-option value="non-binary">Non-Binary</ion-select-option>
+        </ion-select>
+      </div>
+
+      <div section>
+        <div>
+          <span title>Ethnicity &nbsp;</span>
+          <ion-icon style="color:blue;" name="information-circle-outline" (click)="ethnicityHelpOpen()"></ion-icon>
+          <div subtext>select all that apply</div>
+        </div>
+        
+        <div class="ethnicity">
+          <ion-select multiple="true" cancelText="Cancel" okText="Done" placeholder="None selected"
+            formControlName="ethnicity">
+            <ion-select-option *ngFor="let entry of ethnicitiesList" [value]="entry">{{ entry }}</ion-select-option>
+          </ion-select>
+          <ion-input [(ngModel)]="otherEthnicities" #otherEthnicity (keydown.tab)="setFocus(null)"
+            (keydown.enter)="setFocus(null)" [ngClass]="{'gray-bottom': is_iOS}" placeholder="Other ethnicity not in list"
+            [ngModelOptions]="{standalone:true}"></ion-input>
+        </div>
+      </div>
+    </div>
+
+    <div tabPage class="car" *ngIf="activeTab=='vehicle'">
+      
+      <div section>
+        <div title>Vehicle Type</div>
+        <ion-select formControlName="vehicle_type"
+          [ngClass]="{'gray-bottom': is_iOS, 'red-bottom' : !this.transitionAllowed && !personalForm.value.vehicle_type}"
+          required placeholder="Select vehicle type">
+          <ion-select-option value="bike">Bike</ion-select-option>
+          <ion-select-option value="car">Car</ion-select-option>
+          <ion-select-option value="e-bike">E-bike</ion-select-option>
+          <ion-select-option value="moped">Moped</ion-select-option>
+        </ion-select>
+      </div>
+
+      <div *ngIf="personalForm.value.vehicle_type === 'car'">
+        <div section>
+          <div title>Car Brand</div>
+          <ion-input formControlName="vehicle_make" #carBrand (keydown.tab)="setFocus($event, carModel)"
+            (keydown.enter)="setFocus($event, carModel)"
+            [ngClass]="{'gray-bottom': is_iOS, 'red-bottom': !this.transitionAllowed && !personalForm.value.vehicle_make}"
+            required type="text" placeholder="Enter car brand"></ion-input>
+        </div>
+
+        <div section>
+          <div title>Car Model</div>
+          <ion-input formControlName="vehicle_model" #carModel (keydown.tab)="setFocus($event, null)"
+            (keydown.enter)="setFocus($event, null)"
+            [ngClass]="{'gray-bottom': is_iOS, 'red-bottom': !this.transitionAllowed && !personalForm.value.vehicle_model}"
+            required type="text" placeholder="Enter car model"></ion-input>
+        </div>
+        <div section>
+          <div title>Car Year</div>
+          <ion-select formControlName="vehicle_year" [value]="vehicle_year"
+            [ngClass]="{'gray-bottom': is_iOS, 'red-bottom' : !this.transitionAllowed && !personalForm.value.vehicle_year}"
+            required type="number" placeholder="Enter car year">
+            <ion-select-option value="2023">2023</ion-select-option>
+            <ion-select-option value="2022">2022</ion-select-option>
+            <ion-select-option value="2021">2021</ion-select-option>
+            <ion-select-option value="2020">2020</ion-select-option>
+            <ion-select-option value="2019">2019</ion-select-option>
+            <ion-select-option value="2018">2018</ion-select-option>
+            <ion-select-option value="2017">2017</ion-select-option>
+            <ion-select-option value="2016">2016</ion-select-option>
+            <ion-select-option value="2015">2015</ion-select-option>
+            <ion-select-option value="2014">2014</ion-select-option>
+            <ion-select-option value="2013">2013</ion-select-option>
+            <ion-select-option value="2012">2012</ion-select-option>
+            <ion-select-option value="2011">2011</ion-select-option>
+            <ion-select-option value="2010">2010</ion-select-option>
+            <ion-select-option value="2009">2009</ion-select-option>
+            <ion-select-option value="2008">2008</ion-select-option>
+            <ion-select-option value="2007">2007</ion-select-option>
+            <ion-select-option value="2006">2006</ion-select-option>
+            <ion-select-option value="2005">2005</ion-select-option>
+            <ion-select-option value="0">Older than 2005</ion-select-option>
+          </ion-select>
+        </div>
+
+        <div section>
+          <div title>Engine Type</div>
+          <ion-select required placeholder="Select from dropdown" formControlName="engine_type"
+            [ngClass]="{'gray-bottom': is_iOS, 'red-bottom': !this.transitionAllowed && !personalForm.value.engine_type}">
+            <ion-select-option value="gas">Gas</ion-select-option>
+            <ion-select-option value="hybrid">Hybrid</ion-select-option>
+            <ion-select-option value="electric">Electric</ion-select-option>
+            <ion-select-option value="diesel">Diesel</ion-select-option>
+          </ion-select>
+        </div>
+
+        <div section>
+          <div title>Car Ownership</div>
+          <ion-select placeholder="Select from dropdown" formControlName="car_ownership"
+            [ngClass]="{'gray-bottom': is_iOS}">
+            <ion-select-option value="own">I own my car.</ion-select-option>
+            <ion-select-option value="rent">I rent my car.</ion-select-option>
+            <ion-select-option value="lease">I lease my car.</ion-select-option>
+          </ion-select>
+        </div>
+
+        <div section *ngIf="personalForm.value.car_ownership === 'rent'">
+          <div title>Rental Program</div>
+          <ion-select placeholder="Select from dropdown" formControlName="rental_program"
+            [ngClass]="{'gray-bottom': is_iOS}">
+            <ion-select-option value="uber">Uber program</ion-select-option>
+            <ion-select-option value="lyft">Lyft program</ion-select-option>
+            <ion-select-option value="other">Other program or company</ion-select-option>
+          </ion-select>
+          <ion-input *ngIf="personalForm.value.rental_program === 'other'" 
+            formControlName="other_rental" (keydown.tab)="setFocus($event, null)"
+            (keydown.enter)="setFocus($event, null)" [ngClass]="{'gray-bottom': is_iOS}" type="text"
+            placeholder="What program or company do you rent with?"></ion-input>
+        </div>
+      </div>
+    </div>
+
+    <div tabPage class="privacy" *ngIf="activeTab=='privacy'">
+      
+      <div section>
+        <div title>Privacy Options</div>
+        <div>
+          {{ appDisplayName }} helps gig workers benefit from their data.  Our <a (click)="onPrivacyClick()">privacy policy</a> describes more about how we use your data.
+        </div>
+      </div>
+      <div section>
+        Please take a moment to review your privacy options:
+      </div>
+
+      <div section>
+        <table>
+          <colgroup span="1" style="width:40px;"></colgroup>
+          <colgroup span="1"></colgroup>
+          <tr (click)="toggle_dontSellData()">
+            <td input>
+              <ion-icon checkbox *ngIf="personalForm.value.optOutDataSale" name="checkmark-circle-outline"></ion-icon>
+              <ion-icon checkbox recommended *ngIf="!personalForm.value.optOutDataSale" name="ellipse-outline"></ion-icon>
+            </td>
+            <td left input>
+              <div title>Do Not Sell or Share My Personal Information</div>
+              <div subtext>
+                Checking here prevents us from sharing any personal information about you with our partner organizations.
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="!personalForm.value.optOutDataSale" (click)="toggle_limitDataUse()">
+            <td input>
+              <ion-icon checkbox *ngIf="personalForm.value.limitDataUse" name="checkmark-circle-outline"></ion-icon>
+              <ion-icon checkbox recommended *ngIf="!personalForm.value.limitDataUse" name="ellipse-outline"></ion-icon>
+            </td>
+            <td left input>
+              <div title>Limit the Use of My Sensitive Personal Information</div>
+              <div subtext>
+                Checking here prevents us from sharing any sensitive information about you such as gender,
+                your race/ethnicity, and precise location with our partner organizations.
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div section>
+        <a (click)="requestData()">Request my personal data</a><img src="assets/imgs/Arrow1.svg">
+      </div>
+
+      <div section>
+        <a (click)="deleteAccount()">Delete my account</a><img src="assets/imgs/Arrow1.svg">
+      </div>
+
+    </div>
+  </form>
+  <div tabPage class="referral" *ngIf="allowUpdateReferral && activeTab=='referral'">
+    <div section>
+      <div title>Did you receive a referral code?</div>
+      <div>
+        We want to make sure that we thank the person that told you about {{ appDisplayName }}.
+      </div>
+    </div>
+    <div section>      
+
+      <ion-input [(ngModel)]="referralCode"
+        type="text"
+        referral-code
+        [attr.hasvalue]="referralCode?.trim() != ''"
+        maxlength="4"
+        placeholder="Referral Code"
+        autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></ion-input>
+    </div>
+    <div center section>
+      <a (click)="referralCodeReset()">clear referral code</a>
+    </div>
+  </div>
+  
+</ion-content>
+<ion-footer tabs>
+  <table>
+    <colgroup *ngIf="!allowUpdateReferral" span="4" style="width: 25%"></colgroup>
+    <colgroup *ngIf="allowUpdateReferral" span="5" style="width: 20%"></colgroup>
+    <tbody>
+      <tr>
+        <td [class.active]="activeTab == 'account'" (click)="setTab('account')">
+          Account
+        </td>
+        <td [class.active]="activeTab == 'personal'" (click)="setTab('personal')">
+          Personal
+        </td>
+        <td [class.active]="activeTab == 'vehicle'" (click)="setTab('vehicle')">
+          Vehicle
+        </td>
+        <td [class.active]="activeTab == 'privacy'" (click)="setTab('privacy')">
+          Privacy
+        </td>
+        <td [class.active]="activeTab == 'referral'" (click)="setTab('referral')" *ngIf="allowUpdateReferral">
+          Referral
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ion-footer>

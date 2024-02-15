@@ -1,0 +1,104 @@
+<div container *ngIf="!performance && goal && goalAmount">
+  <table>
+    <colgroup span="1"></colgroup>
+    <colgroup span="1" style="width:30px;"></colgroup>
+    <tr>
+      <td header>
+        Performance Goal
+      </td>
+      <td right>
+        <ion-icon name="settings-outline" (click)="onSettingsClick()"></ion-icon>
+      </td>
+    </tr>
+  </table>
+  <table performance-stats>
+    <colgroup span="1"></colgroup>
+    <colgroup span="1" style="width: 85px"></colgroup>
+    <tbody>
+      <tr>
+        <td>
+          Your Goal
+        </td>
+        <td money title>
+          {{ this.goalAmount | currency:'USD':'symbol':'1.0-0' }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div center>
+    We'll start tracking your progress as we receive earnings info for this {{window.summaryLevel}}.
+  </div>
+</div>
+
+<div container *ngIf="!performance && !goalAmount">
+  <table add-goal>
+    <colgroup span="1"></colgroup>
+    <colgroup span="1" style="width:120px;"></colgroup>
+    <tbody>
+      <tr>
+        <td style="vertical-align: middle;">
+          <span *ngIf="!goal">You don't have a goal for this time period.</span>
+          <span *ngIf="goal">You don't have a goal for {{subGoalName}}.</span>
+        </td>
+        <td new-goal center>
+          <ion-button newGoal color="warning" (click)="onSettingsClick()">
+            <ion-icon name="add-circle-outline"></ion-icon>&nbsp;
+            <div left>{{ goal ? "Set" : "Add"}} Goal</div>
+          </ion-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div container [hidden]="!performance">
+  <table>
+    <colgroup span="1" style="width:100px;"></colgroup>
+    <colgroup span="1"></colgroup>
+    <tbody>
+      <tr>
+        <td graph>
+          <div graph>
+            <canvas #performanceCanvas></canvas>
+          </div>
+        </td>
+        <td>
+          <table>
+            <colgroup span="1"></colgroup>
+            <colgroup span="1" style="width:30px;"></colgroup>
+            <tr>
+              <td header>
+                Performance Goal
+              </td>
+              <td right>
+                <ion-icon name="settings-outline" (click)="onSettingsClick()"></ion-icon>
+              </td>
+            </tr>
+          </table>
+          <table performance-stats>
+            <colgroup span="1"></colgroup>
+            <colgroup span="1" style="width: 85px"></colgroup>
+            <tbody>
+              <tr>
+                <td right>
+                  Your Goal
+                </td>
+                <td money title>
+                  {{ this.performance?.goal_amount | currency:'USD':'symbol':'1.0-0' }}
+                </td>
+              </tr>
+              <tr>
+                <td right>
+                  Your Earnings
+                </td>
+                <td money title>
+                  {{ this.performance?.performance_amount | currency:'USD':'symbol':'1.0-0' }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

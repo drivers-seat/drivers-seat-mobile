@@ -1,0 +1,184 @@
+* {
+  font-size: 16px;
+  font-weight: normal;
+  color: black;
+}
+
+
+button{
+
+  margin-bottom: 5px;
+
+  
+
+  &.accept{
+    background-color: green;
+    color:white;
+    font-weight: normal;
+    font-size: 16px;
+    *{
+      color:white;
+    }
+  }
+
+  &.dismiss{
+    background-color: silver;
+    border: solid 2px gray;
+    color:gray;
+    font-weight: normal;
+    font-size: 16px;
+    *{
+      color:gray;
+    }
+  }
+
+  &.postpone{
+    background-color: transparent;
+    color:gray;
+    font-weight: normal;
+    font-size: 16px;
+    border: solid 2px gray;
+    *{
+      color:gray;
+    }
+  }
+
+  &.next{
+    background-color: blue;
+    color:white;
+    font-weight: normal;
+    font-size: 16px;
+    border: solid 2px blue;
+    *{
+      color:white;
+    }
+  }
+
+  &.prev{
+    background-color: blue;
+    color:white;
+    font-weight: normal;
+    font-size: 16px;
+    border: solid 2px blue;
+    *{
+      color:white;
+    }
+  }
+}
+
+a {
+  color: blue;
+}
+
+[center]{
+  text-align: center;
+}
+
+[right]{
+  text-align: right;
+}
+
+[left]{
+  text-align: left;
+}
+
+[subtext] {
+  font-size:10px;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  user-select: none;
+
+  td{
+    vertical-align: top;
+  }
+
+  th{
+    font-weight: bold;
+    vertical-align: bottom;
+  }
+}
+
+[section] {
+  padding-bottom: 10px;
+}
+
+[top-spacer]{
+  padding-top:5px;
+}
+
+[container] {
+  padding: 10px;
+  user-select: none;
+}
+
+[title] {
+  font-weight: bold;
+  
+  * {
+    font-weight: bold;
+  }
+}
+
+[emphasis]{
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+ion-footer{
+  background-color: white;
+}
+
+button{
+  background-color: blue !important;
+  color:white;
+  font-size:18px;
+  *{
+    color:white !important;
+    font-weight:bolder;
+  }
+  outline: none;
+
+  &:focus{
+    outline: none;
+  }
+
+}
+
+button[good]{
+  background-color: green !important;
+  color:white;
+  font-size:18px;
+  *{
+    color:white !important;
+    font-weight:bolder;
+  }
+}
+
+button[delete]{
+  background-color: white !important;
+  color:red;
+  border: solid 2px red;
+  font-size:18px;
+  *{
+    color:red !important;
+    font-weight:bolder;
+  }
+  
+}
+
+button[isDisabled='true']{
+  background-color: silver !important;
+  color: gray;
+}
+
+[waiting]{
+  text-align: center;
+  padding:20px;
+  color:gray;
+  ion-spinner: {
+    color:orange;
+  }
+}

@@ -1,0 +1,138 @@
+//See campaign-card.component.scss for defaults
+
+[card].checklist{
+  border-color: rgb(244, 187, 64);
+  background-color: rgb(255, 241, 204);
+  * {
+    color: black;
+  }
+
+  [header-container] {
+  
+    border-color: rgb(244, 187, 64);
+    background-color:rgb(244, 187, 64);
+  }
+}
+
+[card].recommendations {
+  border-color: #108B5D;
+  background-color: #108B5D;
+  min-height: 175px;
+
+  * {
+    color: white;
+  }
+
+  [button]{
+    background-color: white;
+    *{
+      color:  #108B5D;
+    }
+  }
+
+}
+
+[card].dashboard_notifications {
+
+  &.success{
+    border-color: darkgreen;
+    background-color: #98F8BE;
+    
+    *{
+      color: darkgreen
+    }
+
+    [button]{
+      background-color: darkgreen;
+      *{
+        color: white;
+      }
+    }
+  
+  }
+
+  &.info{
+    border-color: rgb(17, 20, 71);
+    background-color: #CECEFF;
+    // background-color:lightpink;
+    *{
+      color: rgb(17, 20, 71);
+    }
+
+    [button]{
+      *{
+        color: white;
+      }
+    }
+  }
+
+  &.warning{
+    border-color: darkorange;
+    background-color: rgb(255, 241, 204);
+
+    *{
+      color: darkorange;
+    }
+
+    [button]{
+      background-color: darkorange;
+      border-radius: 8px;
+      *{
+        color: white;
+      }
+    }
+  }
+
+  &.alert{
+    border-color: darkred;
+    background-color:lightpink;
+    *{
+      color:darkred;
+    }
+
+    [button]{
+      background-color: darkred;
+      border-radius: 8px;
+      *{
+        color: white;
+      }
+    }
+  }
+}
+
+
+[card].experts {
+  border-color: #4169E1;
+  background-color: #4169E1;
+  min-height: 175px;
+
+  * {
+    color: white;
+  }
+
+  [button]{
+    background-color: white;
+    *{
+      color:  #4169E1
+    }
+  }
+}
+
+
+[card].expert_advertise {
+  border-color: #4169E1;
+  background-color: white;
+  min-height: 175px;
+
+  * {
+    color: #4169E1;
+  }
+
+  [button]{
+    background-color: white;
+    border: solid 2px #4169E1;
+    *{
+      color:  #4169E1
+    }
+  }
+}

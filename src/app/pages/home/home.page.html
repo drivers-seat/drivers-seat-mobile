@@ -1,0 +1,42 @@
+<ion-tabs #tabs (ionTabsDidChange)="setCurrentTab()">
+
+  <div locationTrackingToggle *ngIf="isLocationTrackingEnabled">
+    <shift-tracking-toggle></shift-tracking-toggle>
+  </div>
+
+  <shift-tracking-stats></shift-tracking-stats>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="dashboard">
+      <ion-icon not-selected *ngIf="!(selectedTab == 'dashboard')" name="home-outline"></ion-icon>
+      <ion-icon selected *ngIf="selectedTab == 'dashboard'" name="home"></ion-icon>
+      <ion-label not-selected *ngIf="!(selectedTab == 'dashboard')">home</ion-label>
+      <ion-label selected *ngIf="selectedTab == 'dashboard'">home</ion-label>
+    </ion-tab-button>
+
+
+    <ion-tab-button tab="earnings">
+      <ion-icon not-selected *ngIf="!(selectedTab == 'earnings')" name="cash-outline"></ion-icon>
+      <ion-icon selected *ngIf="selectedTab == 'earnings'" name="cash"></ion-icon>
+      <ion-label not-selected *ngIf="!(selectedTab == 'earnings')">earnings</ion-label>
+      <ion-label selected *ngIf="selectedTab == 'earnings'">earnings</ion-label>
+
+    </ion-tab-button>
+
+    <div style="width:65px;" *ngIf="isLocationTrackingEnabled"></div>
+
+    <ion-tab-button tab="insights">
+      <ion-icon not-selected *ngIf="!(selectedTab == 'insights')" name="bar-chart-outline"></ion-icon>
+      <ion-icon selected *ngIf="selectedTab == 'insights'" name="bar-chart"></ion-icon>
+      <ion-label not-selected *ngIf="!(selectedTab == 'insights')">insights</ion-label>
+      <ion-label selected *ngIf="selectedTab == 'insights'">insights</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="menu_click()">
+      <ion-icon name="menu"></ion-icon>
+      <ion-label not-selected *ngIf="!(selectedTab == 'insights')">menu</ion-label>
+      <div *ngIf="countGigAccountIssues > 0" class="notif-indicator-container">
+        <div class="notification-indicator alert"></div>
+      </div>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

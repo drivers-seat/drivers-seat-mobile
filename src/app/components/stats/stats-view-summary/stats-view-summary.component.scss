@@ -1,0 +1,115 @@
+table[noDataOptions] {
+  width: 100%;
+  user-select: none;
+
+  td {
+    font-size: 16px;
+  }
+}
+
+table[summary] {
+  width: 100%;
+  table-layout: fixed;
+  user-select: none;
+
+  tbody {
+    td {
+      text-align: center;
+      vertical-align: top;
+      border-right: solid .5px silver;
+      padding-top: 10px;
+      padding-bottom: 3px;
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+
+  thead {
+    th {
+      text-align: center;
+      vertical-align: bottom;
+    }
+  }
+
+  tfoot {
+    td {
+      text-align: right;
+    }
+  }
+}
+
+[newExpense] {
+  color: black;
+
+  ion-icon {
+    color: black;
+  }
+}
+
+[title] {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+ion-icon {
+  font-size: 20px;
+  color: blue;
+  font-weight: normal;
+}
+
+
+.perfTitle {
+  font-size: 17px;
+  color: #808080
+}
+
+.perfSubTitle {
+  font-size: 14px;
+  color: #808080;
+}
+
+.perfValue {
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.perfSubValue {
+  font-size: 15px;
+}
+
+
+[nodata] {
+  padding: 20px !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  font-size: 16px;
+  text-align: left;
+  background-color: #FFF1CC;
+  border-bottom: solid 2px rgba(255, 184, 0, 1);
+  color: black;
+
+  li {
+    padding-bottom: 5px;
+    font-size: 16px !important;
+  }
+
+  [detail] {
+    font-size: 16px;
+    padding-top: 10px;
+  }
+}
+
+a {
+  font-size: 16px !important;
+}
+
+[hasData] {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  background-color: #FFF1CC;
+  border-bottom: solid 2px rgba(255, 184, 0, 1);
+}

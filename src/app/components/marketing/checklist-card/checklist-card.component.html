@@ -1,0 +1,30 @@
+<campaign-card [title]="checklist?.title" [actions]="checklist?.actions" [display_class]="display_class"
+  (onAction)="onActionClick($event)">
+
+  <div center-content>
+    <div spacer></div>
+    <div item *ngFor="let item of checklist?.items" [attr.status]="item.status">
+      <div status (click)="onActionClick(item.action)" *ngIf="item.status != 'none'">
+        <ion-icon item-status [ngClass]="item.display_class" [attr.status]="item.status"
+          [name]="getStatusIconName(item.status)"></ion-icon>
+      </div>
+      <div text>
+        <div title *ngFor="let title of item?.title" (click)="onActionClick(item.action)">{{title}}</div>
+        <div subtext *ngFor="let description of item?.description" (click)="onActionClick(item.action)">{{description}}</div>
+      </div>
+      <div action *ngIf="item.action">
+        <ion-icon (click)="onActionClick(item.action)" name="chevron-forward-outline"></ion-icon>
+      </div>
+    </div>
+    <div spacer></div>
+
+    <div footer *ngIf="show_progress">
+      <div progress>
+        <div status complete *ngFor="let x of complete"></div>
+        <div status in-process *ngFor="let x of in_process"></div>
+        <div status req-attn *ngFor="let x of req_attn"></div>
+        <div status not-started *ngFor="let x of not_started"></div>
+      </div>
+    </div>
+  </div>
+</campaign-card>

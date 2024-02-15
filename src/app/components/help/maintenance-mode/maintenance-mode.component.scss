@@ -1,0 +1,32 @@
+[container] {
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  row-gap: 30px;
+  padding:20px;
+}
+
+[info] {
+  flex-grow: 0;
+}
+
+[spacer] {
+  flex-grow: 1;
+}
+
+[logo]{
+  text-align: center;
+  img{
+    width:40%;
+  } 
+}
+
+[store] {
+  text-align: center;
+  padding-top: 40px;
+}
+
+[title]{
+  font-size: 120%;
+}

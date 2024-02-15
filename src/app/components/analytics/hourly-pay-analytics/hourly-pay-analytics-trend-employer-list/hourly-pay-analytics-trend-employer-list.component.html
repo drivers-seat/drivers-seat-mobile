@@ -1,0 +1,60 @@
+<table *ngIf="isReady">
+  <colgroup span="1" style="width:5px;"></colgroup>
+  <colgroup span="1"></colgroup>
+  <colgroup span="1" style="width:60px;"></colgroup>
+  <colgroup span="1" style="width:60px;"></colgroup>
+  <colgroup span="1" style="width:100px;"></colgroup>
+  <thead>
+    <tr>
+      <td></td>
+      <td svcClass>
+        <div>{{service_class}}</div>
+        <div> Gig Platform</div>
+      </td>
+      <td workers>
+        <div># of</div>
+        <div>workers</div>
+      </td>
+      <td tasks>
+        <div># of</div>
+        <div>tasks</div>
+      </td>
+      <td pay *ngIf="!options.deduct_mileage">
+        <div>Average</div>
+        <div>pay/hr</div>
+      </td>
+      <td pay *ngIf="options.deduct_mileage">
+        <div>Average</div>
+        <div>hourly pay</div>
+        <div subtext>deducting mileage</div>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let stat of trend_stats">
+      <td legend [style.background-color]="getEmployerColorBorder(stat?.employer_id)"
+        [style.border-color]="getEmployerColorBorder(stat?.employer_id)">
+      </td>
+      <td employer>
+        {{employers[stat.employer_id].name}}
+      </td>
+
+      <td noStats *ngIf="!stat.count_workers" colspan="3">
+        current data not available
+      </td>
+
+      <td workers *ngIf="stat.count_workers">
+        {{stat.count_workers}}
+      </td>
+      <td tasks *ngIf="stat.count_workers">
+        {{stat.count_tasks}}
+      </td>
+      <td pay *ngIf="stat.count_workers && !options.deduct_mileage">
+        {{stat.avg_hourly_pay | currency}}
+      </td>
+      <td pay *ngIf="stat.count_workers && options.deduct_mileage">
+        {{stat.avg_hourly_pay_with_mileage | currency}}
+      </td>
+    </tr>
+  </tbody>
+</table>

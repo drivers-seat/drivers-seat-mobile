@@ -1,0 +1,194 @@
+[container] {
+  padding: 10px;
+  padding-top:5px;
+  padding-bottom:5px;
+}
+[section] {
+  padding-bottom: 10px;
+}
+
+[warning] {
+  color:orange;
+}
+
+ion-header[header] {
+  // background-color: rgba(255, 184, 0);
+  background-color: #111447;
+
+  td {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  * {
+    color:white;
+  }
+
+  td[action] {
+    padding: 5px;
+    color: white;
+    vertical-align: middle;
+
+    &[left] {
+      text-align: left;
+    }
+
+    &[right] {
+      text-align: right;
+    }
+  }
+
+  span {
+    padding-left: 6px;
+    color:white;
+  }
+}
+
+ion-header[tools] {
+  background-color: #fff1cc;
+  border-bottom: solid 2px #F4BB40;
+
+  td {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  td[action] {
+    padding: 5px;
+    color: blue;
+    vertical-align: middle;
+
+    &[left] {
+      text-align: left;
+    }
+
+    &[right] {
+      text-align: right;
+    }
+  }
+
+  span {
+    padding-left: 6px;
+    color:blue;
+  }
+}
+
+
+ion-footer {
+  background-color: rgba(255, 184, 0, .2);
+  border-top: solid 2px #F4BB40;
+}
+
+ion-icon {
+  color: blue;
+  width: 25px;
+  height: 25px;
+}
+
+table[tools]{
+  td{
+    background-color: white;
+    border: solid 1px gray;
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px;
+  }
+}
+
+table[schedule] {
+
+  td {
+    height: 7.5px;
+  }
+
+  td[status='free'] {
+    background-color: white;
+  }
+
+  td[time] {
+    vertical-align: middle;
+    text-align: right;
+    font-size: .8em;
+    padding-right: 3px;
+  }
+
+  td[middle] {
+    border-bottom: solid 1px silver;
+  }
+
+  td[status='engaged'] {
+    background-color: silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+
+    &[work] {
+      background-color: #F4BB40;
+      border-top: solid 1px #F4BB40;
+      border-bottom: solid 1px #F4BB40;
+    }
+  }
+
+  td[status='notEngaged'] {
+    background-color: silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+}
+
+
+table[summary] {
+
+  border: solid 1px gray;
+
+  [time] {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding-top: 5px;
+  }
+
+  [delta] {
+    text-align: center;
+    padding-bottom: 5px;
+  }
+
+  [legend] {
+
+    padding:3px;
+    text-align: center;
+
+    &[engaged] {
+      background-color: #F4BB40;
+    }
+
+    &[notEngaged] {
+      background-color: silver;
+    }
+
+    &[total]{
+      background-color: black;
+      color: white;
+    }
+  }
+
+  td{
+    background-color: white;
+    border-left: solid 1px gray;
+    border-right: solid 1px gray;
+  }
+
+  tbody[stats] {
+    td {
+      background-color: white;
+      border: solid .5px silver;
+
+
+    }
+  }
+
+  tbody[total] {
+    td {
+      font-weight: bold;
+    }
+  }
+}

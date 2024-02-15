@@ -1,0 +1,94 @@
+<ion-content>
+  <div container>
+    <div section center>
+      <img logo src='assets/imgs/logo-small.png' />
+      <div emphasis>
+        Sign Up
+      </div>
+      <div dupAccountMessage>
+        <div *ngIf="!(emailIsAvailable==false) && unknownError==false">
+          Already a member?
+        </div>
+        <div *ngIf="emailIsAvailable == false" class="error">
+          Looks like there's already an account for {{email}}.
+        </div>
+        <div *ngIf="unknownError == true" class="error">
+          Something went wrong, please try your request again.
+        </div>
+        <a (click)="onLoginClick()">Log In</a>
+      </div>
+    </div>
+    <form>
+      <div section>
+        <table>
+          <colgroup span="1"></colgroup>
+          <colgroup span="1"></colgroup>
+          <tr>
+            <td title>
+              Email
+              <span required>*</span>
+            </td>
+            <td></td>
+          </tr>
+        </table>
+        <ion-input type="email" name="email" autofocus="true" placeholder="Enter your email address" maxlength="100"
+          autocomplete="username" [(ngModel)]="email" debounce="250" (ionFocus)="emailFocusChange(true)"
+          (ionBlur)="emailFocusChange(false)"
+          [class.error]="!emailIsFocused && emailHasFocused && (emailIsValid==false || emailIsAvailable == false)"
+          [class.good]="!emailIsFocused && emailIsValid && emailIsAvailable" [class.focused]="emailIsFocused"
+          (ngModelChange)="emailChanged($event)">
+        </ion-input>
+        <div message>
+          <div class="error" *ngIf="!emailIsValid">
+            {{emailErrorText}}
+          </div>
+        </div>
+      </div>
+
+      <div section>
+        <table>
+          <colgroup span="1"></colgroup>
+          <colgroup span="1"></colgroup>
+          <colgroup span="1" style="width:30px;"></colgroup>
+          <tr>
+            <td title>
+              Password
+              <span required>*</span>
+            </td>
+            <td></td>
+            <td (click)="togglePasswordVisibility()">
+              <ion-icon name="eye-outline" *ngIf="!passwordShowText"></ion-icon>
+              <ion-icon name="eye-off-outline" *ngIf="passwordShowText"></ion-icon>
+            </td>
+          </tr>
+        </table>
+        <ion-input [type]="passwordShowText ? 'text' : 'password'" name="password" maxlength="100"
+          autocomplete="new-password" [(ngModel)]="password" (ngModelChange)="passwordChanged($event)"
+          (ionFocus)="passwordFocusChange(true)" (ionBlur)="passwordFocusChange(false)"
+          [class.error]="!passwordIsFocused && passwordHasFocused && !passwordIsValid" [class.good]="passwordIsValid"
+          [class.focused]="passwordIsFocused" placeholder="passwords must have 8-characters">
+        </ion-input>
+        <div message>
+          <div class="error" *ngIf="passwordErrorText">
+            {{passwordErrorText}}
+          </div>
+        </div>
+      </div>
+    </form>
+    <div center>
+      <div>By creating an account, you agree to our</div>
+      <a (click)="onShowTermsClick()">Terms of Service</a> and <a (click)="onShowPrivacyPolicyClick()">Privacy
+        Policy</a>.
+    </div>
+
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div buttons>
+      <button [disabled]="!canSubmit" class="full-button positive login-button" (click)="onSubmit()">
+        Register
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

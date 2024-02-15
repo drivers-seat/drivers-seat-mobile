@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCancel()">
+        Done
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <div title *ngFor="let txt of title" title>{{txt}}</div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div container>
+    <div section *ngIf="description?.length > 0">
+      <div *ngFor="let desc of description">{{desc}}</div>
+    </div>
+    <campaign-carousel [campaigns]="campaigns" orientation="vertical">
+      <div campaign-carousel-empty>
+        There are no items available at this time
+      </div>
+    </campaign-carousel>
+  </div>
+</ion-content>

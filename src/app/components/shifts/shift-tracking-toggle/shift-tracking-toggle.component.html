@@ -1,0 +1,9 @@
+<div tracker #toggleCtrl
+    *ngIf="allowManageShifts"
+    [class.locked]="ToggleCtrlLocked"
+    [class.off]="(enableManageShifts) && !onShift"
+    [class.on]="(enableManageShifts) && onShift"
+    [class.disabled]="!enableManageShifts">
+    <ion-icon name="navigate" *ngIf="enableManageShifts" (click)="toggleShift()"></ion-icon>
+    <ion-icon name="settings-outline" *ngIf="!enableManageShifts" (click)="openHelpUnableToStartShift()"></ion-icon>
+</div>

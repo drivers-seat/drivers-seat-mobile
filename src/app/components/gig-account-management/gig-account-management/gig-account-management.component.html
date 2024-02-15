@@ -1,0 +1,116 @@
+<ion-header valid *ngIf="isRegistered && linkedAccounts?.length > 0">
+  <ion-toolbar>
+    <ion-buttons slot="primary" *ngIf="isRegistered && linkedAccounts?.length > 0 && !isGhosting">
+      <ion-button (click)="manageGigAccounts()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title title>
+      {{linkedAccounts?.length > 0 ? "Your" : ""}}
+      Gig Accounts
+    </ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="cancelClick()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        Back
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header welcome *ngIf="!isRegistered || !(linkedAccounts?.length > 0)">
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="cancelClick()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        Back
+      </ion-button>
+    </ion-buttons>
+    <ion-title title>
+      Gig Accounts
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <gig-account-management-list *ngIf="isRegistered && linkedAccounts?.length > 0"></gig-account-management-list>
+  <gig-account-management-welcome *ngIf="!(linkedAccounts?.length > 0)"></gig-account-management-welcome>
+</ion-content>
+<ion-footer *ngIf="isRegistered && linkedAccounts?.length > 0">
+  <ion-toolbar>
+    <div container (click)="toggleLegend()">
+      <div title>
+        <table>
+          <colgroup span="1"></colgroup>
+          <colgroup span="1" style="width:50px"></colgroup>
+          <tbody>
+            <tr>
+              <td>
+                What does my status mean?
+              </td>
+              <td style="text-align:right;">
+                <ion-icon status legend name="ellipse-outline" class="connecting"></ion-icon>
+                <ion-icon status legend name="ellipse" class="error"></ion-icon>
+                <ion-icon status legend name="ellipse-outline" class="good"></ion-icon>
+                <ion-icon status legend name="ellipse" class="good"></ion-icon>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+
+
+      </div>
+      <div *ngIf="showLegend==true">
+        <div section></div>
+        <table legend>
+          <colgroup span="1" style="width:20px;"></colgroup>
+          <colgroup span="1" style="width:5px;"></colgroup>
+          <colgroup span="1"></colgroup>
+          <tbody>
+            <tr>
+              <td>
+                <ion-icon status name="ellipse-outline" class="connecting"></ion-icon>
+              </td>
+              <td></td>
+              <td>
+                Connecting to your account
+                <div subtext>
+                  Further action may be required from you to finish connecting
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ion-icon status name="ellipse" class="error"></ion-icon>
+              </td>
+              <td></td>
+              <td>
+                Problem connecting to your account
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ion-icon status name="ellipse-outline" class="good"></ion-icon>
+              </td>
+              <td></td>
+              <td>
+                Fetching your data
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ion-icon status name="ellipse" class="good"></ion-icon>
+              </td>
+              <td></td>
+              <td>
+                Up to date
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

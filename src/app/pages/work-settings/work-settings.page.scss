@@ -1,0 +1,107 @@
+table {
+  width: 100%;
+  table-layout: fixed;
+  user-select: none;
+}
+
+table[schedule] {
+
+  td:first-child {
+    width: 60px;
+  }
+
+  td[help] {
+    text-align: center;
+  }
+
+  td[day] {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  td[hour] {
+    padding-right: 5px;
+    text-align: right;
+    vertical-align: middle;
+    font-weight: bold;
+  }
+
+  td[val] {
+    border: solid 1px silver;
+    height: 40px;
+  }
+
+  td.selected {
+    background-color: rgb(255, 184, 0);
+  }
+}
+
+table[options] {
+
+  margin-top: 5px;
+  margin-bottom: 15px;
+
+  td {
+    text-align: center;
+  }
+
+  thead {
+
+    td {
+      vertical-align: bottom;
+      ;
+    }
+  }
+
+  tbody {
+    td {
+      vertical-align: top;
+      font-size: 16px;
+      font-weight: bold;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+}
+
+ion-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+ion-header {
+
+  background-color: rgb(215, 217, 249);
+  border-bottom: solid 2px rgb(24, 45, 205, .54);
+}
+
+ion-footer {
+  border-top: solid 2px rgb(24, 45, 205, .54);
+  background-color: rgb(215, 217, 249);
+  color: black;
+}
+
+* {
+  font-size: 16px;
+  color: back;
+}
+
+ion-toggle {
+  --background-checked: #00b876;
+
+}
+
+ion-spinner {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+a {
+  font-size: 17px;
+}
+
+ion-icon {
+  font-size: 20px;
+  color: blue;
+  font-weight: normal;
+}

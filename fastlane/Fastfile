@@ -1,0 +1,38 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  lane :test do
+    get_certificates
+    get_provisioning_profile
+    build_app(
+      scheme: "App",
+      workspace: "ios/App/App.xcworkspace", 
+      skip_package_ipa: true,
+      skip_archive: true,
+      configuration: "Debug",
+      destination: "generic/platform=iOS Simulator",
+      derived_data_path: "build"
+    )
+  end
+end
+
+platform :android do
+  lane :test do
+    build_android_app(task: "assemble", build_type: "Debug", project_dir: "./android/")
+  end
+end

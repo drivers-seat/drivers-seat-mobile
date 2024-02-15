@@ -1,0 +1,71 @@
+<div items>
+  <div details>
+    <div waiting *ngIf="!goals">
+      <ion-spinner></ion-spinner>
+      <div subtitle>one moment please...</div>
+    </div>
+    <table goals *ngIf="goals?.length > 0">
+      <colgroup span="1" style="width:100px;"></colgroup>
+      <colgroup span="1"></colgroup>
+      <colgroup span="1" style="width:25px;"></colgroup>
+      <thead>
+        <tr>
+          <th>
+            Start
+          </th>
+          <th>
+            Goal
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let goal of goals">
+          <td date>
+            {{ TimeHelper.toShortDateUnix(goal.start_date_unix, true)}}
+          </td>
+          <td detail>
+            <table subgoals>
+              <colgroup span="1"></colgroup>
+              <colgroup span="1" style="width:90px;"></colgroup>
+              <tbody *ngFor="let subGoal of goal.sub_goals_info; let i = index" [attr.idx]="i">
+                <tr>
+                  <td right>
+                    {{subGoal.title}}
+                  </td>
+                  <td money right>
+                    {{subGoal.amount | currency}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+          <td action (click)="onGoalClick(goal)">
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div noGoals *ngIf="goals && goals.length == 0">
+      <div section>
+        <div emphasis center>No {{title}} Currently Set</div>
+      </div>
+      <div section center>
+        <img src="assets/imgs/goals/welcome.png"/>
+      </div>
+      <div section desc>
+        Setting an earnings goal will help you get the most out of our recommendations.
+      </div>
+      <div section desc>
+        Not sure what your goal should be? <a desc (click)="getDriversSeatHelpClick()">Talk to a {{ appDisplayName }} team member</a> to get some help.
+      </div>
+    </div>
+  </div>
+  <div buttons>
+    <button
+      class="full-button" 
+      (click)="onNewGoalClick()">
+      Set a New Goal
+    </button>
+  </div>
+</div>

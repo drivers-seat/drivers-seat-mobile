@@ -1,0 +1,158 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onClose()">
+        Done
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <div title>Expenses</div>
+      <div>{{window?.title}}</div>
+    </ion-title>
+    <ion-buttons *ngIf="canDownload" slot="secondary">
+      <ion-button (click)="onDownload()">
+        <ion-icon name="cloud-download-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div container *ngIf="!expenses" center waiting>
+    <ion-spinner></ion-spinner>
+    <div subtitle>one moment please...</div>
+  </div>
+  <div container [hidden]="!(expenses?.length > 0)">
+    <div section></div>
+    <div section>
+      <table>
+        <colgroup span="1" style="width:140px;"></colgroup>
+        <colgroup span="1"></colgroup>
+        <tbody>
+          <tr>
+            <td graph>
+              <div graph>
+                <canvas #expenseCanvas></canvas>
+              </div>
+            </td>
+            <td style="vertical-align: middle;">
+              <table expenseTotals>
+                <colgroup span="1"></colgroup>
+                <colgroup span="1" style="width:100px;"></colgroup>
+                <tbody>
+                  <tr>
+                    <td>Deductible</td>
+                    <td money>
+                      {{getExpenseTotalDeductible() | currency }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Non-Deductible</td>
+                    <td money>
+                      {{getExpenseTotalNonDeductible() | currency }}
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td>
+                      Total
+                    </td>
+                    <td money>
+                      {{getExpenseTotal() | currency}}
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div section>
+      <table tabs>
+        <colgroup span="3" style="width:33%"></colgroup>
+        <tbody>
+          <tr>
+            <td tab [class.active]="selectedTab == 'details'" (click)="setActiveTab('details')">Expenses</td>
+            <td tab [class.active]="selectedTab == 'categories'" (click)="setActiveTab('categories')">By Category</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="selectedTab == 'categories'">
+      <table expenseCategories *ngIf="expenses">
+        <colgroup span="1" style="width:8px;"></colgroup>
+        <colgroup span="1"></colgroup>
+        <colgroup span="1" style="width:100px;"></colgroup>
+        <tbody>
+          <tr *ngFor="let summary of categorySummary">
+            <td category [style.backgroundColor]="getExpenseTypeBackgroundColor(summary.category)"
+              [style.borderColor]="getExpenseTypeBorderColor(summary.category)">
+            </td>
+            <td>{{summary.category}}</td>
+            <td money>{{summary.total | currency}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td>Total</td>
+            <td money>{{getExpenseTotal() | currency}}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div *ngIf="selectedTab == 'details'">
+      <table expenseList *ngIf="expenses">
+        <colgroup span="1" style="width:8px;"></colgroup>
+        <colgroup span="1" style="width:70px;"></colgroup>
+        <colgroup span="1"></colgroup>
+        <colgroup span="1" style="width:100px;"></colgroup>
+        <colgroup span="1" style="width:25px;"></colgroup>
+        <tbody>
+          <tr *ngFor="let expense of expenses">
+            <td category [style.backgroundColor]="getExpenseTypeBackgroundColor(expense.category)"
+              [style.borderColor]="getExpenseTypeBorderColor(expense.category)">
+            </td>
+            <td>
+              {{TimeHelper.toShortDate(expense.date)}}</td>
+            <td>
+              <div>{{expense.name}}</div>
+              <div subtext>{{expense.category}}</div>
+            </td>
+            <td money>{{expense.money | currency}}</td>
+            <td action explore (click)="onExpenseClick(expense)">
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td colspan="2">Total</td>
+            <td money>{{getExpenseTotal() | currency}}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  <div noExpenses *ngIf="expenses && expenses.length == 0">
+    <div section center>
+      <img src="assets/imgs/expenses/welcome/money.png"/>
+    </div>
+    <div section>
+      <div emphasis center>There are no</div>
+      <div emphasis center>expenses for</div>
+      <div emphasis center>{{window.title}}</div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button good class="full-button" (click)="onNewExpense()">Add New Expense</button>
+  </ion-toolbar>
+</ion-footer>

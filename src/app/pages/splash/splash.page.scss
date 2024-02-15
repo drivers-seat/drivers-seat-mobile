@@ -1,0 +1,16 @@
+img {
+  height: 100%;
+  object-fit: cover;
+}
+
+div[version]{
+  position: absolute;
+  bottom:0;
+  left: 0;
+  right:0;
+  height:70px;
+  text-align: center;
+  vertical-align: middle;
+  color:white;
+  font-size: 16px;
+}

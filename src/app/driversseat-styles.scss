@@ -1,0 +1,153 @@
+ion-label {
+  display: block;
+}
+
+* {
+  font-size: 14px;
+}
+
+
+[title] {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+[subtitle] {
+  color: #707291;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+[subtext] {
+  font-size: 14px;
+}
+
+
+.delta {
+  font-weight: 600;
+
+  &.increase {
+    color: #00b876;
+  }
+
+  &.decrease {
+    color: #d30072;
+  }
+}
+
+
+[center] {
+  text-align: center;
+}
+
+[right] {
+  text-align: right;
+}
+
+[left] {
+  text-align: left;
+}
+
+.card {
+  background-color: white;
+  box-shadow: none;
+}
+
+button {
+  color: rgba(50, 63, 255, 1);
+  background-color: rgba(50, 63, 255, .1);
+  border: solid 2px rgb(50, 63, 255, 1);
+  border-radius: 8px;
+  height: 50px;
+  font-size: 16px;
+
+  &[full] {
+    width: calc(100% - 40px);
+  }
+
+  &[nav] {
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+
+    &[prev] {
+      background-image: url('/assets/imgs/nav-prev.svg');
+    }
+
+    &[next] {
+      background-image: url('/assets/imgs/nav-next.svg');
+    }
+  }
+
+  &[disabled] {
+    opacity: 30%;
+  }
+
+  &.menu {
+
+    position: relative;
+    border: none;
+    background-color: transparent;
+    color: black;
+    height: auto;
+
+    ion-icon {
+      height: 40px;
+      width: 30px;
+    }
+  }
+
+}
+
+ion-spinner {
+  color: rgba(50, 63, 255, 1);
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+* {
+  font-size: 14px;
+}
+
+div[appVersion] {
+  text-align: center;
+  padding: 10px;
+  color: #808080;
+}
+
+[section] {
+  padding-bottom: 20px;
+}
+
+[heading] {
+  font-weight: bold;
+}
+
+ion-footer {
+  background-color: rgba(50, 63, 255, 1);
+  color: white;
+  min-height: 55px;
+
+  ion-icon {
+    color: white;
+    font-size: 25px;
+  }
+
+  ion-label {
+    font-size: 16px;
+    color: white !important;
+  }
+
+  ion-content[fullscreen] {
+    margin-top: var(--ion-safe-area-top);
+  }
+}
+
+[ghosting] {
+  color: orange;
+  text-align: center;
+  ;
+}

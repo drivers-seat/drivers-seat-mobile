@@ -1,0 +1,176 @@
+[container] {
+  padding-bottom: 0;
+  background-color: #111447 !important;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  overflow: scroll;
+
+  * {
+    color: white;
+  }
+}
+
+[section] {
+  padding-bottom: 10px;
+}
+
+ion-header {
+  background-color: #111447 !important;
+
+  * {
+    color: white;
+  }
+
+  ion-icon {
+    width: 20px;
+    height: 20px;
+    color: white;
+  }
+}
+
+ion-footer {
+  background-color: #111447 !important;
+
+  ion-icon {
+    width: 15px;
+    height: 15px;
+    color: white;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+
+  * {
+    color: white;
+  }
+
+}
+
+div[pageTitle] {
+  position: absolute;
+  top: 0px;
+  height: 50px;
+  left: 10px;
+  right: 10px;
+  text-align: center;
+  vertical-align: top;
+}
+
+div[content] {
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 30px;
+  right: 30px;
+}
+
+div[nav] {
+  position: absolute;
+  top: 10px;
+  bottom: 0;
+  vertical-align: middle;
+  width: 30px;
+  padding-top: 60%;
+
+  &[left] {
+    left: 0;
+    text-align: left;
+  }
+
+  &[right] {
+    right: 0;
+    text-align: right;
+  }
+
+  ion-icon {
+    color: white;
+    height: 25px;
+    width: 25px;
+  }
+}
+
+ion-slides {
+  height: 100%;
+}
+
+ion-slide {
+  img[ios] {
+    height: 350px;
+  }
+
+  img[android] {
+    height: 400px;
+  }
+}
+
+td[instructions] {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: white;
+  font-size: 1.1em;
+}
+
+
+
+
+[tracker] {
+  display: inline-block;
+  border-style: solid;
+  border-width: 8px;
+  border-radius: 100%;
+  padding: 8.5px;
+
+  padding-left: 5px;
+  padding-right: 12px;
+  padding-top: 9px;
+  padding-bottom: 8px;
+
+  width: 120px;
+  height: 120px;
+  background-color: white;
+
+  ion-icon {
+    height: 80px;
+    width: 80px;
+    color: #323fff !important;
+  }
+
+
+  &.on {
+    border-color: green;
+    // background-color:green;
+    // color:white;
+    color: #323fff !important;
+    animation: tracking_on 1s infinite;
+    animation-duration: 1s;
+    animation-name: tracking_on;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  &.off {
+    border-color: green;
+    // background-color:transparent;
+    // color:green;
+    color: #323fff;
+    // color:white;
+  }
+
+  &.locked {
+    border-color: gray;
+    color: gray;
+  }
+
+  &.disabled {
+    border-color: red;
+    background-color: white;
+    color: red;
+    padding-left: 8.5px;
+    padding-right: 8.5px;
+    padding-top: 8.5px;
+    padding-bottom: 8.5px;
+  }
+}

@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCancel()">
+        Done
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <div title>Goals</div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="!hasAnyGoals">
+  <div container *ngIf="hasAnyGoals == false">
+    <div section>
+      <div emphasis center>No Goal Currently Set</div>
+    </div>
+    <div section center>
+      <img src="assets/imgs/goals/welcome.png"/>
+    </div>
+    <div section desc>
+      Setting an earnings goal will help you get the most out of our recommendations.
+    </div>
+    <div section desc>
+      Not sure what your goal should be? <a desc (click)="getDriversSeatHelpClick()">Talk to a {{ appDisplayName }} team member</a> to get some help.
+    </div>
+  </div>
+  <div container *ngIf="hasAnyGoals == null">
+    <div spacer></div>
+    <div center>
+      <ion-spinner></ion-spinner>
+      <div subtitle>one moment please...</div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-content *ngIf="hasAnyGoals">
+  <div container>
+    <div tab-container>
+      <table tabs>
+        <tbody>
+          <tr>
+            <td *ngFor="let level of levels" [class.active]="activeLevel == level" (click)="setActiveLevel(level)">
+              {{ TextHelper.capitalizeFirstLetter(getLevelName(level)) }}
+            </td>
+            <td></td>
+          <tr>
+      </table>
+    </div>
+    <div levels>
+      <goal-list [goal_type]="goalType" [goal_frequency]="activeLevel">
+      </goal-list>
+    </div>
+  </div>
+
+</ion-content>
+
+<ion-footer *ngIf="hasAnyGoals == false">
+  <ion-toolbar>
+    <div buttons>
+      <button
+        class="full-button" 
+        (click)="onNewGoalClick()">
+        Set A New Goal
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

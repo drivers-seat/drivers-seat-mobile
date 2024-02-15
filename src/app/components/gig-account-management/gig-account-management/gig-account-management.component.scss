@@ -1,0 +1,50 @@
+ion-icon{
+  width:30px;
+  height:30px;
+  color: #3880ff;
+}
+
+table[legend]{
+  td{
+    vertical-align: middle !important;
+  }
+
+  ion-icon {
+    margin-top:5px;
+    height:20px;
+    width:20px;
+  }
+}
+
+
+
+ion-icon[status][legend]{
+  height:10px;
+  width:10px;
+}
+
+[container]{
+  padding:5px;
+}
+
+ion-header[welcome] {
+  background-color:  #111447 !important;
+}
+
+ion-footer {
+  background-color:  #111447;
+  
+  *{
+    color:white;
+  }
+  
+  a{
+    color:white;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+
+  ion-toolbar {
+    background-color:  #111447;
+  }
+}

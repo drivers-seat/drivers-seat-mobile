@@ -1,0 +1,97 @@
+<ion-header [attr.isGhosting]="isGhosting">
+  <ion-toolbar>
+    <dashboard-header></dashboard-header>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <div container>
+    <div *ngFor="let section of sections">
+      <div *ngIf="should_show_section(section)">
+
+        <div section lrPadding *ngIf="section.type=='campaign' && section.id != 'recommendations_bottom' && section.id != 'recommendations_top'">
+          <campaign-carousel 
+            [campaigns]="getCampaignsForSection(section)" 
+            [display_class]="section.display_class || []"
+            [orientation]="section.orientation || 'horizontal'">
+            <div campaign-carousel-header *ngIf="should_show_section_header(section)">
+              <div title *ngFor="let txt of section.header.title || []">{{txt}}</div>
+              <div description *ngFor="let txt of section.header.description || []">{{txt}}</div>
+            </div>
+            <div campaign-carousel-footer *ngIf="should_show_section_footer(section)">
+              <div title *ngFor="let txt of section.footer.title || []">{{txt}}</div>
+              <div description *ngFor="let txt of section.footer.description || []">{{txt}}</div>
+            </div>
+          </campaign-carousel>
+        </div>
+
+        <div section lrPadding section *ngIf="(section.id == 'recommendations_top' && recommendations?.length > 0) || (section.id == 'recommendations_bottom' && recommendations?.length == 0 && recommendations_accepted?.length > 0)">
+          <campaign-carousel 
+            [campaigns]="recommendations" 
+            [display_class]="section.display_class || []"
+            [orientation]="section.orientation || 'horizontal'">
+
+            <div campaign-carousel-header>
+              <div recommendations-title>
+                <div icon>
+                  <div spacer></div>
+                  <img src="/assets/imgs/recommendations/robot_icon.png" />
+                </div>
+                <div txt>
+                  <div spacer></div>
+                  <div title *ngIf="recommendations?.length > 1">{{recommendations.length}} New AI Recommendations</div>
+                  <div title *ngIf="recommendations?.length== 1">{{recommendations.length}} New AI Recommendation</div>
+                </div>
+                <div label *ngIf="recommendations_accepted.length > 0" count-accepted
+                  (click)="onAcceptedRecommendationsClick()">
+                  <div spacer></div>
+                  {{recommendations_accepted.length}} saved
+                </div>
+                <div action *ngIf="recommendations_accepted?.length > 0" (click)="onAcceptedRecommendationsClick()">
+                  <div spacer></div>
+                  <ion-icon name="chevron-forward-outline"></ion-icon>
+                </div>
+              </div>
+            </div>
+            <div campaign-carousel-empty *ngIf="recommendations_accepted.length > 0">
+              <div recommendations-title>
+                <div icon>
+                  <div spacer></div>
+                  <img src="/assets/imgs/recommendations/robot_icon.png" />
+                </div>
+                <div txt>
+                  <div spacer></div>
+                  <div title>AI Recommendations</div>
+                </div>
+                <div label *ngIf="recommendations_accepted.length > 0" count-accepted
+                  (click)="onAcceptedRecommendationsClick()">
+                  <div spacer></div>
+                  {{recommendations_accepted.length}} saved
+                </div>
+                <div action *ngIf="recommendations_accepted.length > 0" (click)="onAcceptedRecommendationsClick()">
+                  <div spacer></div>
+                  <ion-icon name="chevron-forward-outline"></ion-icon>
+                </div>
+              </div>
+              <div center card>
+                <div spacer></div>
+                <div center title>
+                  We will notify you when new<br/>recommendations are available.
+                </div>
+                <div spacer></div>
+                <div center *ngIf="recommendations_accepted?.length > 0">
+                  <a (click)="onAcceptedRecommendationsClick()">Review my saved recommendations</a>
+                </div>
+              </div>
+            </div>
+          </campaign-carousel>
+        </div>
+
+        <div section lrPadding *ngIf="section.id=='earnings_summary'">
+          <dashboard-earnings-summary></dashboard-earnings-summary>
+        </div>
+      </div>
+    </div>
+    <div style="height:30px;"></div>
+  </div>
+</ion-content>

@@ -1,0 +1,66 @@
+
+[settings] {
+  height: 40px;
+}
+
+table[heatmap] {
+
+  *{
+    font-size:14px;
+  }
+  
+  td:first-child {
+    width: 35px;
+  }
+
+  td[settings] {
+    text-align: center;
+
+    ion-icon {
+      height: 100%;
+    }
+  }
+
+  td[day] {
+    text-align: center;
+    font-weight: bold;
+    background-color: silver;
+    border: solid 1px gray;
+    padding: 3px;
+  }
+
+  td[hour] {
+    padding-right: 5px;
+    text-align: right;
+    vertical-align: middle;
+    font-weight: bold;
+    background-color: silver;
+    border: solid 1px gray;
+  }
+
+  td[val] {
+    border: solid 1px gray;
+    padding-left:1px;
+    padding-right:1px;
+    padding-top:2px;
+    padding-bottom:2px;
+    color: black;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    
+    
+  }
+
+  td.selected {
+    background-color: rgb(255, 184, 0);
+  }
+
+  [valProp] {
+    font-size:1em;
+  }
+
+  [textProp] {
+    font-size:.8em;
+  }
+}

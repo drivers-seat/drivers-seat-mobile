@@ -1,0 +1,64 @@
+<ion-header [style.background-color]="getEmployerColor(employer)" (click)="close()">
+  <ion-toolbar>
+    <ion-title>
+      {{employer}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div content>
+
+    <table>
+      <colgroup span="1"></colgroup>
+      <colgroup span="1" style="width:15%"></colgroup>
+      <colgroup span="1" style="width:17.5%"></colgroup>
+      <colgroup span="1" style="width:27.5%"></colgroup>
+      <colgroup span="1" style="width:22.5%"></colgroup>
+      <thead>
+        <tr>
+          <td window></td>
+          <td jobs>
+            # of<br />
+            Jobs
+          </td>
+          <td hours>
+            Work<br />
+            Time
+          </td>
+          <td pay>
+            Gross<br />
+            Pay
+          </td>
+          <td hourly>
+            Hourly<br />
+            Pay
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stat of hourlyPayStatsForDisplay">
+          <td window>
+            {{stat.window.title}}
+          </td>
+          <td jobs>
+            {{stat[employer].jobs}}
+          </td>
+          <td hours>
+            {{formatTime(stat[employer].drivingHours, stat[employer].drivingMinutes)}}
+          </td>
+          <td pay>
+            {{stat[employer].totalPayGross | currency}}
+          </td>
+          <td hourly>
+            {{stat[employer].hourlyPayGross | currency}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ion-content>

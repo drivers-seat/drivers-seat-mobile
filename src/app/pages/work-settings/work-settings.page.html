@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="primary">
+      <ion-button (click)="requestNavBack($event)">
+        Save
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      When do you work?
+    </ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="navigateBack(false)">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        Cancel
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <table schedule>
+      <thead>
+        <tr ghosting *ngIf="isGhosting">
+          <td [attr.colspan]="config.availableDays.length + 1">
+            GHOSTING
+          </td>
+        </tr>
+        <tr>
+          <td help>
+            <ion-icon name="help-circle-outline" (click)="showHelp()"></ion-icon>
+          </td>
+          <td day *ngFor="let day of config.availableDays">{{ getDayText(day) }}</td>
+        </tr>
+      </thead>
+    </table>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" *ngIf="!schedule">
+  <ion-spinner></ion-spinner>
+</ion-content>
+<ion-content [fullscreen]="true" *ngIf="schedule">
+  <table schedule *ngIf="config && config.availableDays && config.availableHours && schedule"
+    (touchstart)="touchStart($event)" (touchend)="touchEnd($event)" (touchmove)="touchMove($event)">
+    <tbody>
+      <tr *ngFor="let hour of config.availableHours">
+        <td hour workCategory="work">
+          {{getHourText(hour)}}
+        </td>
+        <td val *ngFor="let day of config.availableDays" [attr.day]="day" [attr.hour]="hour"
+          [class.selected]="schedule[day][hour]">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ion-content>
+<ion-footer *ngIf="schedule">
+  <table options>
+    <colgroup span="1"></colgroup>
+    <colgroup span="1" style="width:50px"></colgroup>
+    <colgroup span="1"></colgroup>
+    <thead>
+      <tr>
+        <td rowspan="3">
+          <div>
+            <ion-toggle [(ngModel)]="remindShiftStart" [disabled]="isSaving || pushNotificationsDisabled || isGhosting">
+            </ion-toggle>
+          </div>
+          <div>
+            Send Start<br />Reminders
+          </div>
+        </td>
+        <td style="height: 30px; vertical-align: top; padding-top:5px;">
+          <a (click)="undoChanges()">Undo</a>
+        </td>
+        <td rowspan="3">
+          <div>
+            <ion-toggle [(ngModel)]="remindShiftEnd" [disabled]="isSaving || pushNotificationsDisabled || isGhosting">
+            </ion-toggle>
+          </div>
+          <div>
+            Send End<br />Reminders
+          </div>
+        </td>
+      </tr>
+      <tr>
+
+      </tr>
+      <tr>
+        <td style="height: 30px; vertical-align: bottom;">
+          <a (click)="clearSchedule()">Clear</a>
+        </td>
+      </tr>
+    </thead>
+    <!-- <tbody>
+      <tr>
+        <td>
+         
+        </td>
+        <td></td>
+        <td>
+          
+        </td>
+      </tr>
+    </tbody> -->
+  </table>
+</ion-footer>

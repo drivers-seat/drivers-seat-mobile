@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-toolbar>
+    <table>
+      <colgroup span="1" style="width:35px;"></colgroup>
+      <colgroup span="1"></colgroup>
+      <colgroup span="1" style="width:35px;"></colgroup>
+      <tbody>
+        <tr>
+          <td></td>
+          <td>
+            <div container>
+              <div title center employer>{{timespan_alloc?.employer || activity?.employer}}</div>
+              <div center *ngIf="timespan_alloc">{{TimeHelper.toLongDateUnix(timespan_alloc.start_time_unix) }}</div>
+              <div center *ngIf="!timespan_alloc && activity">{{TimeHelper.toLongDate(activity.working_day_start ||
+                activity.working_day_end)}}</div>
+              <div center *ngIf="timespan_alloc">{{TimeHelper.toShortTimeUnix(timespan_alloc.start_time_unix)}} -
+                {{TimeHelper.toShortTimeUnix(timespan_alloc.end_time_unix)}}</div>
+              <div center subtext *ngIf="activity">Activity: {{activity.activity_id}}</div>
+            </div>
+          </td>
+          <td (click)="onCancel()">
+            <ion-icon name="close-outline"></ion-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div container *ngIf="!activity" center>
+    <ion-spinner></ion-spinner>
+    <div subtitle>one moment please...</div>
+  </div>
+  <div container *ngIf="activity">
+
+    <div section>
+      <div center totalPay>
+        {{ activity.earnings_total | currency}}
+      </div>
+      <div *ngIf="activity.earnings_pay || activity.earnings_tip || activity.earnings_bonus">
+        <div title center>Pay Breakdown</div>
+        <table breakout>
+          <colgroup span="1"></colgroup>
+          <colgroup span="1" style="width:80px"></colgroup>
+          <tbody>
+            <tr *ngIf="activity.earnings_pay">
+              <td>Pay</td>
+              <td money>{{activity.earnings_pay | currency}}</td>
+            </tr>
+            <tr *ngIf="activity.earnings_tip">
+              <td>Tip</td>
+              <td money>{{activity.earnings_tip | currency}}</td>
+            </tr>
+            <tr *ngIf="activity.earnings_bonus">
+              <td>Incentive</td>
+              <td money>{{activity.earnings_bonus | currency}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <table breakout *ngIf="activity.tasks_total > 1">
+        <colgroup span="1"></colgroup>
+        <colgroup span="1" style="width:80px"></colgroup>
+        <tbody>
+          <tr *ngIf="activity.tasks_total">
+            <td>Number of Jobs</td>
+            <td tasks>{{activity.tasks_total}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div section *ngIf="timespan_alloc">
+      <div center totalTime>
+        {{ TimeHelper.getDurationFromSeconds(timespan_alloc.duration_seconds, true, true) }}
+      </div>
+      <div title center>Work Time</div>
+      <div section small>
+        <table breakout>
+          <colgroup span="1"></colgroup>
+          <colgroup span="1" style="width:80px"></colgroup>
+          <tbody>
+            <tr *ngIf="activity.timestamp_work_start_unix">
+              <td>Work Start</td>
+              <td date>{{TimeHelper.toShortTimeUnix(activity.timestamp_work_start_unix)}}</td>
+            </tr>
+            <tr *ngIf="activity.timestamp_work_end_unix">
+              <td>Work End</td>
+              <td date>{{TimeHelper.toShortTimeUnix(activity.timestamp_work_end_unix)}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <table breakout>
+        <colgroup span="1"></colgroup>
+        <colgroup span="1" style="width:80px"></colgroup>
+        <tbody>
+          <tr *ngIf="activity.timestamp_request_unix">
+            <td>Requested at</td>
+            <td date>{{TimeHelper.toShortTimeUnix(activity.timestamp_request_unix)}}</td>
+          </tr>
+          <tr *ngIf="activity.timestamp_accept_unix">
+            <td>Accepted at</td>
+            <td date>{{TimeHelper.toShortTimeUnix(activity.timestamp_accept_unix)}}</td>
+          </tr>
+          <tr *ngIf="activity.timestamp_cancel_unix">
+            <td>Cancelled att</td>
+            <td date>{{TimeHelper.toShortTimeUnix(activity.timestamp_cancel_unix)}}</td>
+          </tr>
+          <tr *ngIf="activity.timestamp_pickup_unix">
+            <td>Pick Up at</td>
+            <td date>{{TimeHelper.toShortTimeUnix(activity.timestamp_pickup_unix)}}</td>
+          </tr>
+          <tr *ngIf="activity.timestamp_dropoff_unix">
+            <td>Drop off at</td>
+            <td date>{{TimeHelper.toShortTimeUnix(activity.timestamp_dropoff_unix)}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div section center>
+      <a (click)="onHelpActivity()">Something's wrong with this activity</a><br />
+      <a (click)="onHelpActivity()">Contact support for help</a>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <div center subtext>{{activity?.activity_key}}</div>
+</ion-footer>

@@ -1,0 +1,169 @@
+* {
+  
+  font-size: 16px;
+  font-weight: normal;
+  color: black;
+}
+
+a {
+  color: blue;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  user-select: none;
+
+  td{
+    vertical-align: top;
+  }
+}
+
+[section] {
+  padding-bottom: 20px;
+}
+
+[top-spacer]{
+  padding-top:5px;
+}
+
+[container] {
+  padding: 10px;
+  user-select: none;
+}
+
+[title] {
+  font-weight: bold;
+  
+  * {
+    font-weight: bold;
+  }
+}
+
+[subtext] {
+  font-size:12px;
+  color:gray
+
+}
+
+[emphasis]{
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+[warn]{
+  color:orange;
+  font-weight: bold;
+}
+
+[center]{
+  text-align: center;
+}
+
+[right]{
+  text-align: right;
+}
+
+[tab] {
+
+  height: 40px;
+  border-bottom: solid 4px transparent;
+  text-align: center;
+  
+  color: #9a9a9a;
+
+  &.selected {
+    border-bottom: solid 4px #F4BB40;
+    color: black;
+  }
+}
+
+[tabPage] {
+  padding-top: 10px;
+  padding-bottom: 0;
+}
+
+
+//Performance bins
+[perfBin="empty"] {
+  background-color: silver !important;
+}
+
+[perfBin="0"] {
+  background-color: rgb(87, 187, 138, 0) !important;
+}
+
+[perfBin="1"] {
+  background-color: rgb(87, 187, 138, .11) !important;
+}
+
+[perfBin="2"] {
+  background-color: rgb(87, 187, 138, .22) !important;
+}
+
+[perfBin="3"] {
+  background-color: rgb(87, 187, 138, .33) !important;
+}
+
+[perfBin="4"] {
+  background-color: rgb(87, 187, 138, .44) !important;
+}
+
+[perfBin="5"] {
+  background-color: rgb(87, 187, 138, .55) !important;
+}
+
+[perfBin="6"] {
+  background-color: rgb(87, 187, 138, .66) !important;
+}
+
+[perfBin="7"] {
+  background-color: rgb(87, 187, 138, .77) !important;
+}
+
+[perfBin="8"] {
+  background-color: rgb(87, 187, 138, .88) !important;
+}
+
+[perfBin="9"] {
+  background-color: rgb(87, 187, 138, 1) !important;
+}
+
+[isScheduled="true"]{
+  border: solid 3px blue !important;
+  color: blue !important;
+}
+
+[waiting]{
+  text-align: center;
+  padding:20px;
+  color:gray;
+  ion-spinner: {
+    color:orange;
+  }
+}
+
+ion-content{
+  position:relative;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background-color: purple;
+}
+
+button[good]{
+  background-color: green !important;
+  *{
+    color:white;
+    font-weight:bolder;
+  }
+  
+}
+
+button[ignore]{
+  color:white;
+  *{
+    color:white;
+  }
+}

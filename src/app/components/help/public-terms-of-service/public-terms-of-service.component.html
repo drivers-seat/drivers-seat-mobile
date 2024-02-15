@@ -1,0 +1,17 @@
+<ion-header>
+  
+  <ion-toolbar>
+    <ion-title title [innerHTML]="title">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div container>
+    <div [innerHTML]="detail"></div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button class="full-button accept" (click)="onCancel()">Close</button>
+  </ion-toolbar>
+</ion-footer>

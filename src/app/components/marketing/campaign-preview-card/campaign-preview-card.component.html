@@ -1,0 +1,51 @@
+<campaign-card 
+  [title]="campaign?.preview?.title"
+  [actions]="campaign?.preview?.actions"
+  [display_class]="display_class"
+  (onAction)="onActionClick($event)">
+
+  <div header *ngIf="topChart">
+    <chart [definition]="topChart"></chart>
+  </div>
+
+  <div left-content *ngIf="hasLeftImage && hasContent">
+    <div spacer></div>
+    <img [attr.src]="imageUrls[0]"/>
+    <div spacer></div>
+  </div>
+
+  <div center-content *ngIf="hasContent">
+    <div spacer></div>
+    <div content *ngIf="hasContentUrl && hasInternalContentUrl">
+      <div html [innerHTML]="htmlContent" *ngIf="htmlContent"></div>
+      <div wait *ngIf="!htmlContent"><ion-spinner></ion-spinner></div>
+    </div>
+    <div content description
+        *ngFor="let desc of this.preview?.description">
+        <div spacer *ngIf="hasRightImage || imageUrls.length == 0"></div>
+        <div label left *ngIf="hasLeftImage && !hasRightImage">{{desc}}</div>
+        <div label center *ngIf="imageUrls.length == 0 || imageUrls.length == 2">{{desc}}</div>
+        <div label right *ngIf="!hasLeftImage && hasRightImage">{{desc}}</div>
+        <div spacer *ngIf="hasLeftImage || imageUrls.length == 0"></div>
+    </div>
+    <div spacer></div>
+  </div>
+
+  <div center-content single-image  *ngIf="!hasContent && imageUrls.length == 1">
+    <div spacer></div>
+    <img [attr.src]="imageUrls[1] || imageUrls[0]"/>
+    <div spacer></div>
+  </div>
+
+  <div right-content *ngIf="hasRightImage && hasContent || imageUrls.length > 1">
+    <div spacer></div>
+    <img [attr.src]="rightImageUrl"/>
+    <div spacer></div>
+  </div>
+
+  <div footer *ngIf="bottomChart">
+    <chart [definition]="bottomChart"></chart>
+  </div>
+
+
+</campaign-card>

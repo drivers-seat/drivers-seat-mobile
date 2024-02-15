@@ -1,0 +1,36 @@
+<ion-content >
+  <div full>
+    <div container>
+      <div section title center>
+        Welcome to<br />
+        {{ appDisplayName }}
+      </div>
+      <div section emphasis center>
+        Free tools to make your rideshare and delivery work better!
+      </div>
+
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide>
+          <span emoji>⏰</span> Find the best times to work
+        </ion-slide>
+        <ion-slide>
+          <span emoji>🚗</span> Track your earnings and mileage
+        </ion-slide>
+        <ion-slide>
+          <span emoji>💸</span> See which apps are paying you most per hour
+        </ion-slide>
+        <ion-slide>
+          <span emoji>✨</span> And more!
+        </ion-slide>
+      </ion-slides>
+      <div section center buttons>
+        <button (click)="onContinueClick()" class="full-button positive register-button">
+          Sign Up
+        </button> 
+      </div>
+      <div center>
+        <a (click)="onLoginClick()">I already have an account</a>
+      </div>
+    </div>
+  </div>
+</ion-content>

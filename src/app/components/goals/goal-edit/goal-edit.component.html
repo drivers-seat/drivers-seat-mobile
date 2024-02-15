@@ -1,0 +1,189 @@
+<ion-header>
+  <ion-toolbar>
+    <table>
+      <colgroup span="1" style="width:30px;"></colgroup>
+      <colgroup span="1"></colgroup>
+      <colgroup span="1" style="width:30px;"></colgroup>
+      <tr>
+        <td></td>
+        <td center title>
+          {{title}}
+        </td>
+        <td (click)="onCancel()">
+          <ion-icon name="close-outline"></ion-icon>
+        </td>
+      </tr>
+    </table>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div container>
+
+    <div section>
+      <div title>Start tracking on</div>
+      <table date input required
+        [attr.isValid]="isValid('start_date')"
+        [attr.isTouched]="isTouched('start_date')">
+        <colgroup *ngIf="goal.frequency=='week'" span="1" style="width:60px;"></colgroup>
+        <colgroup span="1"></colgroup>
+        <colgroup span="1" style="width: 30px;"></colgroup>
+        <tr>
+          <td uom-left *ngIf="goal.frequency=='week'">
+            week starting
+          </td>
+          <td ctrl>
+            <input 
+              [attr.type]="goal.frequency == 'month' ? 'month' : 'date'" 
+              [(ngModel)]="model.start_date" 
+              (blur)="onDateBlur()" />
+          </td>
+          <td current (click)="onCurrentWindowClick()">
+            <ion-icon name="today-outline"></ion-icon>
+            <div subtext *ngIf="goal.frequency == 'day'">today</div>
+            <div subtext *ngIf="goal.frequency == 'week'">this week</div>
+            <div subtext *ngIf="goal.frequency == 'month'">this month</div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div section></div>
+
+    <div section *ngIf="goal?.frequency == 'day'">
+      <table>
+        <colgroup span="1" style="width: 40px"></colgroup>
+        <colgroup span="1" style="width: 90px"></colgroup>
+        <colgroup span="1"></colgroup>
+        <tbody>
+          <tr (click)="onSameEveryDayToggle(true)">
+            <td>
+              <ion-icon radio *ngIf="model.isSameEveryDay == null || model.isSameEveryDay == false"
+                name="radio-button-off-outline"  
+                [attr.isValid]="isValid('isSameEveryDay')"
+                [attr.isTouched]="isTouched('isSameEveryDay')"
+                ></ion-icon>
+              <ion-icon radio *ngIf="model.isSameEveryDay"
+                name="radio-button-on-outline"
+                [attr.isValid]="isValid('isSameEveryDay')"
+                [attr.isTouched]="isTouched('isSameEveryDay')"
+                ></ion-icon>
+            </td>
+            <td colspan="2">
+              <div section>
+                <div title>My goal is the same every day that I work</div>
+              </div>
+              <div section></div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="model.isSameEveryDay">
+          <tr>
+            <td></td>
+            <td colspan="2">
+              <div section>
+                <table input required
+                  [attr.isValid]="isValid('amount','all')"
+                  [attr.isTouched]="isTouched('amount','all')">
+                  <colgroup span="1" style="width: 10px;"></colgroup>
+                  <colgroup span="1"></colgroup>
+                  <colgroup span="1" style="width: 10px;"></colgroup>
+                  <tr>
+                    <td uom-left>$</td>
+                    <td ctrl>
+                      <input 
+                        type="number"
+                        [(ngModel)]="model.amount_all"
+                        (input)="onAmountChanged('amount','all')"
+                        (blur)="onAmountBlur('amount','all')"
+                      />
+                    </td>
+                    <td uom-right>/day</td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr (click)="onSameEveryDayToggle(false)">
+            <td>
+              <ion-icon radio *ngIf="model.isSameEveryDay == null || model.isSameEveryDay == true"
+                name="radio-button-off-outline" 
+                [attr.isValid]="isValid('isSameEveryDay')"
+                [attr.isTouched]="isTouched('isSameEveryDay')"
+                ></ion-icon>
+              <ion-icon radio *ngIf="model.isSameEveryDay == false"
+                name="radio-button-on-outline" 
+                [attr.isValid]="isValid('isSameEveryDay')"
+                [attr.isTouched]="isTouched('isSameEveryDay')"
+              ></ion-icon>
+            </td>
+            <td colspan="2">
+              <div section>
+                <div title>I have a different goal for each day that I work</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="model.isSameEveryDay == false">
+          <tr *ngFor="let day of TimeHelper.daysOfWeek">
+            <td></td>
+            <td label day-name right>{{day}}</td>
+            <td>
+              <div section small>
+                <table input
+                  [attr.isValid]="isValid('amount',day)"
+                  [attr.isTouched]="isTouched('amount',day)">
+                  <colgroup span="1" style="width: 10px;"></colgroup>
+                  <colgroup span="1"></colgroup>
+                  <tr>
+                    <td uom-left>$</td>
+                    <td ctrl>
+                      <input 
+                        type="number"
+                        [(ngModel)]="model['amount_' + day]"
+                        (input)="onAmountChanged('amount', day)"
+                        (blur)="onAmountBlur('amount',day)"
+                      />
+                    </td>
+                  </tr>
+                </table>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div section *ngIf="goal?.frequency != 'day'">
+      <div title>Goal Amount</div>
+      <table input required
+        [attr.isValid]="isValid('amount','all')"
+        [attr.isTouched]="isTouched('amount','all')">
+        <colgroup span="1" style="width: 10px;"></colgroup>
+        <colgroup span="1"></colgroup>
+        <colgroup span="1" style="width: 10px;"></colgroup>
+        <tr>
+          <td uom-left>$</td>
+          <td ctrl>
+            <input 
+              type="number"
+              [(ngModel)]="model.amount_all"
+              (change)="onAmountChanged('amount','all')"
+              (blur)="onAmountBlur('amount','all')"
+            />
+          </td>
+          <td uom-right>/{{ this.goal?.frequency }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div buttons>
+      <button good class="full-button" [attr.isDisabled]="!canSubmit" (click)="onSave()">Save</button>
+      <button *ngIf="!isNew" delete class="full-button" (click)="onDelete()">Delete</button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

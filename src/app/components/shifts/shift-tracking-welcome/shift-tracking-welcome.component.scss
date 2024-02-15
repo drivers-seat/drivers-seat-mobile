@@ -1,0 +1,36 @@
+[container]{
+  padding-bottom:0;
+  background-color:  #111447 !important;
+  position: absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  overflow: scroll;
+}
+
+ion-footer{
+  padding: 15px;
+  padding-bottom:0;
+  background-color:  #111447 !important;
+}
+
+ion-icon{
+  width:30px;
+  height:30px;
+  color: #3880ff;
+}
+
+li {
+  padding-bottom:15px;
+}
+
+* {
+  color:white;
+}
+
+a{
+  color: white;
+  text-decoration: underline;
+  font-weight: bolder;
+}

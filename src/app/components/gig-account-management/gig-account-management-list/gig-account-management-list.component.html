@@ -1,0 +1,39 @@
+<div section>
+  <table accounts>
+    <colgroup span="1" style="width:60px"></colgroup>
+    <colgroup span="1"></colgroup>
+    <colgroup span="1" style="width:30px"></colgroup>
+    <colgroup span="1" style="width:60px"></colgroup>
+    <thead>
+      <tr>
+        <th subtext>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let acct of linkedAccounts">
+        <td center>
+          <ion-icon slot="start" status *ngIf="acct.has_errors" name="ellipse" class="error"></ion-icon>
+          <ion-icon slot="start" status *ngIf="!acct.has_errors && !acct.is_connected" name="ellipse-outline" class="connecting"></ion-icon>
+          <ion-icon slot="start" status *ngIf="acct.is_connected && acct.is_synced" name="ellipse" class="good"></ion-icon>
+          <ion-icon slot="start" status *ngIf="acct.is_connected && !acct.is_synced" name="ellipse-outline" class="good"></ion-icon>
+        </td>
+        <td [attr.colspan]="!isGhosting && !acct.is_connected ? 1 : 2">
+          <div title>{{ getEmployerName(acct.link_item) }}</div>
+          <div subtext class="error" *ngIf="acct.has_errors">{{acct.connection_error_message || acct.connection_error_code}}</div>
+          <div subtext class="connecting" *ngIf="!acct.has_errors && !acct.is_connected">Further action may be required from you to finish connecting</div>
+          <div subtext *ngIf="acct.activities_updated_at">Last Updated On: {{acct.activities_updated_at | date:'shortDate'}}</div>
+          <div subtext *ngIf="acct.activity_date_max">Most Recent Activity: {{acct.activity_date_max | date:'shortDate'}}</div>
+        </td>
+        <td center *ngIf="!isGhosting && !acct.is_connected">
+          <ion-icon name="cog" (click)="manageGigAccounts(acct)"></ion-icon>
+        </td>
+        <td center>
+          <ion-icon *ngIf="!isGhosting" slot="end" name="close" (click)="requestDeleteAccount(acct)"></ion-icon>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div section center *ngIf="!isGhosting">
+  <a (click)="onLinkAccountHelpClick()">Having trouble connecting your accounts?</a>
+</div>

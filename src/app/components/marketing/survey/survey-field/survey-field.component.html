@@ -1,0 +1,238 @@
+<div [attr.enabled]="definition?.isEnabled" [attr.isValid]="!definition.hasFocused || definition?.isValid">
+  <table boolean *ngIf="definition?.type == 'boolean'" [ngClass]="definition.display_class">
+    <colgroup span="1" style="width:40px;"></colgroup>
+    <colgroup span="1"></colgroup>
+    <tr (click)="onToggle(!internalVal)">
+      <td ctrl>
+        <ion-icon name="square-outline" *ngIf="!internalVal"></ion-icon>
+        <ion-icon name="checkbox-outline" *ngIf="internalVal"></ion-icon>
+      </td>
+      <td>
+        <div *ngIf="definition?.title?.length > 0">
+          <div *ngFor="let title of definition.title" title>{{title}}</div>
+        </div>
+        <div *ngIf="definition?.description?.length > 0">
+          <div *ngFor="let description of definition.description" description>{{description}}</div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <table option *ngIf="definition?.type == 'option'" [ngClass]="definition.display_class">
+    <colgroup span="1" style="width:40px;"></colgroup>
+    <colgroup span="1"></colgroup>
+    <tr (click)="onToggle(!internalVal)">
+      <td ctrl>
+        <ion-icon name="radio-button-off-outline" *ngIf="!internalVal"></ion-icon>
+        <ion-icon name="radio-button-on-outline" *ngIf="internalVal"></ion-icon>
+      </td>
+      <td>
+        <div *ngIf="definition?.title?.length > 0">
+          <div *ngFor="let title of definition.title" title>{{title}}</div>
+        </div>
+        <div *ngIf="definition?.description?.length > 0">
+          <div *ngFor="let description of definition.description" description>{{description}}</div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <div *ngIf="definition?.type == 'numeric'" [ngClass]="definition.display_class">
+    <div *ngIf="definition?.title?.length > 0">
+      <div *ngFor="let title of definition.title" title>{{title}}</div>
+    </div>
+    <div *ngIf="definition?.description?.length > 0">
+      <div *ngFor="let description of definition.description" description>{{description}}</div>
+    </div>
+    <table numeric>
+      <colgroup span="1" style="width: 30%;" *ngIf="definition.label"></colgroup>
+      <colgroup span="1" style="width: 70%;"></colgroup>
+      <tr>
+        <td *ngIf="definition.label" label>{{definition.label}}</td>
+        <td>
+          <table input [attr.required]="definition.isRequired">
+            <colgroup span="1" style="width: 10px;" *ngIf="definition?.uom_left"></colgroup>
+            <colgroup span="1"></colgroup>
+            <colgroup span="1" style="width: 10px;" *ngIf="definition?.uom_right"></colgroup>
+            <tr>
+              <td uom-left *ngIf="definition?.uom_left">{{definition.uom_left}}</td>
+              <td ctrl>
+                <input 
+                  type="number"
+                  [placeholder]="definition?.hint || ''"
+                  [(ngModel)]="internalVal"
+                  (change)="onNumericChanged()"
+                  (blur)="onInputBlur()"
+                />
+              </td>
+              <td uom-right *ngIf="definition?.uom_right">{{definition.uom_right}}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div *ngIf="definition?.type == 'short_text'" [ngClass]="definition.display_class">
+    <div *ngIf="definition?.title?.length > 0">
+      <div *ngFor="let title of definition.title" title>{{title}}</div>
+    </div>
+    <div *ngIf="definition?.description?.length > 0">
+      <div *ngFor="let description of definition.description" description>{{description}}</div>
+    </div>
+
+    <table short-text>
+      <colgroup span="1" style="width: 30%;" *ngIf="definition.label"></colgroup>
+      <colgroup span="1" style="width: 70%;"></colgroup>
+      <tr>
+        <td *ngIf="definition.label" label>{{definition.label}}</td>
+        <td>
+
+          <table input [attr.required]="definition.isRequired">
+            <colgroup span="1" style="width: 10px;" *ngIf="definition?.uom_left"></colgroup>
+            <colgroup span="1"></colgroup>
+            <colgroup span="1" style="width: 10px;" *ngIf="definition?.uom_right"></colgroup>
+            <tr>
+              <td uom-left *ngIf="definition?.uom_left">{{definition.uom_left}}</td>
+              <td ctrl>
+                <input 
+                  type="text" 
+                  [placeholder]="definition?.hint || ''"
+                  [(ngModel)]="internalVal"
+                  (change)="onTextChanged()"
+                  (blur)="onInputBlur()"
+                />
+              </td>
+              <td uom-right *ngIf="definition?.uom_right">{{definition.uom_right}}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div *ngIf="definition?.type == 'date'" [ngClass]="definition.display_class">
+    <div *ngIf="definition?.title?.length > 0">
+      <div *ngFor="let title of definition.title" title>{{title}}</div>
+    </div>
+    <div *ngIf="definition?.description?.length > 0">
+      <div *ngFor="let description of definition.description" description>{{description}}</div>
+    </div>
+
+    <table date>
+      <colgroup span="1" style="width: 30%;" *ngIf="definition.label"></colgroup>
+      <colgroup span="1" style="width: 70%;"></colgroup>
+      <tr>
+        <td *ngIf="definition.label" label>{{definition.label}}</td>
+        <td>
+
+          <table input [attr.required]="definition.isRequired">
+            <colgroup span="1"></colgroup>
+            <colgroup span="1" style="width: 30px;"></colgroup>
+            <tr>
+              <td ctrl>
+                <input 
+                  type="date" 
+                  [placeholder]="definition?.hint || ''"
+                  [(ngModel)]="internalVal"
+                  (change)="onDateChanged()"
+                  (blur)="onInputBlur()"
+                />
+              </td>
+              <td today (click)="onTodayClick()">
+                <ion-icon name="today-outline"></ion-icon>
+                <div subtext>today</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div long-text *ngIf="definition?.type == 'long_text'" [ngClass]="definition.display_class">
+    <div *ngIf="definition.title?.length > 0">
+      <div *ngFor="let title of definition.title" title>{{title}}</div>
+    </div>
+    <div *ngIf="definition.description?.length > 0">
+      <div *ngFor="let description of definition.description" description>{{description}}</div>
+    </div>
+    <div *ngIf="definition.label" label>{{definition.label}}</div>
+    <textarea 
+      rows="5"
+      [attr.required]="definition.isRequired" 
+      [placeholder]="definition?.hint || ''"
+      [(ngModel)]="internalVal"
+      (change)="onTextChanged()"
+      (blur)="onInputBlur()"
+      ></textarea>
+  </div>
+
+  <div segment-options *ngIf="definition?.type == 'segment_options'" [ngClass]="definition.display_class">
+    <div *ngIf="definition.title?.length > 0">
+      <div *ngFor="let title of definition.title" title>{{title}}</div>
+    </div>
+    <div *ngIf="definition.description?.length > 0">
+      <div *ngFor="let description of definition.description" description>{{description}}</div>
+    </div>
+
+    <div segments>
+      <table segments>
+        <colgroup [attr.span]="definition.options?.length"></colgroup>
+        <tr>
+          <td *ngFor="let option of definition.options" 
+            [attr.selected]="internalVal == option.id"
+            (click)="onToggle(option.id)">
+            <div segment-button [attr.selected]="internalVal == option.id">
+              <div spacer></div>
+              <div txt *ngIf="option.title?.length > 0">
+                <div *ngFor="let title of option.title" title>{{title}}</div>
+              </div>
+              <div txt *ngIf="option.description?.length > 0">
+                <div *ngFor="let description of option.description" description>{{description}}</div>
+              </div>
+              <div spacer></div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <table>
+      <colgroup span="3"></colgroup>
+      <tr>
+        <td uom left>
+          {{definition.uom_left || ""}}
+        </td>
+        <td center>
+          <a *ngIf="!definition.isRequired && internalVal != null" (click)="clearSelection()">reset</a>
+          <span subtext *ngIf="definition.isRequired">select an option</span>
+        </td>
+        <td uom right>
+          {{definition.uom_right || ""}}
+        </td>
+      </tr>
+    </table>
+  </div>
+  
+  <div info *ngIf="definition?.type == 'info'" [ngClass]="definition.display_class">
+    <div *ngIf="definition.title?.length > 0">
+      <div *ngFor="let title of definition.title" title>{{title}}</div>
+    </div>
+    <div *ngIf="definition.url">
+      <img [attr.src]="safeUrl">
+    </div>
+    <div *ngIf="definition.description?.length > 0">
+      <div *ngFor="let description of definition.description" description>{{description}}</div>
+    </div>
+  </div>
+
+  <div chart *ngIf="definition?.type == 'chart'" [ngClass]="definition.display_class">
+    <div *ngIf="definition?.title?.length > 0">
+      <div *ngFor="let title of definition.title" title>{{title}}</div>
+    </div>
+    <div *ngIf="definition?.description?.length > 0">
+      <div *ngFor="let description of definition.description" description>{{description}}</div>
+    </div>
+    <chart [definition]="definition.chart"></chart>
+  </div>
+</div>

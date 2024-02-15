@@ -1,0 +1,28 @@
+<ion-content>
+  <div container>
+    <div center *ngIf="!terms">
+      <ion-spinner></ion-spinner>
+      <div>one moment please...</div>
+    </div>
+
+    <div section center *ngIf="terms">
+      <img logo src='assets/imgs/logo-small.png' />
+      <div emphasis [innerHTML]="terms.title"></div>
+    </div>
+    <div section *ngIf="terms">
+      <div [innerHTML]="terms.text"></div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div buttons>
+      <button class="full-button positive login-button" (click)="onSubmit()">
+        Accept
+      </button>
+      <div>
+        <a (click)="onLogout()">log-out</a>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

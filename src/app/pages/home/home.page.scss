@@ -1,0 +1,82 @@
+.notif-indicator-container {
+  position: absolute;
+  z-index: 1000;
+  top: 10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.notification-indicator {
+  height: 15px;
+  width: 15px;
+  display:inline-block;
+  border-radius: 10px;
+  border: 2px solid #EBECFF;
+  z-index: 999;
+
+  &.notif {
+    background: #2c47ee;
+  }
+
+  &.alert {
+    background: red;
+  }
+}
+
+ion-tabs {
+  background-color: #111447;
+}
+
+ion-label {
+  font-size: 11px;
+}
+
+ion-tab-bar {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  background-color: #111447;
+
+  ion-icon {
+    color: silver;
+    height: 30px !important;
+    width: 30px !important;
+  }
+
+  ion-tab-button {
+    background-color: #111447;
+  }
+
+  ion-badge {
+
+    background-color: rgba(34, 45, 205);
+
+    &[good] {
+      background-color: green;
+    }
+
+    &[new] {
+      background-color: rgb(244, 187, 64);
+    }
+
+    &[warning] {
+      background-color: red;
+    }
+  }
+
+}
+
+ion-icon[selected] {
+  color: #F4BB40 !important;
+}
+
+ion-label[selected] {
+  color: #F4BB40 !important;
+}
+
+[locationTrackingToggle] {
+  z-index: 1000;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

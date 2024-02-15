@@ -1,0 +1,39 @@
+
+table[tabs] {
+
+  margin-top: 20px;
+  margin-bottom: 10px;
+
+  td {
+    border-bottom: solid 4px transparent;
+    text-align: center;
+    color: #9a9a9a;
+    font-size: 18px;
+
+    &.active {
+      border-bottom: solid 4px #F4BB40;
+      color: black;
+    }
+  }
+}
+
+[container]{
+  display:flex;
+  flex-direction: column;
+  align-items: stretch;
+  row-gap: 10px;
+  height:100%;
+  padding:20px;
+}
+
+[tab-container]{
+  flex-grow: 0;
+}
+
+[levels]{
+  flex-grow: 1;
+}
+
+[desc] {
+  font-size: 20px;
+}

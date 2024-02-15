@@ -1,0 +1,277 @@
+//A table that allows for UOM and an non-bordered input control
+table[input] {
+  border: solid 1px gray;
+  table-layout: auto !important;
+
+  &[required='true']{
+    // border-left: solid 5px #111447 !important;
+    border-left: solid 5px blue !important;
+  }
+
+  td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  td[uom-left] {
+    color: gray;
+    vertical-align: middle;
+    text-align: right;
+    padding-left: 3px;
+  }
+
+  td[uom-right] {
+    color: gray;
+    vertical-align: middle;
+    text-align: left;
+    padding-right: 3px;
+  }
+
+  td[ctrl]{
+    padding-left:3px;
+    padding-right:3px;
+  }
+}
+
+
+[info]{
+  img{
+    width:100%;
+  }
+}
+
+//Numeric input control
+[numeric] {
+
+  table-layout: auto !important;
+
+  [label] {
+    text-align: right;
+    vertical-align: middle;
+    padding-right: 5px;
+  }
+
+  input {
+    text-align: right;
+  }
+}
+
+//short-text
+[short-text] {
+
+  table-layout: auto !important;
+
+  [label] {
+    text-align: right;
+    vertical-align: middle;
+    padding-right: 5px;
+  }
+
+  input {
+    text-align: left;
+  }
+}
+
+[spacer]{
+  flex-grow: 1;
+}
+
+[segment-options]{
+
+  div[segments] {
+    border: solid 2px gray;
+    border-radius: 16px;
+  }
+
+  table[segments]{
+    
+    tr {
+      height: 1px;      //keep this to make the segment button take 100% height
+    }
+
+    td{
+      height: inherit;  //keep this to make the segment button take 100% height
+      background-color: transparent;
+      * {
+        font-size: .95em;
+        color: black;
+      }
+
+      border-left: solid 2px gray;
+
+      div[segment-button]{
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        vertical-align: middle;
+        padding: 5px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        &[selected='true']{
+          background-color: blue;
+          * {
+            color: white;
+          }
+        }
+
+        [txt]{
+          flex-grow: 0;
+        }
+      }
+
+      &:first-child{
+        border-left: none;
+        div[segment-button] {
+          border-radius: 14px 0 0 14px;
+        }
+      }
+
+      &:last-child{
+        div[segment-button] {
+          border-radius: 0 14px 14px 0;
+        }
+      }
+    }
+  }
+  
+
+}
+
+
+[date] {
+  ion-icon{
+    width: 15px;
+    height: 15px;
+  }
+
+  table-layout: auto !important;
+
+  [label] {
+    text-align: right;
+    vertical-align: middle;
+    padding-right: 5px;
+  }
+
+  input {
+    text-align: center;
+  }
+
+  [ctrl]{
+    vertical-align: middle;
+  }
+
+  [today]{
+    text-align: center;
+    background-color: silver;
+    padding-left:3px;
+    padding-right:3px;
+    border: solid 1px gray
+  }
+
+  //A table that allows for UOM and an non-bordered input control
+  table[input] {
+    td {
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+  }
+
+}
+
+
+//radio button control
+[option] {
+  ion-icon{
+    width: 25px;
+    height: 25px;
+  }
+
+  [ctrl]{
+    text-align: center;
+  }
+}
+
+//checkbox control
+[boolean]{
+  ion-icon{
+    width: 25px;
+    height: 25px;
+  }
+
+  [ctrl]{
+    text-align: center;
+  }
+}
+
+
+[long-text] {
+  input {
+    text-align: left;
+    border: solid 1px gray !important;
+  }
+
+}
+
+
+[chart]{
+
+  
+}
+
+
+input,
+select,
+textarea {
+  background-color: transparent;
+  width: 100%;
+  font-size: 18px;
+
+  &:focus{
+    background-color: transparent;
+    outline: none;
+  }
+}
+
+textarea {
+  border: solid 1px gray;
+
+  &[required='true']{
+    // border-left: solid 5px #111447 !important;
+    border-left: solid 5px blue !important;
+  }
+
+}
+
+//no border b/c it's really a table with UOM L and R that has the border
+input, select {
+  border: none;
+}
+
+[isValid=false]{
+  ion-icon{
+    color: red;
+  }
+
+  textarea {
+    border-color: red;
+  }
+
+  table[input]{
+    border-color: red;
+  }
+
+  div[segments]{
+    border-color: red;
+  }
+
+  table[segments]{
+    border-color: red;
+
+    td{
+      border-color:red;
+    }
+  }
+}

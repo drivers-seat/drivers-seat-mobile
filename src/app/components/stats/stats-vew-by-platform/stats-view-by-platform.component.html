@@ -1,0 +1,152 @@
+<div [hidden]="noDataAvailable">
+  <div container [hidden]="!stats?.employerStats || stats.hasNoJobs">
+    <table pieCharts>
+      <colgroup span="1" style="width:50%"></colgroup>
+      <colgroup span="1" style="width:30px"></colgroup>
+      <colgroup span="1" style="width:50%"></colgroup>
+      <tfoot>
+        <tr>
+          <td>
+            Gross Pay
+          </td>
+          <td></td>
+          <td>
+            Work Time
+          </td>
+        </tr>
+      </tfoot>
+      <tbody>
+        <tr>
+          <td>
+            <canvas #payBreakdownChart></canvas>
+          </td>
+          <td></td>
+          <td>
+            <canvas #timeBreakdownChart></canvas>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table details *ngIf="stats?.employerStats">
+      <colgroup span="1" style="width:3px;"></colgroup>
+      <colgroup span="1" style="width:70px;"></colgroup>
+      <colgroup span="1" style="width:40px;"></colgroup>
+      <colgroup span="1" style="width:28%;"></colgroup>
+      <colgroup span="1" style="width:40%;"></colgroup>
+      <colgroup span="1" style="width:32%;"></colgroup>
+      <thead>
+        <tr>
+          <td></td>
+          <td></td>
+          <td jobs>
+            # of<br />
+            Jobs
+          </td>
+          <td hours>
+            Work<br />
+            Time
+          </td>
+          <td pay>
+            Gross<br />
+            Pay
+          </td>
+          <td hourly>
+            Hourly<br />
+            Pay
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employerStat of stats.employerStats">
+          <td legend [style.background-color]="getEmployerColorBorder(employerStat.employer)"
+            [style.border-color]="getEmployerColorBorder(employerStat.employer)">
+          </td>
+          <td employer>
+            {{employerStat.employer}}
+          </td>
+          <td jobs>
+            {{employerStat.jobs}}
+          </td>
+          <td hours>
+            {{formatTime(employerStat.drivingHours, employerStat.drivingMinutes)}}
+          </td>
+          <td pay>
+            {{employerStat.totalPayGross  | currency:'USD':'symbol':'1.0-0' }}
+          </td>
+          <td hourly>
+            {{employerStat.hourlyPayGross | currency}}
+          </td>
+        </tr>
+        <tr *ngIf="stats.unpaidSeconds > 0">
+          <td legend [style.background-color]="getEmployerColorBackground(null)"
+            [style.border-color]="getEmployerColorBorder(null)">
+          </td>
+          <td employer colspan="2">
+            Unpaid time
+          </td>
+          <td hours>
+            {{formatTime(stats.unpaidHours, stats.unpaidMinutes)}}
+          </td>
+          <td colspan="2">
+            <ion-icon name="help-circle-outline" (click)="showHelp_UpaidTime()"></ion-icon>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td employer>
+            Total
+          </td>
+          <td jobs>
+            {{stats.jobs}}
+          </td>
+          <td hours>
+            <div>{{formatTime(stats.drivingHours, stats.drivingMinutes)}}</div>
+            <div uom>hh:mm</div>
+          </td>
+          <td pay>
+            {{stats.totalPayGross  | currency:'USD':'symbol':'1.0-0' }}
+          </td>
+          <td hourly>
+            {{stats.hourlyPayGross | currency}}
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div container>
+    <div section>
+      <div title>Your hourly Pay Over Time</div>
+      <div>Hourly pay by {{summaryLevel}} for each gig app</div>
+    </div>
+    <div style="position: relative; height: 300px;">
+      <canvas #hourlyPayTrendChart></canvas>
+    </div>
+    <div>
+      <table trend legend>
+        <colgroup [span]="hourlyPayTrendEmployer_GroupSize" [style.width]="hourlyPayTrendEmployer_GroupWidth">
+        </colgroup>
+        <tbody>
+          <tr *ngFor="let grp of hourlyPayTrendEmployer_Groups">
+            <td *ngFor="let emp of grp" (click)="showHourlyTrendDetail(emp);">
+              <div symbol [style.background-color]="getEmployerColorBorder(emp)"></div>
+              <a label>{{emp}}</a>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td more-info [attr.colspan]="hourlyPayTrendEmployer_GroupSize">
+              click on the gig app name for more info
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+      <div modalExtraSpacing *ngIf="visibleModal"></div>
+    </div>
+  </div>
+</div>
+<div noData *ngIf="noDataAvailable">
+  Sorry, we don't have any jobs for you for {{ dateRangeText }}.
+</div>

@@ -1,0 +1,21 @@
+<ion-header valid *ngIf="isRegistered && hasData">
+  <ion-toolbar>
+    <stats-navigation></stats-navigation>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header welcome *ngIf="!isRegistered || !hasData">
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <stats-welcome *ngIf="!isRegistered"></stats-welcome>
+  <stats-waiting-for-data *ngIf="isRegistered && !hasData"></stats-waiting-for-data>
+  <div *ngIf="isRegistered && hasData">
+    <stats-view *ngIf="window && summaryLevel"></stats-view>
+  </div>
+</ion-content>
+<ion-footer problem *ngIf="hasAccountsWithErrors">
+  <stats-gig-acct-problem></stats-gig-acct-problem>
+</ion-footer>

@@ -1,0 +1,32 @@
+<ion-menu menuId="shiftOnRightMenuContentId" side="end" contentId="menuContent" swipeEnabled="false" swipeGesture="false">
+  <ion-content>
+    <div class="content-container">
+      <ion-list>
+        <button ion-item nav-clear menuClose (click)="clickDashboard()" [class]="activePage === 'home' ? 'active' : ''">Home</button>
+        <button ion-item nav-clear menuClose (click)="clickProfile()" [class]="activePage === 'profile' ? 'active' : ''">Profile</button>
+        <button ion-item nav-clear menuClose (click)="clickGigAccounts()" [class]="activePage === 'gig-accounts' ? 'active' : ''">
+          Gig Accounts
+          <ion-badge *ngIf="countGigAccountIssues > 0" color="danger">{{countGigAccountIssues}}</ion-badge>
+        </button>
+        <button ion-item nav-clear menuClose (click)="clickResearch()" [class]="activePage === 'research' ? 'active' : ''">Research Gigs</button>
+        <button ion-item nav-clear menuClose (click)="clickEarningsExpenses()" [class]="activePage === 'earnings-and-expenses' ? 'active' : ''">Expenses</button>
+        <button ion-item nav-clear menuClose (click)="clickWorkSettings()" [class]="activePage === 'work-settings' ? 'active' : ''">Shift Reminders</button>
+        <button ion-item nav-clear menuClose (click)="clickReferral()">Refer a friend</button>
+        <div class="close-button" menuClose (click)="closeMenu()"><img src="assets/imgs/focus-group/Close.svg"></div>
+      </ion-list>
+      <div class="flex-fill"></div>
+      <ion-list>
+        <button ion-item nav-clear menuClose (click)="clickHelp()" class="help-row">
+          Help 
+        </button>
+        <button ion-item nav-clear menuClose (click)="clickGhost()" [class]="activePage === 'help' ? 'active' : ''" *ngIf="canGhost">Ghost</button>
+        <button ion-item nav-clear menuClose (click)="clickTermsOfUse()" [class]="activePage === 'terms' ? 'active' : ''">Terms of Use</button>
+        <button ion-item nav-clear menuClose (click)="clickLogout()">Logout</button>
+      </ion-list>
+      <div subtext appVersion>{{appVersion}}</div>
+    </div>
+    
+  </ion-content>
+</ion-menu>
+
+<ion-router-outlet id="menuContent"></ion-router-outlet>

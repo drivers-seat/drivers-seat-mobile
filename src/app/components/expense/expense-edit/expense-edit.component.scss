@@ -1,0 +1,59 @@
+ion-content {
+  [container] {
+    padding: 50px;
+  }
+}
+
+input,
+select,
+textarea {
+  background-color: white;
+  border: solid 1px silver;
+  border-radius: 8px;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+
+  &.invalid{
+    border: solid 2px red;
+  }
+}
+
+input,
+select {
+  text-align: center;
+  font-size: 18px;
+}
+
+input[money] {
+  text-align: center;
+  font-size: 54px;
+  font-weight: bold;
+  color: gray;
+}
+
+[curSymbol]{
+  color:gray;
+  font-size: 32px;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  left:5px;
+}
+
+ion-icon{
+  width:40px;
+  font-size: 22px;
+}
+
+td[today]{
+  color:black;
+  vertical-align: middle !important;
+  text-align: center;
+}
+
+button[disabled]{
+  background-color: silver !important;
+  color: gray;
+}
+

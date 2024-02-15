@@ -1,0 +1,18 @@
+<ion-content>
+  <div container>
+    <div spacer></div>
+    <div info logo>
+      <img src="/assets/imgs/logo-small.png" />
+    </div>
+    <div info>
+      <div title center [innerHTML]="title"></div>
+      <div center [innerHTML]="message"></div>
+    </div>
+    <div info store>
+      <img *ngIf="isIOS || (!isIOS && !isAndroid)" (click)="onAppStoreClick()" src="/assets/imgs/appstore_ios.svg" />
+      <img *ngIf="isAndroid || (!isIOS && !isAndroid)" (click)="onAppStoreClick()"
+        src="/assets/imgs/appstore_android.svg" />
+    </div>
+    <div spacer></div>
+  </div>
+</ion-content>

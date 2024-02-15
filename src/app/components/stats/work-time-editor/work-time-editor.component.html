@@ -1,0 +1,137 @@
+<ion-header header>
+  <ion-toolbar>
+    <table>
+      <colgroup span="1" style="width:100px;"></colgroup>
+      <colgroup span="1"></colgroup>
+      <colgroup span="1" style="width:100px;"></colgroup>
+      <tbody>
+        <tr>
+          <td action left (click)="onCancel()">
+            &lt;<span>Cancel</span>
+          </td>
+          <td>
+            <div container>
+              <div title center>{{work_date | date:'longDate'}}</div>
+              <div center>Work Time Editor</div>
+            </div>
+          </td>
+          <td action right (click)="onSave()">
+            Save
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ion-toolbar>
+</ion-header>
+<ion-header tools>
+  <div container>
+    <div center title>
+      Clear non-engaged time blocks
+    </div>
+    <table tools>
+      <colgroup span="4" style="width:50px;"></colgroup>
+      <tr>
+        <td center>
+          <a (click)="onRemoveNonEngagedBlocksClick(0)">all</a>
+        </td>
+        <td center>
+          <a (click)="onRemoveNonEngagedBlocksClick(15)">15+ min</a>
+        </td>
+        <td center>
+          <a (click)="onRemoveNonEngagedBlocksClick(30)">30+ min</a>
+        </td>
+        <td center>
+          <a (click)="onRemoveNonEngagedBlocksClick(60)">1+ hour</a>
+        </td>
+      </tr>
+    </table>
+    <div center warning *ngIf="!canEdit">READ ONLY</div>
+</div>
+</ion-header>
+<ion-content>
+  <div container>
+    <table schedule *ngIf="workStatuses" (touchstart)="touchStart($event)" (touchend)="touchEnd($event)"
+      (touchmove)="touchMove($event)">
+      <colgroup span="1" style="width:75px;"></colgroup>
+      <colgroup span="1" style="width:20px"></colgroup>
+      <colgroup span="1"></colgroup>
+      <colgroup span="1" style="width:20px"></colgroup>
+      <tbody *ngFor="let slot of workStatuses; index as idx">
+        <tr>
+          <td *ngIf="getSlot(idx).isFirst" #firstWorkTime rowspan="2" time>
+            {{getTimeLabel(slot)}}
+          </td>
+          <td *ngIf="!getSlot(idx).isFirst" rowspan="2" time>
+            {{getTimeLabel(slot)}}
+          </td>
+          <td [attr.idx]="idx-1" middle [attr.status]="getSlot(idx-1)?.status"></td>
+          <td [attr.idx]="idx-1" middle work [attr.status]="getSlot(idx-1)?.status"></td>
+          <td [attr.idx]="idx-1" middle [attr.status]="getSlot(idx-1)?.status"></td>
+        </tr>
+        <tr>
+          <td [attr.idx]="idx" [attr.status]="getSlot(idx).status"></td>
+          <td [attr.idx]="idx" work [attr.status]="getSlot(idx).status"></td>
+          <td [attr.idx]="idx" [attr.status]="getSlot(idx).status"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div container>
+      <table>
+        <colgroup span="1" style="width:30px;"></colgroup>
+        <colgroup span="1"></colgroup>
+        <colgroup span="1" style="width:30px;"></colgroup>
+        <tbody>
+          <tr>
+            <td></td>
+            <td title center>
+              Work Time Summary
+            </td>
+            <td right>
+              <ion-icon name="help-circle-outline" (click)="showHelp()"></ion-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table summary>
+        <colgroup span="3" style="width:33%"></colgroup>
+        <tbody>
+          <tr>
+            <td time>
+              {{TimeHelper.getDurationFromSeconds(this.engagedDurationSeconds)}}
+            </td>
+            <td time>
+              {{TimeHelper.getDurationFromSeconds(this.notEngagedDurationSeconds)}}
+            </td>
+            <td time>
+              {{TimeHelper.getDurationFromSeconds(this.notEngagedDurationSeconds + this.engagedDurationSeconds)}}
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td delta subtext>
+              {{durationDeltaText}}
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td legend engaged>
+              Jobs
+            </td>
+            <td legend notengaged>
+              Not Engaged
+            </td>
+            <td legend total>
+              Total
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ion-toolbar>
+</ion-footer>

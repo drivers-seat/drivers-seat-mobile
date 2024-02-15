@@ -1,0 +1,145 @@
+<ion-content>
+  <div container>
+    <div center section>
+      <img logo src='assets/imgs/logo-small.png' />
+      <div emphasis>Almost Done</div>
+      <div title>Just a few more questions</div>
+    </div>
+    <form>
+      <div section>
+        <div title>
+          Name
+          <span required>*</span>
+        </div>
+        <div input>
+          <ion-input type="text" autofocus="true" name="firstName" placeholder="First Name *" maxlength="50"
+            autocomplete="given-name"
+            [class.error]="firstNameHasFocused && !firstNameIsFocused && firstNameIsValid==false"
+            [class.good]="firstNameIsValid==true" [class.focused]="firstNameIsFocused" [(ngModel)]="firstName"
+            (ngModelChange)="firstNameChanged($event)" (ionFocus)="firstNameFocusChanged(true)"
+            (ionBlur)="firstNameFocusChanged(false)">
+          </ion-input>
+        </div>
+        <div>
+          <ion-input type="text" name="lastName" placeholder="Last Name *" maxlength="50" autocomplete="family-name"
+            [class.error]="lastNameHasFocused && !lastNameIsFocused && lastNameIsValid==false"
+            [class.focused]="lastNameIsFocused" [class.good]="lastNameIsValid==true" [(ngModel)]="lastName"
+            (ngModelChange)="lastNameChanged($event)" (ionFocus)="lastNameFocusChanged(true)"
+            (ionBlur)="lastNameFocusChanged(false)">
+          </ion-input>
+        </div>
+      </div>
+
+      <div section>
+        <div title>
+          Postal Code
+          <span required>*</span>
+        </div>
+        <div input>
+          <ion-input type="text" name="postalCode" placeholder="#####" maxlength="10"
+            [class.error]="postalCodeHasFocused && !postalCodeIsFocused && postalCodeIsValid==false"
+            [class.good]="postalCodeHasFocused && postalCodeIsValid==true" [class.focused]="postalCodeIsFocused"
+            [(ngModel)]="postalCode" (ngModelChange)="postalCodeChanged($event)"
+            (ionFocus)="postalCodeFocusChanged(true)" (ionBlur)="postalCodeFocusChanged(false)">
+          </ion-input>
+        </div>
+      </div>
+
+
+
+      <div section>
+        <div title>
+          Phone Number
+        </div>
+        <div input>
+          <ion-input type="tel" name="phone" placeholder="(###) ###-####" maxlength="10" autocomplete="tel-national"
+            [class.error]="phoneHasFocused && !phoneIsFocused && phoneIsValid==false"
+            [class.good]="phoneHasFocused && phoneIsValid==true" [class.focused]="phoneIsFocused" [(ngModel)]="phone"
+            (ngModelChange)="phoneChanged($event)" (ionFocus)="phoneFocusChanged(true)"
+            (ionBlur)="phoneFocusChanged(false)">
+          </ion-input>
+        </div>
+      </div>
+
+
+      <div section>
+        <div section>
+          <div title>Your Privacy Is Important</div>
+          <div section>
+            {{ appDisplayName }} helps gig workers benefit from their data. Our <a
+              (click)="onPrivacyClick()">privacy policy</a> describes more about how we use your data.
+          </div>
+          <div section>
+            Please take a moment to review your privacy options:
+          </div>
+        </div>
+
+        <table>
+          <colgroup span="1" style="width:40px;"></colgroup>
+          <colgroup span="1"></colgroup>
+          <tr (click)="optOutDataSaleToggle()">
+            <td input>
+              <ion-icon checkbox *ngIf="optOutDataSale" name="checkmark-circle-outline"></ion-icon>
+              <ion-icon checkbox recommended *ngIf="!optOutDataSale" name="ellipse-outline"></ion-icon>
+            </td>
+            <td left input>
+              <div title>Do Not Sell or Share My Personal Information</div>
+              <div subtext>
+                Checking here prevents us from sharing any personal information about you with our partner
+                organizations.
+              </div>
+            </td>
+          </tr>
+          <tr (click)="limitDataUseToggle()" *ngIf="!optOutDataSale">
+            <td input>
+              <ion-icon checkbox *ngIf="limitDataUse" name="checkmark-circle-outline"></ion-icon>
+              <ion-icon checkbox recommended *ngIf="!limitDataUse" name="ellipse-outline"></ion-icon>
+            </td>
+            <td input>
+              <div title>Limit the Use of My Sensitive Personal Information</div>
+              <div subtext>
+                Checking here prevents us from sharing any sensitive information about you such as gender,
+                your race/ethnicity, and precise location with our partner organizations.
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div *ngIf="allowUpdateReferralCode">
+        <div title>
+          Do you have a referral code?
+        </div>
+        <div subtext>
+          We want to thank the person that told you about {{ appDisplayName }}.
+          If you're not sure what this is, leave it blank.
+        </div>
+        <ion-input type="text" referral-code name="referralCode" maxlength="4" placeholder="Referral Code"
+          [(ngModel)]="referralCode" [attr.hasValue]="referralCode?.trim()?.length > 0"
+          [class.good]="referralCodeIsValid==true && referralCodeIsAvailable==true"
+          [class.error]="referralCodeHasFocused && ((!referralCodeIsFocused && referralCodeIsValid==false) || referralCodeIsAvailable==false)"
+          [class.focused]="referralCodeIsFocused" (ngModelChange)="referralCodeChanged($event)"
+          (ionFocus)="referralCodeFocusChanged(true)" (ionBlur)="referralCodeFocusChanged(false)">
+        </ion-input>
+        <div message>
+          <div class="error" *ngIf="referralCodeIsAvailable == false && referralCodeErrorText">
+            {{referralCodeErrorText}}
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div buttons>
+      <button class="full-button positive login-button" [disabled]="!canSubmit" (click)="onSubmit()">
+        Continue
+      </button>
+      <div>
+        <a (click)="onLogout()">log-out</a>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

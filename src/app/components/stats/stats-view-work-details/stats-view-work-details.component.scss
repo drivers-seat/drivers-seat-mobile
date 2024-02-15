@@ -1,0 +1,66 @@
+
+[graphs]{
+  
+  td[graph]{
+    text-align: center;
+  }
+
+  td[title]{
+    font-weight: bold;
+    text-align: center;
+  }
+
+  div[graph]{
+    height: 125px; width:125px; display:inline-block;
+  }
+
+  div[noGraph]{
+    color: gray;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    padding:25px;
+  }
+
+}
+
+[stats]{
+  [engaged]{
+    background-color: rgba(255, 184, 0, 1)
+  }
+
+  [notEngaged]{
+    background-color: silver
+  }
+
+  [miles] {
+    text-align: right;
+  }
+
+  [time] {
+    text-align: right;
+  }
+
+  td{
+    padding: 3px;
+  }
+
+  thead {
+    td{
+      font-weight: bold;
+    }
+  }
+
+  tbody[detail]{
+    td{
+      border: solid 1px silver;
+    }
+  }
+
+  tbody[total] {
+    td{
+      font-weight: bold;
+    }
+  }
+
+}

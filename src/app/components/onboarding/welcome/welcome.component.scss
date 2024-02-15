@@ -1,0 +1,81 @@
+* {
+  
+  font-size: 20px;
+  font-weight: normal;
+  color: white;
+  text-shadow: -1px 1px 0 #323fff,
+  1px 1px 0 #323fff,
+ 1px -1px 0 #323fff,
+-1px -1px 0 #323fff;
+  
+}
+
+[full]{
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background-color:  #323fff !important;
+}
+
+[container]{
+  // background-color:   rgba(50, 63, 255, .5) !important;
+  color:white !important;
+  overflow: auto;
+  padding:15px;
+  padding-bottom:0;
+  padding-top:20%;
+}
+
+
+[section]{
+  padding-bottom: 3%;
+}
+
+button {
+  background-color: white !important;
+  border: solid 2px  #323fff;
+  color: #323fff !important;
+  font-weight: bold;
+  margin:0;
+  text-shadow: none;
+  width:90%;
+}
+
+a {
+  color:white;
+  padding:2px;
+
+
+}
+
+[title] {
+  font-size: 48px;
+  line-height: 95%;
+  font-weight: bold;
+  letter-spacing: -.4px;
+}
+
+[emphasis] {
+  letter-spacing: -.2px;
+  font-size:22px;
+}
+
+[emoji]{
+  display:block;
+  font-size:28pt;
+  padding-right: 10px;
+}
+
+[feature]{
+  display:block;
+}
+
+ion-slide{
+  text-align: left;
+  padding: 15px;
+  padding-bottom:0;
+  vertical-align: middle;
+}
+

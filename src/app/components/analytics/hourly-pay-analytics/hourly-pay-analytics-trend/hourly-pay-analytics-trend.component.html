@@ -1,0 +1,166 @@
+<ion-header>
+  <ion-toolbar>
+    <div hdr *ngIf="options_display">
+      <div title center>
+        {{title}}
+      </div>
+      <div subtitle center>
+        {{options_display.metro_area_name}}
+      </div>
+      <div subText center>
+        {{options_display.employer_filter}}
+      </div>
+    </div>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCancel()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div waiting [hidden]="isReady">
+    <ion-spinner></ion-spinner>
+    <div subtitle>one moment please...</div>
+  </div>
+  <div container [hidden]="!isReady">
+    <div section>
+      <div *ngIf="options.display_value=='avgHourlyPay' && options.deduct_mileage">
+        <div center large>
+          {{summary_stat.avg_hourly_pay_with_mileage | currency}}
+        </div>
+        <div center title>Average Hourly Pay</div>
+        <div center subtext>deducting mileage expense</div>
+      </div>
+
+      <div *ngIf="options.display_value=='avgHourlyPay' && !options.deduct_mileage">
+        <div center large>
+          {{summary_stat.avg_hourly_pay | currency}}
+        </div>
+        <div center title>Average Hourly Pay</div>
+        <div center subtext>not deducting mileage expense</div>
+      </div>
+
+
+      <div *ngIf="options.display_value=='bestEmployerPay' && options.deduct_mileage">
+        <div center large>
+          {{summary_stat.best_employer_with_mileage.avg_hourly_pay_with_mileage | currency}}
+        </div>
+        <div center title>Highest Platform Hourly Pay</div>
+        <div center subtext>deducting mileage expense</div>
+        <div center title>{{getEmployerName(summary_stat.best_employer_with_mileage.employer_id)}}</div>
+      </div>
+
+      <div *ngIf="options.display_value=='bestEmployerPay' && !options.deduct_mileage">
+        <div center large>
+          {{summary_stat.best_employer.avg_hourly_pay | currency}}
+        </div>
+        <div center title>Highest Platform Hourly Pay</div>
+        <div center subtext>not deducting mileage expense</div>
+        <div center title>{{getEmployerName(summary_stat.best_employer.employer_id)}}</div>
+      </div>
+    </div>
+
+    <div section>
+
+      <table legend>
+        <tbody>
+          <tr>
+            <td low [attr.colspan]="(performance_bins.length * 2)/2">Lower<br />Earnings</td>
+            <td colspan="2"></td>
+            <td high [attr.colspan]="(performance_bins.length * 2)/2">Higher<br />Earnings</td>
+          </tr>
+        </tbody>
+      </table>
+      <table legend>
+        <tbody>
+          <tr>
+            <td></td>
+            <td *ngFor="let bin of performance_bins" colspan="2" bin [attr.perfBin]="bin.binId">
+              <ion-icon name="ellipse" *ngIf="summary_stat.perfBin == bin.binId"></ion-icon>
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <table legend>
+        <tbody>
+          <tr>
+            <td val *ngFor="let bin of performance_bins" colspan="2">
+              {{bin.binId%2 == 0 ? bin.minValue.toFixed(2) : ""}}
+            </td>
+            <td val colspan="2">
+              {{performance_bins[performance_bins.length -1].maxValue}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div section *ngIf="shouldShowTabs()">
+      <table>
+        <tbody>
+          <tr>
+            <td tab *ngIf="shouldShowTab('delivery')" (click)="setActiveTab('delivery')"
+              [class.selected]="activeTab=='delivery'">
+              Delivery
+            </td>
+            <td tab *ngIf="shouldShowTab('rideshare')" (click)="setActiveTab('rideshare')"
+              [class.selected]="activeTab=='rideshare'">
+              Rideshare
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div section>
+      <div tabPage [hidden]="!isActiveTab('delivery')">
+
+        <div section>
+          <hourly-pay-analytics-employer_stats *ngIf="isReady" [summary_stat]="summary_stat" service_class="delivery"
+            [options]="options" [trend_stats]="current_stats_matrix?.delivery">
+          </hourly-pay-analytics-employer_stats>
+        </div>
+
+        <div section>
+          <div section>
+            <div title>
+              Average hourly earnings over time
+            </div>
+            <div>
+              See how average hourly earnings have changed over the last 16-weeks for delivery platforms
+            </div>
+          </div>
+          <div style="position: relative; height: 300px;">
+            <canvas #hourlyPayChartDelivery></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div tabPage [hidden]="!isActiveTab('rideshare')">
+        <div section>
+          <hourly-pay-analytics-employer_stats *ngIf="isReady" [summary_stat]="summary_stat" service_class="rideshare"
+            [options]="options" [trend_stats]="current_stats_matrix?.rideshare">
+          </hourly-pay-analytics-employer_stats>
+        </div>
+
+        <div section>
+          <div section>
+            <div title>
+              Average hourly earnings over time
+            </div>
+            <div>
+              See how average hourly earnings have changed over the last 16-weeks for rideshare platforms
+            </div>
+          </div>
+          <div style="position: relative; height: 300px;">
+            <canvas #hourlyPayChartRideshare></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<hourly-pay-analytics-footer-make-better></hourly-pay-analytics-footer-make-better>

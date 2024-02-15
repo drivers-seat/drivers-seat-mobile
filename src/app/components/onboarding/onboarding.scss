@@ -1,0 +1,148 @@
+* {
+  
+  font-size: 16px;
+  font-weight: normal;
+  color: black;
+}
+
+a {
+  color: blue;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  user-select: none;
+
+  td{
+    vertical-align: top;
+  }
+}
+
+[section] {
+  padding-bottom: 10px;
+}
+
+[container]{
+  padding-top:60px;
+  padding-left:25px;
+  padding-right:25px;
+  padding-bottom:5px;
+  user-select: none;
+}
+
+
+[title] {
+  font-weight: bold;
+  
+  * {
+    font-weight: bold;
+  }
+}
+
+[subtext] {
+  font-size:13px;
+  color:gray
+}
+
+[underline]{
+  text-decoration: underline;
+}
+
+[emphasis]{
+  font-size: 1.6em;
+  letter-spacing: -.5pt;
+  font-weight: bold;
+}
+
+[warn]{
+  color:orange;
+  font-weight: bold;
+}
+
+[center]{
+  text-align: center;
+}
+
+[right]{
+  text-align: right;
+}
+
+button[good]{
+  background-color: green !important;
+  *{
+    color:white;
+    font-weight:bolder;
+  }
+  
+}
+
+button:disabled {
+  background-color: silver;
+  color:gray;
+  
+}
+
+button[ignore]{
+  color:white;
+  *{
+    color:white;
+  }
+}
+
+input{
+  background-color: white;
+  width:100%;
+  color:gray;
+  padding:5px;
+}
+
+[input] {
+  padding-bottom: 10px;
+}
+
+ion-input {
+  margin-bottom: 0px;
+  padding: 0px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  padding-top:0px !important;
+  padding-bottom:0px !important;
+
+  &.error {
+    border: solid 2px red;
+  }
+
+  &.good {
+    border: solid 2px green;
+  }
+
+  &.focused {
+    border-width: 2px;
+  }
+}
+
+[message] {
+  height:40px;
+}
+
+.error {
+  color:red;
+}
+
+ion-footer{
+  background-color: white;
+  padding-top:10px;
+}
+
+[buttons]{
+  text-align: center;
+  padding-left:30px;
+  padding-right:30px;
+  padding-top:10px;
+}
+
+[required]{
+  color:orange;
+  font-weight: bold;
+}

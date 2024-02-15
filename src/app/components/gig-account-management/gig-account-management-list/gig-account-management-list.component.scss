@@ -1,0 +1,35 @@
+*{
+  color:gray;
+}
+
+ion-icon {
+  font-size: 26px;
+}
+
+[accounts]{
+
+  thead{
+    th{
+      vertical-align: bottom;
+      padding-top:10px;
+      padding-left:3px;
+      padding-right:3px;
+
+    }
+
+  }
+
+  tbody {
+    td {
+      padding-top:10px;
+      padding-bottom:10px;
+      padding-left:3px;
+      padding-right:3px;
+      border-bottom: solid 1px silver;
+      vertical-align: middle;
+      
+    }
+  }
+  
+
+}

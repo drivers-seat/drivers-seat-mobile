@@ -1,0 +1,36 @@
+* {
+  
+  font-size: 14px;
+  font-weight: normal;
+  color: black;
+}
+
+[container]{
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:5px;
+  padding-bottom:10px;
+  background-color: #F4BB40;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  user-select: none;
+
+  td{
+    vertical-align: top;
+  }
+}
+
+[left]{
+  text-align: left;
+}
+
+[center]{
+  text-align: center;
+}
+
+[right]{
+  text-align: right;
+}

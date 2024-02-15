@@ -1,0 +1,68 @@
+<ion-header valid *ngIf="optionsValid">
+  <ion-toolbar>
+    <table>
+      <colgroup span="1" style="width:35px;"></colgroup>
+      <colgroup span="1"></colgroup>
+      <colgroup span="1" style="width:35px;"></colgroup>
+      <tbody>
+        <tr>
+          <td left>
+            <ion-icon (click)="showOptionsClick('settingsIcon')" name="settings-outline"></ion-icon>
+          </td>
+          <td center>
+            <div title>
+            {{optionsDisplay?.calc_method}}
+            </div>
+            <div *ngIf="optionsDisplay">
+              <div subtitle>
+                {{optionsDisplay.metro_area_name}}
+              </div>
+              <div subtitle *ngIf="optionsDisplay?.mileage_method">
+                {{optionsDisplay.mileage_method}}
+              </div>
+              <div subtitle *ngIf="optionsDisplay?.employer_filter">
+                {{optionsDisplay.employer_filter}}
+              </div>
+              </div>
+
+          </td>
+          <td right>
+            <ion-icon (click)="showHelpClick()" name="help-circle-outline"></ion-icon>
+          </td>
+        </tr>
+        <tr *ngIf="optionsDisplay">
+          <td colspan="3" center>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header welcome *ngIf="!optionsValid">
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="!optionsValid">
+  <hourly-pay-analytics-welcome *ngIf="prefSvcIsReady" (onSettingsClick)="showOptionsClick('welcomePage')"
+    (onHelpClick)="showHelpClick()">
+  </hourly-pay-analytics-welcome>
+  <div waiting *ngIf="!prefSvcIsReady">
+    <ion-spinner></ion-spinner>
+    <div subtitle>one moment please...</div>
+  </div>
+</ion-content>
+
+<ion-content *ngIf="optionsValid">
+  <div waiting *ngIf="!performanceStats">
+    <ion-spinner></ion-spinner>
+    <div subtitle>one moment please...</div>
+  </div>
+  <div *ngIf="performanceStats && notEnoughData">
+    <hourly-pay-analytics-metro-not-enough-data></hourly-pay-analytics-metro-not-enough-data>
+  </div>
+  <hourly-pay-heatmap *ngIf="performanceStats && !notEnoughData" [PerformanceStats]="performanceStats"
+    (metricSelected)="onMetricClick($event)" (missingValueSelected)="onMissingValueClick($event)">
+  </hourly-pay-heatmap>
+</ion-content>

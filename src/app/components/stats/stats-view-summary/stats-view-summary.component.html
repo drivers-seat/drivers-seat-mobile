@@ -1,0 +1,94 @@
+<div *ngIf="summaryStats">
+  <div hasData *ngIf="!summaryStats.current.hasNoData">
+    <table summary>
+      <colgroup span="1" style="width:33%"></colgroup>
+      <colgroup span="1" style="width:33%"></colgroup>
+      <colgroup span="1" style="width:33%"></colgroup>
+      <thead>
+        <tr>
+          <th>
+            <div class="perfTitle">Gross Pay</div>
+          </th>
+          <th>
+            <div class="perfTitle">Total Miles</div>
+          </th>
+          <th>
+            <div class="perfTitle">Expenses</div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div *ngIf="summaryStats.current.totalPayGross">
+              <div class="perfValue">
+                {{summaryStats.current.totalPayGross | currency:'USD':'symbol':'1.0-0'}}
+              </div>
+              <div class="perfSubValue" *ngIf="summaryStats.current.drivingTotalSeconds">
+                {{summaryStats.current.hourlyPayGross | currency}}/hr
+              </div>
+            </div>
+            <div *ngIf="!summaryStats.current.totalPayGross" class="perfValue empty">
+              -
+            </div>
+          </td>
+          
+          <td>
+            <div *ngIf="summaryStats.current.miles">
+              <div class="perfValue">
+                {{summaryStats.current.miles | number:'1.0-0'}}
+              </div>
+              <div class="perfSubValue" *ngIf="summaryStats.current.earningsPerMile">
+                {{summaryStats.current.earningsPerMile | currency}}/mile
+              </div>
+            </div>
+            <div *ngIf="!summaryStats.current.miles" class="perfValue empty">
+              -
+            </div>
+          </td>
+
+          <td>
+            <div *ngIf="summaryStats.current.expensesDeductible" class="perfValue">
+              {{summaryStats.current.expensesDeductible | currency:'USD':'symbol':'1.0-0'}}
+            </div>
+            <ion-button *ngIf="!summaryStats.current.expensesDeductible" newExpense color="warning" (click)="goto_Expenses(true)">
+              <ion-icon name="add-circle-outline"></ion-icon>&nbsp;
+              <div left>Add<br/>Expenses</div>
+            </ion-button>
+            <a *ngIf="summaryStats.current.expensesDeductible" (click)="goto_Expenses(false)">manage</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div nodata *ngIf="!(summaryStats?.current?.hasNoData == false)">
+    <table noDataOptions>
+      <colgroup span="1"></colgroup>
+      <colgroup span="1" style="width:120px;"></colgroup>
+      <tbody>
+        <tr>
+          <td>
+            We don't have any jobs or expenses for {{summaryStats?.current?.window?.title}}.&nbsp;
+            <a *ngIf="!noData_ShowMore" (click)="toggleNoDataShowMore()">show more</a>
+            <a *ngIf="noData_ShowMore" (click)="toggleNoDataShowMore()">show less</a>
+          </td>
+          <td>
+            <ion-button newExpense color="warning" (click)="goto_Expenses(true)">
+              <ion-icon name="add-circle-outline"></ion-icon>&nbsp;
+              <div left>Add<br/>Expenses</div>
+            </ion-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div detail *ngIf="noData_ShowMore">
+      If you expected to see data here:
+
+      <ul>
+        <li>Check your <a (click)="goto_Profile()">gig accounts</a> to make sure that they are connected.</li>
+        <li>Try again later. Sometimes, it takes up to a few hours for us to receive new data from your apps.</li>
+      </ul>
+    </div>
+  </div>
+</div>

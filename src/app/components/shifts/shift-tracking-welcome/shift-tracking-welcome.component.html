@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="cancelClick()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        Back
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div container>
+    <div section>
+      <div section center>
+        <div emphasis center>Start tracking your mileage!</div>
+      </div>
+      <div section>
+        When you track your mileage on {{ appDisplayName }}, you'll get advanced insights to help you see
+        which strategies are working best for you.
+      </div>
+      <div section>
+        And when it's time for taxes, you can use the miles you tracked for your deduction!
+      </div>
+      <div section center>
+        <img style="width:90%" src="assets/imgs/shift-tracking/welcome.png" />
+      </div>
+
+      <div section title>
+        To enable mileage tracking, allow location and motion access "Always." We will only
+        save location data when the mileage tracker is turned on.
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <div center>
+    <button good title class="full-button" (click)="openSettingsClick()">Let's get started</button>
+  </div>
+</ion-footer>

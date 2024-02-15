@@ -1,0 +1,54 @@
+[expenseList], [expenseTotals], [expenseCategories] {
+  tbody {
+    td {
+      border: solid 1px silver;
+    }
+  }
+}
+
+div[graph]{
+  height: 125px; width:125px; display:inline-block;
+}
+
+
+[section]{
+  padding-bottom: 20px;
+}
+
+
+table[tabs] {
+
+  margin-top: 20px;
+  margin-bottom: 10px;
+
+  td {
+    border-bottom: solid 4px transparent;
+    text-align: center;
+    
+    color: #9a9a9a;
+    font-size: 18px;
+
+    &.active {
+      border-bottom: solid 4px #F4BB40;
+      color: black;
+    }
+  }
+}
+
+[waiting]{
+  padding:20px;
+  font-size: 1.2em;
+}
+
+ion-icon {
+  width: 35px;
+}
+
+[emphasis]{
+  font-size:32px;
+  color:gray;
+}
+
+[noExpenses]{
+  padding:30px;
+}

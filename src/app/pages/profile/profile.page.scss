@@ -1,0 +1,147 @@
+* {
+  
+  font-size: 16px;
+  font-weight: normal;
+  color: black;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  user-select: none;
+  
+  td{
+    vertical-align: top;
+  }
+}
+
+ion-footer[tabs]{
+  background-color:white;
+  height: 60px;
+
+  table {
+    height: 60px;
+    
+  }
+
+  td {
+    border-top: solid 4px transparent;
+    text-align: center;
+    padding-top: 10px;
+
+    
+    color: #9a9a9a;
+
+    &.active {
+      border-top: solid 4px #F4BB40;
+      color: black;
+    }
+  }
+}
+
+a {
+  color: blue;
+}
+
+
+
+div[tabPage]{
+  padding:25px;
+  padding-bottom:0;
+}
+
+
+[section] {
+  padding-bottom: 20px;
+}
+
+
+[title] {
+  font-weight: bold;
+  
+  * {
+    font-weight: bold;
+  }
+}
+
+[subtext] {
+  font-size:13px;
+  color:gray
+}
+
+[underline]{
+  text-decoration: underline;
+}
+
+[emphasis]{
+  font-size: 1.6em;
+  letter-spacing: -.5pt;
+  font-weight: bold;
+}
+
+[warn]{
+  color:orange;
+  font-weight: bold;
+}
+
+[center]{
+  text-align: center;
+}
+
+[right]{
+  text-align: right;
+}
+
+[input] {
+  padding-bottom: 10px;
+}
+
+input{
+  background-color: white;
+  width:100%;
+  color:gray;
+  padding:5px;
+}
+
+
+ion-input {
+  margin-bottom: 0px;
+  padding: 0px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  padding-top:0px !important;
+  padding-bottom:0px !important;
+
+  &.error {
+    border: solid 2px red;
+  }
+
+  &.good {
+    border: solid 2px green;
+  }
+
+  &.focused {
+    border-width: 2px;
+  }
+}
+
+
+ion-select{
+  border:solid .5px silver;
+  margin: 5px;
+
+}
+
+[referral-code]{
+  text-align: center !important;
+  &[hasvalue=true]{
+    letter-spacing: 30px !important;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+}
+
+ion-icon[checkbox]{
+  width:30px;
+  height:30px;
+}

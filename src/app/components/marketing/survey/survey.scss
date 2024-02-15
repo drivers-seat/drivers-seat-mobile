@@ -1,0 +1,48 @@
+[container]{
+  padding:20px;
+}
+
+[survey-item]{
+  padding-bottom: 15px;
+
+  &[level_left='1']{
+    padding-left: 40px;
+  };
+
+  &[level_left='2']{
+    padding-left: 80px;
+  };
+
+  &[level_left='3']{
+    padding-left: 120px;
+  };
+
+  &[level_left='4']{
+    padding-left: 160px;
+  };
+
+  &[level_left='5']{
+    padding-left: 200px;
+  }
+
+  &[level_right='1']{
+    padding-right: 40px;
+  };
+
+  &[level_right='2']{
+    padding-right: 80px;
+  };
+
+  &[level_right='3']{
+    padding-right: 120px;
+  };
+
+  &[level_right='4']{
+    padding-right: 160px;
+  };
+
+  &[level_right='5']{
+    padding-right: 200px;
+  }
+}
+

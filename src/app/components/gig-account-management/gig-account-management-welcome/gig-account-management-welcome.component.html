@@ -1,0 +1,25 @@
+<div container>
+  <div section>
+  <div section center>
+    <img style="width:90%" src="assets/imgs/gig-account-management/welcome.png" />
+  </div>
+</div>
+  <div section center>
+    <div section>
+      {{ appDisplayName }} uses a service called Argyle to connect to your rideshare
+      and delivery accounts.
+    </div>
+    <div section>
+      Argyle lets you automatically track your trips and earnings!
+    </div>
+  </div>
+  <div section>
+    <button good class="full-button" (click)="getStartedClick()">Continue</button>
+  </div>
+  <div center section>
+    <a (click)="launchArgyleTOS()">Review Argyle's Terms of Service</a>
+  </div>
+  <div center>
+    <ion-icon help name="help-circle-outline" (click)="launchArgyleDataQ()"></ion-icon>
+  </div>
+</div>

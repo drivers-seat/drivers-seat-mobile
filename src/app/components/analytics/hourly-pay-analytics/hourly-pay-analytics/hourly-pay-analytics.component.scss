@@ -1,0 +1,50 @@
+
+ion-header[valid] {
+  background-color: #F4BB40;
+  min-height: 30px;
+  padding: 3px;
+  vertical-align: middle;
+
+  * {
+    color:black;
+  }
+
+  ion-icon{
+    color: black;
+    height:25px !important;
+    width:25px  !important;
+  }
+}
+
+ion-header[welcome] {
+  background-color:  #111447 !important;
+}
+ion-toolbar {
+  padding:5px;
+}
+
+[title]{
+  color: black;
+  font-weight: bold;
+  font-size:16px;
+  text-align: center;
+}
+
+[subtitle]{
+  color: black;
+  font-size:12px;
+  text-align: center;
+}
+
+td[settings]{
+  vertical-align: middle;
+  text-align: center;
+
+  ion-icon{
+    color: black;
+    height:25px !important;
+    width:25px  !important;
+  }
+  
+}
+

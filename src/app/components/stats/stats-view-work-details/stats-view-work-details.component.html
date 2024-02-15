@@ -1,0 +1,84 @@
+<div section [hidden]="!summaryStats || !showGraphs">
+  <div section></div>
+  <div section [hidden]="!showGraphs">
+    <table graphs>
+      <colgroup span="1"></colgroup>
+      <colgroup span="1" style="width:20px;"></colgroup>
+      <colgroup span="1"></colgroup>
+      <tbody>
+        <tr>
+          <td graph>
+            <div graph [hidden]="!showHours">
+              <canvas #timeCanvas></canvas>
+            </div>
+            <div noGraph *ngIf="!showHours">
+              Work Time is not available
+            </div>
+          </td>
+          <td></td>
+          <td graph>
+            <div graph [hidden]="!showMileage">
+              <canvas #mileageCanvas></canvas>
+            </div>
+            <div noGraph *ngIf="!showMileage">
+              Mileage is not Available
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td title *ngIf="showHours">Hours</td>
+          <td></td>
+          <td title *ngIf="showMileage">Mileage</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <table *ngIf="summaryStats && showGraphs" stats>
+    <colgroup span="1" style="width:5px;"></colgroup>
+    <colgroup span="1"></colgroup>
+    <colgroup span="1" style="width:80px;"></colgroup>
+    <colgroup span="1" style="width:80px;"></colgroup>
+    <thead>
+      <tr>
+        <td></td>
+        <td></td>
+        <td time>Hours</td>
+        <td miles>Miles</td>
+      </tr>
+    </thead>
+    <tbody detail>
+      <tr *ngIf="summaryStats.duration_seconds_engaged">
+        <td legend engaged></td>
+        <td>Engaged</td>
+        <td time>{{ TimeHelper.getDurationFromSeconds(summaryStats.duration_seconds_engaged, true, showPrecise) }}</td>
+        <td miles *ngIf="showPrecise"> {{ summaryStats.selected_miles_engaged | number:'0.0-1' }}</td>
+        <td miles *ngIf="!showPrecise"> {{ summaryStats.selected_miles_engaged | number:'0.0-0' }}</td>
+      </tr>
+      <tr *ngIf="summaryStats.duration_seconds_not_engaged">
+        <td legend notEngaged></td>
+        <td>Not Engaged</td>
+        <td time>{{ TimeHelper.getDurationFromSeconds(summaryStats.duration_seconds_not_engaged, true, showPrecise) }}</td>
+        <td miles *ngIf="showPrecise"> {{ summaryStats.selected_miles_not_engaged | number:'0.0-1' }}</td>
+        <td miles *ngIf="!showPrecise"> {{ summaryStats.selected_miles_not_engaged | number:'0.0-0' }}</td>
+      </tr>
+    </tbody>
+    <tbody total>
+      <tr>
+        <td></td>
+        <td>Total</td>
+        <td time>{{ TimeHelper.getDurationFromSeconds(summaryStats.duration_seconds, true, showPrecise) }}</td>
+        <td miles *ngIf="showPrecise"> {{ summaryStats.selected_miles | number:'0.0-1' }}</td>
+        <td miles *ngIf="!showPrecise"> {{ summaryStats.selected_miles | number:'0.0-0' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="windowIsDay">
+  <stats-view-work-details-workday></stats-view-work-details-workday>
+</div>
+
+<div *ngIf="!windowIsDay">
+  <stats-view-work-details-summary></stats-view-work-details-summary>
+</div>

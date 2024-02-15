@@ -1,0 +1,174 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="onCancel()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <div title>Best Times to Work</div>
+    </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="trySave()">
+        Save
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div container *ngIf="isReady && selections">
+    <ion-header>
+      <div messages *ngIf="messages">
+        <ul>
+          <li *ngFor="let msg of messages">{{msg}}</li>
+        </ul>
+      </div>
+    </ion-header>
+    <div section>
+      <div hdr title>Metro Area</div>
+      <ion-item lines="none" metro>
+        <ionic-selectable item-content [(ngModel)]="selections.metro_area" [items]="metroAreas"
+          [hasVirtualScroll]="true" itemTextField="name" placeholder="select your metro area" itemValueField="id"
+          [canSearch]="true">
+          <ng-template ionicSelectableTitleTemplate>
+            Select Metro Area
+          </ng-template>
+        </ionic-selectable>
+      </ion-item>
+      <div right top-spacer>
+        <a (click)="onMissingMetroClick()">Don't see your metro area?</a>
+      </div>
+    </div>
+
+    <div section>
+      <div hdr title>Gig Platforms</div>
+      <div options>
+        <div section *ngFor="let svcClass of svcClasses">
+          <table>
+            <colgroup span="1" style="width:30px;"></colgroup>
+            <colgroup span="1" style="width:30px;"></colgroup>
+            <colgroup span="1"></colgroup>
+            <tbody>
+              <tr>
+                <td (click)="toggleServiceClass(svcClass)">
+                  <ion-icon chk *ngIf="selections?.service_classes[svcClass]==true" name="checkmark-circle-outline">
+                  </ion-icon>
+                  <ion-icon chk
+                    *ngIf="!(selections?.service_classes[svcClass]==true) && areNoEmployersSelectedForSvcClass(svcClass)"
+                    name="ellipse-outline">
+                  </ion-icon>
+                  <ion-icon chk some
+                    *ngIf="!(selections?.service_classes[svcClass]==true) && !areNoEmployersSelectedForSvcClass(svcClass)"
+                    name="checkmark-circle-outline">
+                  </ion-icon>
+                </td>
+                <td colspan="2" (click)="toggleExpandServiceClass(svcClass)">
+                  <span title>All {{svcClass}} platforms</span>&nbsp;&nbsp;
+                  <span subtext>{{getSelectedItemCount(svcClass)}} of {{getTotalItemCount(svcClass)}} selected</span>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="selections.service_class_expand[svcClass]">
+              <tr opt *ngFor="let emp of employersBySvcClass[svcClass]" (click)="toggleEmployer(emp)">
+                <td></td>
+                <td>
+                  <ion-icon chk *ngIf="selections?.employers[svcClass][emp.id]==true" name="checkmark-circle-outline">
+                  </ion-icon>
+                  <ion-icon chk *ngIf="!(selections.employers[svcClass][emp.id]==true)" name="ellipse-outline">
+                  </ion-icon>
+                </td>
+                <td>
+                  {{emp.name}}
+                  <span warn *ngIf="!emp.reports_mileage">&nbsp;* mileage not available</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div section>
+      <div hdr title>Display Settings</div>
+      <div options>
+        <table>
+          <colgroup span="1" style="width:35px;"></colgroup>
+          <colgroup span="1"></colgroup>
+          <tbody>
+            <tr opt (click)="onDisplayValueChange('avgHourlyPay')">
+              <td>
+                <ion-icon chk *ngIf="selections?.display_value == 'avgHourlyPay'" name="checkmark-circle-outline">
+                </ion-icon>
+                <ion-icon chk *ngIf="!(selections.display_value == 'avgHourlyPay')" name="ellipse-outline"></ion-icon>
+              </td>
+              <td>
+                <div title>Average Hourly Pay</div>
+                <div>Show average hourly earnings/hour in your area across all platforms you selected.</div>
+              </td>
+            </tr>
+            <tr opt (click)="onDisplayValueChange('bestEmployerPay')">
+              <td>
+                <ion-icon chk *ngIf="selections?.display_value == 'bestEmployerPay'" name="checkmark-circle-outline">
+                </ion-icon>
+                <ion-icon chk *ngIf="!(selections.display_value == 'bestEmployerPay')" name="ellipse-outline">
+                </ion-icon>
+              </td>
+              <td>
+                <div title>Show Best Platforms</div>
+                <div>Show the platform with the best pay for each time slot our of the platforms you selected.</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div section>
+      <div hdr title>Other Options</div>
+      <div options>
+        <table>
+          <colgroup span="1" style="width:35px;"></colgroup>
+          <colgroup span="1"></colgroup>
+          <tbody>
+            <tr opt (click)="toggleDeductMileage()" [class.disabled]="preventDeductMileage == true">
+              <td>
+                <ion-icon chk *ngIf="selections?.deduct_mileage" name="checkmark-circle-outline"></ion-icon>
+                <ion-icon chk *ngIf="!(selections?.deduct_mileage)" name="ellipse-outline"></ion-icon>
+              </td>
+              <td>
+                <div title>Deduct Mileage Expense</div>
+                <div>Show average earnings minus estimated mileage expenses of 62.5 cents/mile (2022 IRS Mileage rate).
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="preventDeductMileage">
+              <td></td>
+              <td warn>Not available when the following platforms are selected: {{preventDeductMileageEmployers}}.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div options>
+        <table>
+          <colgroup span="1" style="width:35px;"></colgroup>
+          <colgroup span="1"></colgroup>
+          <tbody>
+            <tr opt (click)="toggleHighlightWorkSchedule()">
+              <td>
+                <ion-icon chk *ngIf="selections?.highlight_work_schedule" name="checkmark-circle-outline"></ion-icon>
+                <ion-icon chk *ngIf="!(selections?.highlight_work_schedule)" name="ellipse-outline"></ion-icon>
+              </td>
+              <td>
+                <div title>Highlight My Work Schedule &nbsp;<div isScheduled="true"></div>
+                </div>
+                <div>This will show your work schedule if you saved it in Shift Reminders.</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<hourly-pay-analytics-footer-make-better></hourly-pay-analytics-footer-make-better>

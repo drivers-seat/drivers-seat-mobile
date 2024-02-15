@@ -1,0 +1,27 @@
+<ion-content>
+    <div class="top-button" [style.margin-top]="is_iOS ? 'var(--ion-safe-area-top)' : '0px'">
+      <p left>App version: {{ appVersion }} ({{ pointingTo }})</p>
+      <button ion-button menuToggle right (click)="toggleMenu()">
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </div>
+    <div class="content-wrapper" [style.margin-top]="is_iOS ? 'var(--ion-safe-area-top)' : '0px'">
+      <div class="content-wrapper-inner">
+        <div class="content-inside">
+
+            <div class="ghost-mode" *ngIf="canGhost">
+              <div title>Ghost User</div>
+              <div class="enroll-ghost">
+                <ion-label>Enter ghost mode for this user id. Ghost mode will reset once the app is reloaded, after 1 hour, or when the ghost is cleared.</ion-label>
+                <div class="entry-row">
+                  <ion-input [(ngModel)]="ghostID" type="number" [placeholder]="currentGhost ? 'Clear ghost first': 'e.g. 2071'"></ion-input>
+                  <ion-button (click)="submitGhost()"><ion-icon name="chevron-forward-circle-outline"></ion-icon></ion-button>
+                </div>
+              </div>
+              <ion-label class="error" *ngIf="ghostError">{{ ghostError }}</ion-label>
+              <ion-button (click)="clearGhost()" class="full-button" *ngIf="currentGhost">Clear ghost on {{ currentGhost.first_name }} {{ currentGhost.last_name }}</ion-button>
+            </div>
+        </div>
+      </div>
+  </div>
+</ion-content>

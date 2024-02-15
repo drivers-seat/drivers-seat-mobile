@@ -1,0 +1,63 @@
+<ion-header *ngIf="showHeader">
+
+  <ion-toolbar>
+    <div header>
+      <div tool *ngIf="hasHeaderActions">
+        <ion-icon *ngIf="helpAction" (click)="handleButton(helpAction)" name="help-circle-outline"></ion-icon>
+        <div spacer></div>
+      </div>
+      <div header-title>
+        <div *ngIf="mainHeader" center title>{{mainHeader}}</div>
+        <div *ngIf="subHeaders">
+          <div *ngFor="let subHeader of subHeaders" center>{{subHeader}}</div>
+        </div>
+      </div>
+      <div tool *ngIf="hasHeaderActions">
+        <div spacer></div>
+        <ion-icon *ngIf="closeAction" (click)="handleButton(closeAction)" name="close-circle-outline"></ion-icon>
+      </div>
+    </div>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <div *ngIf="mainHeader" center title>{{mainHeader}}</div>
+    <div *ngIf="subHeaders">
+      <div *ngFor="let subHeader of subHeaders" center>{{subHeader}}</div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div external-html *ngIf="hasExternalHtml">
+    <div spacer></div>
+    <div wait *ngIf="!content_html">
+      <ion-spinner></ion-spinner>
+    </div>
+    <div content *ngIf="content_html" [innerHTML]="content_html"></div>
+    <div spacer></div>
+  </div>
+  <iframe *ngIf="content_url" [src]="content_url" _target="self"></iframe>
+  <video-player *ngIf="video_url" [url]="video_url" (videoStart)="onVideoStart()" (videoEnd)="onVideoEnd($event)"></video-player>
+</ion-content>
+<ion-footer *ngIf="showFooter">
+  <ion-toolbar>
+    <div section *ngIf="campaign?.footer.length > 0">
+      <div center *ngFor="let footer of campaign?.footer">{{footer}}</div>
+    </div>
+    <div section>
+      <button *ngFor="let action of custom_actions" class="full-button" [class.accept]="action.type == 'accept'"
+        [class.postpone]="action.type == 'postpone'" [class.dismiss]="action.type == 'dismiss'"
+        (click)="handleButton(action)">
+        <div *ngFor="let title of action.text">{{title}}</div>
+      </button>
+    </div>
+    <div center *ngIf="showFooterLinks">
+      <table links>
+        <tr>
+          <td *ngFor="let action of default_actions">
+            <a (click)="handleButton(action)">{{action.text[0]}}</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </ion-toolbar>
+</ion-footer>

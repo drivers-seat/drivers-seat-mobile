@@ -1,0 +1,11 @@
+.swiper-slide{
+  height:auto !important;
+}
+
+[campaign-card]{
+  padding-bottom: 10px;
+
+  &[isLast="true"]{
+    padding-bottom: 0;
+  }
+}

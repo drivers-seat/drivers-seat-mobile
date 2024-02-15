@@ -1,0 +1,180 @@
+* {
+  
+  font-size: 16px;
+  font-weight: normal;
+  color: black;
+}
+
+a {
+  color: blue;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  user-select: none;
+
+  td{
+    vertical-align: top;
+    padding: 3px;
+  }
+
+  thead {
+    td{
+      vertical-align: bottom;
+      font-weight: bold;
+    }
+  }
+
+  tfoot {
+    td{
+      vertical-align: top;
+      font-weight: bold;
+    }
+  }
+}
+
+[section] {
+  padding-bottom: 10px;
+}
+
+[container] {
+  padding: 10px;
+  user-select: none;
+}
+
+
+[title] {
+  font-weight: bold;
+  
+  * {
+    font-weight: bold;
+  }
+}
+
+
+[emphasis]{
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+[center]{
+  text-align: center;
+}
+
+[right] {
+  text-align: right;
+}
+
+[subtext] {
+  font-size:12px;
+  color:gray
+}
+
+.error {
+  color:red;
+}
+
+.good {
+  color: green;
+}
+
+button[good]{
+  background-color: green !important;
+  color:white;
+  font-size:18px;
+  *{
+    color:white !important;
+    font-weight:bolder;
+  }
+}
+
+button[delete]{
+  background-color: white;
+  color:red;
+  border: solid 2px red;
+  font-size:18px;
+  *{
+    color:red !important;
+    font-weight:bolder;
+  }
+  
+}
+
+button[ignore]{
+  color:white;
+  *{
+    color:white;
+  }
+}
+
+ion-footer{
+  background-color: white;
+  color: black;
+}
+
+[money]{
+  text-align: right;
+}
+
+[time]{
+  text-align: right;
+}
+
+
+[stats]{
+  [engaged]{
+    background-color: rgba(255, 184, 0, 1)
+  }
+
+  [notEngaged]{
+    background-color: silver
+  }
+
+  [miles] {
+    text-align: right;
+  }
+
+  [time] {
+    text-align: right;
+  }
+
+  td{
+    padding: 3px;
+  }
+
+  thead {
+    td{
+      font-weight: bold;
+    }
+  }
+
+  tbody[detail]{
+    td{
+      border: solid 1px silver;
+    }
+  }
+
+  tbody[total] {
+    td{
+      font-weight: bold;
+    }
+  }
+
+}
+
+[action] {
+  text-align: center;
+  
+  ion-icon {
+    color: blue;
+    height: 20px;
+    width: 20px;
+  }
+
+  &[delete]{
+    ion-icon {
+      color: red;
+    }
+  }
+}

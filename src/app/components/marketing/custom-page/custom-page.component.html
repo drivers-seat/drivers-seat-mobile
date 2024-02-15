@@ -1,0 +1,43 @@
+<ion-header [attr.isGhosting]="isGhosting">
+  <ion-toolbar>
+    <div header>
+      <div tool>
+      </div>
+      <div header-title>
+        <div title center *ngFor="let txt of title || []">{{txt}}</div>
+      </div>
+      <div tool>
+        <div spacer></div>
+        <a (click)="onCancelClick()">Done</a>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div container>
+    <div description *ngIf="description?.length > 0">
+      <div center *ngFor="let txt of description">{{txt}}</div>
+    </div>
+    <div *ngFor="let section of sections">
+      <div *ngIf="should_show_section(section)">
+        <div section lrPadding *ngIf="section.type=='campaign'">
+          <campaign-carousel 
+            [campaigns]="getCampaignsForSection(section)" 
+            [display_class]="section.display_class || []"
+            [slides_per_row]="section.slides_per_row || 1"
+            [orientation]="section.orientation || 'horizontal'">
+            <div campaign-carousel-header *ngIf="should_show_section_header(section)">
+              <div title *ngFor="let txt of section.header.title || []">{{txt}}</div>
+              <div description *ngFor="let txt of section.header.description || []">{{txt}}</div>
+            </div>
+            <div campaign-carousel-footer *ngIf="should_show_section_footer(section)">
+              <div title *ngFor="let txt of section.footer.title || []">{{txt}}</div>
+              <div description *ngFor="let txt of section.footer.description || []">{{txt}}</div>
+            </div>
+          </campaign-carousel>
+        </div>
+      </div>
+    </div>
+    <div style="height:30px;"></div>
+  </div>
+</ion-content>

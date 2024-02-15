@@ -1,0 +1,87 @@
+<ion-content [style.margin-top]="is_iOS ? 'var(--ion-safe-area-top)' : '0px'">
+  <div class="top-button" [style.padding-top]="is_iOS ? 'var(--ion-safe-area-top)' : '20px'">
+    <button ion-button menuToggle right (click)="toggleMenu()">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </div>
+  <div [hidden]="!shouldShowOptions()">
+    <div class="content-wrapper align-bottom">
+      <div class="content-wrapper-inner">
+        <button class="close-button" ion-button full (click)="setFocusGroup(undefined); confirmCode='';"><img
+            src='assets/imgs/focus-group/Close.svg'></button>
+        <p *ngIf="backendDescription">You're signed up for the {{ backendDescription.Name }} research gig!</p>
+      </div>
+      <div className="{{ showDetails ? 'collapsible-card full-height' : 'collapsible-card small-height' }}">
+        <div class="card-header">
+          <div class="card-title" (click)="showDetails = !showDetails">
+            Check out the details
+            <ion-icon name="chevron-down-outline" *ngIf="!showDetails"></ion-icon>
+            <ion-icon name="chevron-up-outline" *ngIf="showDetails"></ion-icon>
+          </div>
+        </div>
+
+        <div class="card-content" *ngIf="backendDescription" [hidden]="!showDetails">
+          <div [innerHTML]="backendDescription.Description"></div>
+        </div>
+      </div>
+      <p class="unenroll">I didn't want to join this research group. <span (click)="unenroll()">Unenroll</span></p>
+    </div>
+  </div>
+
+  <div [hidden]="shouldShowOptions()" style="width:100%;">
+    <div *ngIf="focusGroup !== 'true' && showResearhGroupInfo == false" class="content-wrapper align-bottom">
+      <button class="close-button" ion-button full (click)="setFocusGroup(undefined); confirmCode='';"><img
+          src='assets/imgs/focus-group/Close.svg'></button>
+      <div class="content-wrapper-inner">
+        <img padding-top class="center" src='assets/imgs/focus-group/ResearchGroup.svg'>
+        <p>Are you using {{ appDisplayName }} with a research study group?</p>
+      </div>
+      <button ion-button full (click)="setFocusGroup('true')" no-margin class="full-button positive">Yes</button>
+      <button ion-button full (click)="setFocusGroup('false')" no-margin class="full-button positive">No</button>
+      <p class="registration-link" [hidden]="!showRegisterArtifacts()">You can also enroll after registration.</p>
+    </div>
+    <div *ngIf="focusGroup === 'true' && showResearhGroupInfo == false" class="content-wrapper code-wrapper">
+      <div class="content-wrapper-inner">
+        <p class="margin-smaller">Enter the code</p>
+        <div class="error-message" *ngIf="this.showErrorMessage">{{this.errorMessage}}</div>
+        <ion-input [ngClass]="getInputClass" [(ngModel)]="confirmCode" type="text" placeholder="Enter the code"
+          class="code-input">
+        </ion-input>
+
+      </div>
+      <button [attr.disabled]="confirmCode? null : true" class="full-botton positive" (click)="continue()">Enter</button>
+      <button class="close-button" ion-button full (click)="setFocusGroup(undefined); confirmCode='';"><img
+          src='assets/imgs/focus-group/Close.svg'></button>
+      <p class="registration-link" [hidden]="!showRegisterArtifacts()">Not a research group member?<br>Proceed to <span (click)="toggleView()">registration</span></p>
+    </div>
+
+    <div *ngIf="showResearhGroupInfo == true">
+      <div class="content-wrapper align-bottom">
+        <div class="content-wrapper-inner">
+          <button class="close-button" ion-button full (click)="setFocusGroup(undefined); confirmCode='';"><img
+              src='assets/imgs/focus-group/Close.svg'></button>
+          <img padding-top src='assets/imgs/focus-group/ResearchWelcome.svg'>
+          <div className="{{ showDetails ? 'collapsible-card full-height' : 'collapsible-card small-height' }}">
+            <div class="card-header">
+              <div class="card-title" (click)="showDetails = !showDetails">
+                <b *ngIf="backendDescription">{{ backendDescription.Name }}</b>
+                <ion-icon name="chevron-down-outline" *ngIf="!showDetails"></ion-icon>
+                <ion-icon name="chevron-up-outline" *ngIf="showDetails"></ion-icon>
+              </div>
+            </div>
+
+            <div class="card-content" *ngIf="backendDescription" [hidden]="!showDetails">
+              <div [innerHTML]="backendDescription.Description"></div>
+            </div>
+          </div>
+          <div class="checkbox-accept">
+            <ion-checkbox slot="end" [(ngModel)]="checkedBox"></ion-checkbox>
+            <ion-label>By checking this box, you agree to the Supplemental Terms of Use.</ion-label>
+          </div>
+          <button ion-button margin-top full [disabled]="!checkedBox" class="full-botton positive" (click)="proceed()">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

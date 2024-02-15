@@ -1,0 +1,59 @@
+<ion-spinner [hidden]="dataAvailable"></ion-spinner>
+
+<div [hidden]="!dataAvailable || hasNoData">
+  <div>
+    <stats-view-summary [summaryStats]="summaryStats"></stats-view-summary>
+  </div>
+  <div *ngIf="canHaveGoals">
+    <goal-performance></goal-performance>
+  </div>
+  <div container>
+    
+    <table tabs>
+      <tbody>
+        <tr>
+          <td *ngFor="let view of possibleAnalysisViews" [class.active]="analysisView == view" (click)="setAnalysisView(view)">
+            {{getAnalysisViewName(view)}}
+            <ion-icon name="help-circle-outline" (click)="showHelp(view)"></ion-icon>
+          </td>
+        <tr>
+    </table>
+
+    <div section *ngIf="summaryLevel=='day'" center>
+      <a (click)="onEditWorkTimeClick()">edit my work time</a>
+    </div>
+
+    <div [hidden]="analysisView != 'employer'">
+      <stats-view-by-platform [hidden]="!summaryStats?.current" [summaryLevel]="summaryLevel"
+        [stats]="summaryStats?.current" [trendStats]="trendStats">
+      </stats-view-by-platform>
+    </div>
+
+    <div [hidden]="analysisView != 'trend'">
+      <stats-view-trend [hidden]="!summaryStats?.current" [summaryLevel]="summaryLevel" [window]="window"
+        [summaryStats]="summaryStats" [detailStats]="detailStats" [trendStats]="trendStats">
+      </stats-view-trend>
+    </div>
+
+    <div [hidden]="analysisView != 'activity'">
+      <stats-view-work-details></stats-view-work-details>
+    </div>
+  </div>
+ 
+</div>
+
+<div nodata *ngIf="hasNoData && dataAvailable">
+  We don't have any jobs or expenses for you for {{ dateRangeText }}.<br /><br />
+
+  If you expected to see data here:
+
+  <ul>
+    <li>Check your <a (click)="goto_Profile()">gig accounts</a> to make sure that they are connected.</li>
+    <li>Try again later. Sometimes, it takes up to a few hours for us to receive new data from your apps.</li>
+  </ul>
+</div>
+
+<div refresh>
+  <a center (click)=" refresh()">refresh</a>
+  <img (click)="showRefreshTip()" src="assets/imgs/insights/Info.svg">
+</div>

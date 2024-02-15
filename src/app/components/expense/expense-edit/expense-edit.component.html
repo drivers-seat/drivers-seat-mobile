@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title title *ngIf="expense.id">Edit Expense</ion-title>
+    <ion-title title *ngIf="!expense.id">New Expense</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div container>
+      <div section style="position:relative;">
+        <div curSymbol>
+          $
+        </div>
+        <input money #amount
+          type="number" 
+          placeholder="Amount" 
+          [class.invalid]="editStatus?.money && messages?.money"
+          [(ngModel)]="moneyTxt" 
+          (focus)="amountFocused()"
+          (blur)="fieldBlurred('money')"
+          (keyup)="amountKeyUp()"
+          (change)="amountChanged()" />
+      </div>
+      <div section>
+        <select [class.invalid]="editStatus?.category && messages?.category" (blur)="fieldBlurred('category')" (change)="validate()"
+          [(ngModel)]="expense.category">
+          <option *ngIf="!expense?.category" value="" disabled>Expense Type</option>
+          <option *ngFor="let expenseType of expenseTypes" [value]="expenseType.name">
+            {{expenseType.name}}
+          </option>
+        </select>
+      </div>
+      <div section>
+        <table>
+          <colgroup span="1"></colgroup>
+          <colgroup span="1" style="width:45px;"></colgroup>
+          <tbody>
+            <tr>
+              <td>
+                <input type="date" [(ngModel)]="expense.dateFmt" [class.invalid]="editStatus?.date && messages.date" placeholder="Date"
+                  (change)="onDateChange()" (blur)="fieldBlurred('date')"/>
+              </td>
+              <td today (click)="onDateToday()">
+                <ion-icon name="today-outline"></ion-icon>
+                <div subtext>today</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <div section>
+        <textarea rows="5" [(ngModel)]="expense.name" placeholder="description" [class.invalid]="editStatus?.name && messages?.name"
+          (change)="nameChanged()" (blur)="fieldBlurred('name')" (keyup)="validate()"></textarea>
+      </div>
+    </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div container>
+      <button good class="full-button" [disabled]="!canSubmit" (click)="onSave()">Save</button>
+      <button *ngIf="expense.id" delete class="full-button" (click)="onDelete()">Delete</button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

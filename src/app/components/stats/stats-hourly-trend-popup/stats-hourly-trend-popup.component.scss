@@ -1,0 +1,78 @@
+ion-title {
+  text-transform: capitalize;
+  font-size: 20px;
+  user-select: none;
+}
+
+div[content] {
+  background-color: black !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: scroll;
+  user-select: none;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  user-select: none;
+
+  td {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 2px;
+    padding-right: 2px;
+    border: solid 1px gray;
+    text-align: top;
+
+    &[window] {
+      text-align: left;
+      padding-left: 8px;
+    }
+
+    &[jobs] {
+      text-align: center;
+    }
+
+    &[hours] {
+      text-align: right;
+    }
+
+    &[pay] {
+      text-align: right;
+    }
+
+    &[hourly] {
+      text-align: right;
+      padding-right: 8px;
+    }
+  }
+
+  thead {
+
+    td {
+      padding-top: 20px;
+      text-align: bottom;
+      border: solid 1px gray;
+      font-weight: bold;
+
+      //supporting sticky headers
+      position: sticky;
+      background-color: silver;
+      color: black;
+      top: 0;
+      /* Don't forget this, required for the stickiness */
+    }
+  }
+
+  tfoot {
+    td {
+      font-weight: bold;
+      text-align: top;
+      border: none;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="onClose()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        Back
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <div emphasis center>
+        Refer a Friend!
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div container>
+    <div center>
+      <img style="width:60%" src="assets/imgs/marketing/referral/people.png" />
+    </div>
+    <div section>
+      <div section>
+        <div title section center>Bring Others onto {{ appDisplayName }}</div>
+        <div section>
+          When you invite others to use {{ appDisplayName }}, you not only help them take charge 
+          of their earnings — you also benefit.
+        </div>
+        <div section>
+          When more workers in your community use {{ appDisplayName }}, they uncover better
+          insights on the best times to work and the most lucrative gig platforms.
+        </div>
+        <div>
+          The bigger your network, the greater the benefits for everyone!
+        </div>
+      </div>
+      <div>
+        <button class="full-button accept" (click)="onGenerateSMS()">
+          Invite a Friend over Text
+        </button>
+      </div>
+    </div>
+    <div>
+      <div section>
+        Or, pass along your personalized referral code for them to use during sign-up:
+      </div>
+      <div section>
+        <div code center>{{referral_source?.referral_code}}</div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

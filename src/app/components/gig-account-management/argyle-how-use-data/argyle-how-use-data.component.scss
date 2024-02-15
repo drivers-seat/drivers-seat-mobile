@@ -1,0 +1,55 @@
+* {
+  color:black;
+}
+
+[content]{
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  right:0;
+  overflow:hidden;
+  overflow-y: auto;
+  padding:20px;
+  padding-top:50px;
+}
+
+[title]{
+  font-size: 32px;
+}
+
+[subtitle]{
+  font-size: 24px;
+}
+
+
+[subtext]{
+  font-size: 12px;
+}
+
+
+[section]
+{
+  padding-bottom:20px;
+}
+
+table{
+  table-layout: fixed;
+  width:100%;
+  
+  td{
+    vertical-align: top;
+    text-align: left;
+  }
+
+}
+
+ion-footer{
+  background-color: white;
+  text-align: center;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+button {
+  margin:0;
+}

@@ -1,0 +1,65 @@
+
+
+[hdr] {
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+}
+
+[options] {
+  padding: 5px;
+}
+
+[dtl] {
+  vertical-align: top;
+  padding: 5px;
+}
+
+
+ion-icon[chk] {
+  height: 25px;
+  width: 25px;
+
+  &[some]{
+    color:silver;
+  }
+}
+
+tr[opt] {
+
+  td {
+    vertical-align: top;
+    padding-top: 10px;
+
+    &[emp] {
+      div {
+        display: inline-block;
+        vertical-align: top;
+        padding-left: 5px;
+      }
+    }
+  }
+}
+
+ion-item[metro] {
+  border: solid 1px gray;
+}
+
+[isScheduled="true"]{
+  display: inline-block;
+  height:15px;
+  width:15px;
+}
+
+[messages]{
+  color:red;
+  *{
+    color:red;
+  }
+}
+
+.disabled {
+  *{
+    color: silver;
+  }
+}

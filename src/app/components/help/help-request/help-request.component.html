@@ -1,0 +1,81 @@
+<ion-header>
+  
+  <ion-toolbar>
+    <table>
+      <colgroup span="1" style="width:35px;"></colgroup>
+      <colgroup span="1"></colgroup>
+      <colgroup span="1" style="width:35px;"></colgroup>
+      <tbody>
+        <tr>
+          <td left>
+            <ion-icon (click)="showHelpClick()" name="help-circle-outline"></ion-icon>
+          </td>
+          <td center title>
+              Help
+          </td>
+          <td right>
+            <ion-icon  (click)="onCancel()" name="close"></ion-icon>      
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div container>
+    <div>
+      Please fill answer the following questions and someone will respond to your email address shortly.
+    </div>    
+    <div spacer></div>
+    <div *ngIf="showContactInfo">
+      <div title>
+        Your name<span required>*</span>
+      </div>
+      <input 
+        type="text" 
+        [(ngModel)]="model.name"
+        (keyup)="onChange()"
+        (change)="onChange()" 
+        (blur)="onChange()"/>
+      <div spacer></div>
+      <div title>
+        Contact Email<span required>*</span>
+      </div>
+      <input 
+        type="email" 
+        [(ngModel)]="model.email"
+        (keyup)="onChange()"
+        (change)="onChange()" 
+        (blur)="onChange()"/>
+      <div spacer></div>
+    </div>
+    <div title>
+      Subject<span required>*</span>
+    </div>
+    <input 
+      type="text" 
+      [(ngModel)]="model.subject"
+      (keyup)="onChange()"
+      (change)="onChange()" 
+      (blur)="onChange()"/>
+    <div spacer></div>
+    <div title>
+      Message<span required>*</span>
+    </div>
+    <textarea 
+      rows="5"
+      [(ngModel)]="model.message"
+      (keyup)="onChange()"
+      (change)="onChange()" 
+      (blur)="onChange()">
+    </textarea>
+    <div spacer></div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button class="full-button accept" [class.disabled]="!isValid" (click)="onSubmit()">
+      Submit
+    </button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,20 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../.tsbuild/",
+    "sourceMap": false,
+    "module": "commonjs", 
+    "removeComments": true, 
+    "noImplicitAny": true, 
+    "esModuleInterop": true,
+    "strictPropertyInitialization": true,
+    "strictNullChecks": true,
+    "types": [
+      "node",
+      "webdriverio/async",
+      "@wdio/mocha-framework",
+      "expect-webdriverio"
+    ],
+    "target": "es2019"
+  }
+}

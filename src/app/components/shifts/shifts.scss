@@ -1,0 +1,62 @@
+* {
+  
+  font-size: 16px;
+  font-weight: normal;
+  color: black;
+}
+
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  user-select: none;
+
+  td{
+    vertical-align: top;
+  }
+}
+
+
+[section] {
+  padding-bottom: 20px;
+}
+
+[container] {
+  padding: 20px;
+  user-select: none;
+}
+
+
+[title] {
+  font-weight: bold;
+  
+  * {
+    font-weight: bold;
+  }
+}
+
+
+[emphasis]{
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+[center]{
+  text-align: center;
+}
+
+
+[subtext] {
+  font-size:12px;
+  color:gray
+}
+
+
+button[good]{
+  background-color: green !important;
+  *{
+    color:white;
+    font-weight:bolder;
+  }
+  
+}

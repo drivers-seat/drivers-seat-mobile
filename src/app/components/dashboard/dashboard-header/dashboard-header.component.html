@@ -1,0 +1,23 @@
+<div header>
+  <div spacer></div>
+  <div header-content>
+    <div logo>
+      <div spacer></div>
+      <img src="/assets/imgs/logo-small.png"/>
+      <div spacer></div>
+    </div>
+    <div user-info>
+      <div spacer></div>
+      <div title>Hi {{TextHelper.capitalizeFirstLetter(user?.first_name)}}!</div>
+      <div ghost-tag *ngIf="isGhosting">GHOSTING</div>
+      <div spacer></div>
+    </div>
+    <div spacer></div>
+    <div menu (click)="onProfileClick()">
+      <div spacer></div>
+      <ion-icon name="settings-outline"></ion-icon>
+      <div spacer></div>
+    </div>
+  </div>
+  <div spacer></div>
+</div>

@@ -1,0 +1,75 @@
+[container]{
+  padding-left:10%;
+  padding-right:10%;
+}
+
+[totalPay] {
+  font-size: 36pt;
+  font-weight: bold;
+}
+
+[totalTime] {
+  font-size: 36pt;
+  font-weight: bold;
+}
+
+
+[totalMiles] {
+  font-size: 36pt;
+  font-weight: bold;
+}
+
+[money] {
+  text-align: right;
+}
+
+[section]{
+  &[small]{
+    padding-bottom:5px;
+  }
+}
+
+ion-header {
+  background-color: rgba(255, 184, 0, .2);
+  border-bottom: solid 2px #F4BB40;
+
+  td {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  ion-icon {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+table[breakout] {
+  margin-top:10px;
+  td {
+    vertical-align: bottom;
+    padding:3px;
+    border: solid .5px silver;
+  }
+}
+
+[employer]{
+  text-transform: capitalize;
+}
+
+[money] {
+  text-align: right;
+}
+
+[miles]{
+  text-align: right;
+}
+
+[date]{
+  text-align: right;
+}
+
+
+[tasks] {
+  text-align: right;
+}

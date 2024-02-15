@@ -1,0 +1,95 @@
+<div other_activities section *ngIf="other_activities?.length > 0">
+  <table other_activities>
+    <colgroup span="1"></colgroup>
+    <colgroup span="1" style="width:65px;"></colgroup>
+    <colgroup span="1" style="width:25px;"></colgroup>
+    <thead>
+      <tr>
+        <td colspan="3">
+          Other Payments
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let activity of other_activities">
+        <td employer>
+          {{ activity.employer }}
+        </td>
+        <td money>
+          {{ activity.earnings_total | currency }}
+        </td>
+        <td action (click)="onActivityClick(activity)">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div timespan section *ngFor="let timespan of timespans">
+
+  <table timespan>
+    <colgroup span="1"></colgroup>
+    <colgroup span="1" style="width:100px"></colgroup>
+    <colgroup span="1" style="width:20px"></colgroup>
+    <tbody>
+      <tr>
+        <td>
+          <div title>
+            {{ TimeHelper.toShortTimeUnix(timespan.start_time_unix)}} - {{
+            TimeHelper.toShortTimeUnix(timespan.end_time_unix) }}
+          </div>
+          <div subtext>
+            {{ TimeHelper.getDurationFromSeconds(timespan.duration_seconds, false)}}
+          </div>
+        </td>
+        <td right *ngIf="!getTimespanIsMileageTracked(timespan)">
+            <div subtext>mileage</div>
+            <div subtext>not tracked</div>
+        </td>
+        <td right *ngIf="getTimespanIsMileageTracked(timespan)">
+            <div title>{{ timespan.selected_miles }}</div>
+            <div subtext>miles</div>
+        </td>
+        <td gps_quality>
+          <div quality [class.good]="timespan.selected_miles_quality_percent >= .8"></div>
+          <div quality [class.good]="timespan.selected_miles_quality_percent >= .6"></div>
+          <div quality [class.good]="timespan.selected_miles_quality_percent >= .4"></div>
+          <div quality [class.good]="timespan.selected_miles_quality_percent >= .2"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table allocations>
+    <colgroup span="1" style="width:65px;"></colgroup>
+    <colgroup span="1" style="width:65px;"></colgroup>
+    <colgroup span="1"></colgroup>
+    <colgroup span="1" style="width:65px;"></colgroup>
+    <colgroup span="1" style="width:25px;"></colgroup>
+    <tbody>
+      <tr *ngFor="let alloc of getActiveAllocations(timespan)" [attr.notEngaged]="!alloc.activity_id">
+        <td time>
+          {{TimeHelper.toShortTimeUnix(alloc.start_time_unix) }}
+        </td>
+        <td time>
+          {{TimeHelper.toShortTimeUnix(alloc.end_time_unix) }}
+        </td>
+        <td notEngaged *ngIf="!alloc.activity_id" colspan="3">
+          Not Engaged
+        </td>
+        <td employer *ngIf="alloc.activity_id">
+            {{alloc.activity_extends_before ? "&larr;" : ""}}
+            {{alloc.employer}}
+            {{alloc.activity_extends_after ? "&rarr;" : ""}}
+        </td>
+        <td money *ngIf="alloc.activity_id">
+          {{ alloc.earnings_total | currency }}
+        </td>
+        <td action explore *ngIf="alloc.activity_id" (click)="onAllocClick(timespan, alloc)">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

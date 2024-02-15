@@ -1,0 +1,11 @@
+<div playAgain *ngIf="hasEnded">
+  <button class="full-button prev" (click)="onReplay()">
+    <ion-icon name="refresh-outline"></ion-icon>
+    play again
+  </button>
+</div>
+
+<iframe #videoPlayer _target="self" frameborder="0" [hidden]="hasEnded"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+  allowfullscreen>
+</iframe>

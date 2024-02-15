@@ -1,0 +1,88 @@
+table{
+  thead {
+    * {
+      font-weight: bold;
+      vertical-align: bottom;
+    }
+
+    [subtext] {
+      font-size: .8em;
+    }
+
+    td[workers] {
+      * {
+        font-weight: normal;
+        // font-size:.8em;
+        color: gray;
+      }
+    }
+  
+    td[tasks] {
+      * {
+        font-weight: normal;
+        // font-size:.8em;
+        color: gray;
+      }
+    }
+  }
+
+  tfoot {
+    td {
+      border-bottom: none;
+      font-weight: bold;
+      vertical-align: top;
+    }
+  }
+
+  td {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 1px;
+    padding-right: 1px;
+    font-size: 15px;
+    border-bottom: 1px solid silver;
+  }
+
+  td[legend] {
+    border-width: 1px;
+    border-style: solid;
+  }
+
+  td[employer] {
+    text-transform: capitalize;
+    padding-left: 3px;
+    border-bottom: 1px solid silver;
+  }
+
+  td[workers] {
+    text-align: right;
+    border-bottom: 1px solid silver;
+    color: gray;
+    font-size: .8em;
+  }
+
+  td[tasks] {
+    text-align: right;
+    border-bottom: 1px solid silver;
+    color: gray;
+    font-size: .8em;
+  }
+
+  td[noStats] {
+    text-align: right;
+    border-bottom: 1px solid silver;
+    color: gray;
+    font-size: .8em;
+  }
+ 
+
+  td[pay] {
+    text-align: right;
+    border-bottom: 1px solid silver;
+  }
+  
+}
+
+[svcClass]{
+  text-transform: capitalize;
+}

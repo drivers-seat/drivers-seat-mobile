@@ -1,0 +1,33 @@
+<div *ngIf="campaigns?.length > 0">
+  <ng-content select="[campaign-carousel-header]"></ng-content>
+
+  <div *ngIf="campaigns.length ==1 || orientation =='vertical'">
+    <div campaign-card *ngFor="let campaign of campaigns; let idx=index" [attr.isLast]="(idx + 1) == campaigns.length">
+      <checklist-card *ngIf="getControlType(campaign)=='checklist'" [campaign]="toChecklist(campaign)"
+        [custom_class]="display_class"></checklist-card>
+      <campaign-preview-card *ngIf=" getControlType(campaign)=='preview'" [campaign]="campaign"
+        [custom_class]="display_class"></campaign-preview-card>
+    </div>
+  </div>
+
+  <ion-slides #slider *ngIf="campaigns?.length > 1 && slideOpts && orientation == 'horizontal'" pager="false"
+    [options]="slideOpts" (ionSlideDidChange)="slideChanged()" (ionSlideWillChange)="slideWillChange()"
+    (ionSlidesDidLoad)="slideInit()">
+
+    <ion-slide *ngFor="let campaign of campaigns; let idx = index" [id]="idx">
+      <div style="width:100%; height:100%">
+
+        <checklist-card *ngIf="getControlType(campaign)=='checklist'" [campaign]="toChecklist(campaign)"
+          [custom_class]="display_class"></checklist-card>
+        <campaign-preview-card *ngIf="getControlType(campaign)=='preview'" [campaign]="campaign"
+          [custom_class]="display_class"></campaign-preview-card>
+      </div>
+    </ion-slide>
+  </ion-slides>
+
+  <ng-content select="[campaign-carousel-footer]"></ng-content>
+</div>
+
+<div *ngIf="campaigns && campaigns?.length == 0">
+  <ng-content select="[campaign-carousel-empty]"></ng-content>
+</div>
