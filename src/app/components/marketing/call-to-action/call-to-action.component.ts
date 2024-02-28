@@ -34,11 +34,11 @@ export class CallToActionComponent implements OnInit {
   hasExternalHtml: boolean;
 
   public get custom_actions(): CampaignAction[] {
-    return this.campaign?.actions?.filter(a => !a.is_default) || [];
+    return this.campaign?.actions?.filter(a => !a.is_default && !a.is_header) || [];
   }
 
   public get default_actions(): CampaignAction[] {
-    return this.campaign?.actions?.filter(a => a.is_default) || [];
+    return this.campaign?.actions?.filter(a => a.is_default && !a.is_header) || [];
   }
 
   public get closeAction(): CampaignAction {
