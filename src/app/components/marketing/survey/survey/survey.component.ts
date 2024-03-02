@@ -46,25 +46,25 @@ export class SurveyComponent implements OnInit {
     return this.current_section?.actions?.filter(a => a.is_default) || [];
   }
 
-  public get hasHeaderActions():boolean{
+  public get hasHeaderActions(): boolean {
     return this.closeAction != null || this.helpAction != null;
   }
 
   public get closeAction(): CampaignAction {
     return this.current_section
       ?.actions
-      ?.filter(a=> a.is_header)
-      ?.find(a=>a.type == 'dismiss' || a.type == 'close');
+      ?.filter(a => a.is_header)
+      ?.find(a => a.type == 'dismiss' || a.type == 'close' || a.type == 'postpone');
   }
 
   public get helpAction(): CampaignAction {
     return this.current_section
       ?.actions
-      ?.filter(a=> a.is_header)
-      ?.find(a=>a.type == 'help');
+      ?.filter(a => a.is_header)
+      ?.find(a => a.type == 'help');
   }
 
-  public get showHeader():boolean {
+  public get showHeader(): boolean {
     return this.hasHeaderActions || this.current_section?.title?.length > 0;
   }
 
@@ -214,8 +214,8 @@ export class SurveyComponent implements OnInit {
           this.state.data[f.field] = this.state.data[f.field] || {};
 
 
-          if(stateData[f.field] != null){
-            if( Array.isArray(stateData[f.field])){
+          if (stateData[f.field] != null) {
+            if (Array.isArray(stateData[f.field])) {
               this.state.data[f.field][f.value || true] = stateData[f.field].indexOf(f.value) > -1 || false;
             } else {
               this.state.data[f.field][f.value || true] = stateData[f.field] == f.value;
@@ -526,7 +526,7 @@ export class SurveyComponent implements OnInit {
       this.video_url = section.content_url;
     } else if (this._externalContentSvc.isUrlExternal(section.content_url)) {
       this.content_url = this._externalContentSvc.getSafeUrl(section.content_url);
-    } else if (section.content_url){
+    } else if (section.content_url) {
       this.hasExternalHtml = true;
       this.content_html = await this._externalContentSvc.getExternalHtml(section.content_url);
     }
