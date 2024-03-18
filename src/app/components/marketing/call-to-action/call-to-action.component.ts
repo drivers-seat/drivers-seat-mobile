@@ -34,28 +34,28 @@ export class CallToActionComponent implements OnInit {
   hasExternalHtml: boolean;
 
   public get custom_actions(): CampaignAction[] {
-    return this.campaign?.actions?.filter(a => !a.is_default) || [];
+    return this.campaign?.actions?.filter(a => !a.is_default && !a.is_header) || [];
   }
 
   public get default_actions(): CampaignAction[] {
-    return this.campaign?.actions?.filter(a => a.is_default) || [];
+    return this.campaign?.actions?.filter(a => a.is_default && !a.is_header) || [];
   }
 
   public get closeAction(): CampaignAction {
     return this.campaign
       ?.actions
-      ?.filter(a=> a.is_header)
-      ?.find(a=>a.type == 'dismiss' || a.type == 'close');
+      ?.filter(a => a.is_header)
+      ?.find(a => a.type == 'dismiss' || a.type == 'close' || a.type == 'postpone');
   }
 
   public get helpAction(): CampaignAction {
     return this.campaign
       ?.actions
-      ?.filter(a=> a.is_header)
-      ?.find(a=>a.type == 'help');
+      ?.filter(a => a.is_header)
+      ?.find(a => a.type == 'help');
   }
 
-  public get hasHeaderActions():boolean{
+  public get hasHeaderActions(): boolean {
     return this.closeAction != null || this.helpAction != null;
   }
 
@@ -138,7 +138,7 @@ export class CallToActionComponent implements OnInit {
       this.video_url = this.campaign.content_url;
     } else if (this._externalContentSvc.isUrlExternal(this.campaign?.content_url)) {
       this.content_url = this._externalContentSvc.getSafeUrl(this.campaign.content_url);
-    } else if (this.campaign?.content_url){
+    } else if (this.campaign?.content_url) {
       this.hasExternalHtml = true;
       this.content_html = await this._externalContentSvc.getExternalHtml(this.campaign.content_url);
     }

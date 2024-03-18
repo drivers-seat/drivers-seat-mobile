@@ -5,8 +5,8 @@
         <ion-icon *ngIf="helpAction" name="help-circle-outline"></ion-icon>
         <div spacer></div>
       </div>
-      <div header-title *ngIf="title?.length > 0">
-        <div title-container *ngFor="let titleTxt of title">
+      <div header-title *ngIf="title?.length > 0 || hasHeaderActions">
+        <div title-container *ngFor="let titleTxt of (title || [])">
           <div spacer></div>
           <div title center>{{titleTxt}}</div>
           <div spacer></div>

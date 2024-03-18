@@ -18,13 +18,6 @@
       </div>
     </div>
   </ion-toolbar>
-
-  <ion-toolbar>
-    <div *ngIf="mainHeader" center title>{{mainHeader}}</div>
-    <div *ngIf="subHeaders">
-      <div *ngFor="let subHeader of subHeaders" center>{{subHeader}}</div>
-    </div>
-  </ion-toolbar>
 </ion-header>
 <ion-content>
   <div external-html *ngIf="hasExternalHtml">
