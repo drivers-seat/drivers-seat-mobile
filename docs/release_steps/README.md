@@ -63,8 +63,8 @@ ionic cap sync
 
 ## Perform Native Deploys
 
-* [iOS Deployment Guide]()
-* [Android Deployment Guide]()
+* [iOS Deployment Guide](ios/README.md)
+* [Android Deployment Guide](android/README.md)
 
 
 ## Increment the Version and/or Build Number for the next cycle.
